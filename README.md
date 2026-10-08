@@ -112,9 +112,22 @@ Para publicar este proyecto en la web de manera gratuita con GitHub Pages:
 
 ---
 
-## 👨‍🏫 Información Institucional
+## 👨‍🏫 Equipo de Instructores y Dirección Formativa
 
-- **Instructor Líder:** Héctor David Toledo García
+| Instructor | Rol / Área Formativa | Centro / Sede |
+| :--- | :--- | :--- |
+| **Héctor David Toledo García** | Instructor Líder de Programa | CADPH — Garzón |
+| **Julián Andrés Trujillo** | Instructor de Formación ADSO | CADPH — Garzón |
+| **Jimmy Alexander Lombana** | Instructor de Formación ADSO | CADPH — Garzón |
+| **Manuel Galíndez** | Instructor de Formación ADSO | CADPH — Garzón |
+| **Gonzalo Chacón** | Instructor de Formación ADSO | CADPH — Garzón |
+| **Diego Vargas** | Instructor de Formación ADSO | CADPH — Garzón |
+| **Paulo Rincón** | Instructor de Formación ADSO | CADPH — Garzón |
+
+---
+
+## 🏛️ Información Institucional
+
 - **Centro de Formación:** Centro Agroempresarial y Desarrollo Pecuario del Huila (CADPH)
 - **Sede:** Garzón, Huila — Colombia
 - **Entidad:** Servicio Nacional de Aprendizaje — SENA

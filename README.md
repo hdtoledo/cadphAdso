@@ -49,11 +49,19 @@ El proyecto formativo está alineado con el [Diseño Curricular Oficial de ADSO]
 ```text
 cadphAdso/
 ├── 404.html                     # Página personalizada de error 404 para GitHub Pages
-├── index.html                   # Portal principal interactivo y responsivo con UI/UX SENA
-├── .gitignore                   # Exclusión de archivos temporales y del sistema
-├── README.md                    # Documentación técnica y guía de despliegue
-└── docs/
-    └── DisenoCurricularADSO.pdf # Documento curricular oficial del SENA
+├── index.html                   # Portal principal de bienvenida / acceso institucional
+├── explorar.html                # Dashboard y explorador curricular completo de ADSO
+├── assets/                      # Recursos estáticos organizados por buenas prácticas
+│   ├── css/
+│   │   └── styles.css           # Estilos institucionales, glassmorphism y transiciones
+│   ├── js/
+│   │   └── dashboard.js         # Lógica interactiva del explorador, filtros y modales
+│   └── images/
+│       └── sena_logo.svg        # Logotipo vectorial oficial del SENA
+├── docs/
+│   └── DisenoCurricularADSO.pdf # Documento curricular oficial del SENA
+├── .gitignore                   # Exclusión de temporales y configuraciones locales
+└── README.md                    # Documentación técnica y guía de despliegue
 ```
 
 ---

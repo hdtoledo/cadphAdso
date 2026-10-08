@@ -116,7 +116,7 @@ Para publicar este proyecto en la web de manera gratuita con GitHub Pages:
 
 | Instructor | Rol / Área Formativa | Centro / Sede |
 | :--- | :--- | :--- |
-| **Héctor David Toledo García** | Instructor Líder de Programa | CADPH — Garzón |
+| **Héctor David Toledo García** | Instructor de Formación ADSO | CADPH — Garzón |
 | **Julián Andrés Trujillo** | Instructor de Formación ADSO | CADPH — Garzón |
 | **Jimmy Alexander Lombana** | Instructor de Formación ADSO | CADPH — Garzón |
 | **Manuel Galíndez** | Instructor de Formación ADSO | CADPH — Garzón |

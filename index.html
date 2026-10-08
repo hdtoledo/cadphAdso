@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADSO - Centro Agroempresarial y Desarrollo Pecuario del Huila | SENA Garzón</title>
+  <meta name="description" content="Repositorio formativo y portal de explicaciones técnicas para la formación ADSO (Análisis y Desarrollo de Software) - SENA CADPH Garzón, Huila.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%2339a900'/><path d='M50 20 L75 75 L25 75 Z' fill='white'/></svg>">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            sena: {
+              green: '#39a900',
+              hover: '#2e8b00',
+              dark: '#007832',
+              light: '#f2f9ed',
+              accent: '#4ade80'
+            },
+            gov: {
+              blue: '#3366cc',
+              darkblue: '#1e4b9e'
+            },
+            portal: {
+              dark: '#0b3244',
+              teal: '#0e4359',
+              lightbg: '#f4f6f8',
+              card: '#ffffff'
+            }
+          },
+          fontFamily: {
+            sans: ['"Work Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Work Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Work Sans', sans-serif;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Estilo de textura suave de fondo para la barra lateral y hero */
+    .bg-sena-mesh {
+      background-color: #0c384a;
+      background-image: radial-gradient(at 0% 0%, rgba(20, 95, 115, 0.7) 0px, transparent 50%),
+                        radial-gradient(at 100% 100%, rgba(12, 56, 74, 0.9) 0px, transparent 50%);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-[#f0f3f6] text-slate-800 min-h-screen flex flex-col antialiased selection:bg-sena-green selection:text-white">
+
+  <!-- ================= BARRA SUPERIOR INSTITUCIONAL GOV.CO ================= -->
+  <header class="w-full bg-gov-blue text-white h-10 px-4 md:px-8 flex items-center justify-between z-40 select-none shadow-sm">
+    <div class="flex items-center space-x-3">
+      <!-- Logo gov.co en minúscula característico -->
+      <a href="https://www.gov.co" target="_blank" rel="noopener noreferrer" class="flex items-center text-white font-extrabold text-lg tracking-tight hover:opacity-90 transition">
+        gov<span class="text-white">.co</span>
+      </a>
+      <span class="text-blue-200 text-xs hidden sm:inline-block">|</span>
+      <span class="text-[11px] md:text-xs text-blue-100 font-normal tracking-wide hidden sm:inline-block">
+        Portal Único del Estado Colombiano
+      </span>
+    </div>
+    <div class="flex items-center space-x-4 text-xs font-medium">
+      <span class="hidden md:inline-block text-blue-100">Centro Agroempresarial y Desarrollo Pecuario del Huila — Garzón</span>
+      <!-- Botón de Vista Login / Portal -->
+      <button onclick="toggleWelcomeView()" class="bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded text-xs transition flex items-center gap-1.5" title="Ver Pantalla de Bienvenida / Acceso">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+        </svg>
+        <span id="btnViewToggleLabel">Ver Vista Acceso</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= VISTA 1: PANTALLA DE ACCESO / BIENVENIDA (SPLASH/LOGIN) ================= -->
+  <!-- Replicación exacta de la Pantalla 1 del sistema SENA con opción de entrar directamente -->
+  <div id="welcomeScreen" class="hidden fixed inset-0 top-10 z-30 bg-[#0d3f54] text-white overflow-y-auto">
+    <!-- Fondo decorativo con ondas y silueta sutil -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#0c394c] via-[#0b4860] to-[#07596b] opacity-95"></div>
+    <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto min-h-[calc(100vh-2.5rem)] px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-12">
+      <!-- Columna Izquierda: Marca y Eslogan -->
+      <div class="w-full md:w-1/2 flex flex-col justify-center space-y-6">
+        <!-- Badge estilo SI Contratista -> CADPH ADSO -->
+        <div class="flex items-center space-x-3">
+          <div class="bg-sena-green text-white font-extrabold text-2xl md:text-3xl px-3.5 py-1.5 rounded-lg shadow-lg flex items-center">
+            ADSO
+          </div>
+          <div>
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-none">
+              CADPH <span class="font-light">Huila</span>
+            </h1>
+            <p class="text-xs md:text-sm text-cyan-200 uppercase tracking-widest mt-1">
+              Sede Garzón • Formación Tecnológica
+            </p>
+          </div>
+        </div>
+
+        <!-- Eslogan institucional -->
+        <div class="space-y-1">
+          <h2 class="text-4xl md:text-5xl font-light text-white tracking-tight">
+            Cada línea de código
+          </h2>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+            más clara
+          </h2>
+          <div class="relative inline-block">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+              más eficiente
+            </h2>
+            <div class="h-1.5 bg-sena-green w-32 rounded-full mt-2"></div>
+          </div>
+        </div>
+
+        <p class="text-slate-200 text-sm md:text-base max-w-lg leading-relaxed font-light">
+          Plataforma de estudio, guías prácticas y documentación técnica para el programa 
+          <strong>Análisis y Desarrollo de Software (ADSO)</strong> del Centro Agroempresarial y Desarrollo Pecuario del Huila.
+        </p>
+
+        <!-- Puntos destacados rápidos -->
+        <div class="grid grid-cols-2 gap-3 pt-2 text-xs text-cyan-100 max-w-md">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-sena-green"></span>
+            <span>4 Fases del Proyecto Formativo</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-sena-green"></span>
+            <span>Frontend, Backend y Bases de Datos</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-sena-green"></span>
+            <span>Metodologías Ágiles & Git</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-sena-green"></span>
+            <span>Despliegues en GitHub Pages</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Tarjeta Glassmorphism de Bienvenida / Acceso -->
+      <div class="w-full md:w-[460px]">
+        <div class="glass-card rounded-3xl p-8 md:p-10 shadow-2xl flex flex-col items-center text-center relative border border-white/20">
+          
+          <!-- Logo SENA Blanco en SVG -->
+          <div class="mb-5 flex flex-col items-center">
+            <svg class="w-16 h-16 text-white fill-current" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="18" r="8" fill="white" />
+              <path d="M50 32 L35 48 L44 48 L44 85 L56 85 L56 48 L65 48 Z" fill="white" />
+              <path d="M22 45 L15 62 L32 62 Z" fill="white" />
+              <path d="M78 45 L85 62 L68 62 Z" fill="white" />
+            </svg>
+            <span class="text-[11px] uppercase tracking-widest text-cyan-200 font-semibold mt-1">SENA</span>
+          </div>
+
+          <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Bienvenido</h3>
+          <p class="text-xs md:text-sm text-cyan-100 mb-8 font-light">
+            Ingresa al repositorio oficial de temarios y proyectos de ADSO Garzón
+          </p>
+
+          <!-- Botón de acceso verde SENA idéntico al de la imagen -->
+          <button onclick="toggleWelcomeView()" class="w-full bg-sena-green hover:bg-sena-hover text-white font-semibold py-3.5 px-6 rounded-full shadow-lg hover:shadow-xl transition flex items-center justify-center gap-3 transform hover:-translate-y-0.5 active:translate-y-0 text-sm tracking-wide">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span>Explorar Repositorio ADSO</span>
+          </button>
+
+          <!-- Separador sutil -->
+          <div class="w-full flex items-center my-6">
+            <div class="flex-grow h-px bg-white/20"></div>
+            <span class="px-3 text-[11px] text-cyan-200 uppercase">CADPH Garzón</span>
+            <div class="flex-grow h-px bg-white/20"></div>
+          </div>
+
+          <!-- Acceso a Documentos y Ficha -->
+          <div class="flex gap-2 w-full text-xs">
+            <a href="docs/DisenoCurricularADSO.pdf" target="_blank" class="flex-1 bg-white/10 hover:bg-white/20 text-cyan-100 py-2 rounded-xl transition text-center border border-white/10 flex items-center justify-center gap-1">
+              <span>📄</span> Diseño Curricular
+            </a>
+            <a href="https://github.com/hdtoledo/cadphAdso" target="_blank" class="flex-1 bg-white/10 hover:bg-white/20 text-cyan-100 py-2 rounded-xl transition text-center border border-white/10 flex items-center justify-center gap-1">
+              <span>🐙</span> GitHub Repo
+            </a>
+          </div>
+
+          <div class="mt-8 text-[11px] text-cyan-200/70 font-light">
+            © Todos los derechos reservados • SENA Regional Huila
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= LAYOUT PRINCIPAL DEL SISTEMA ================= -->
+  <div class="flex flex-1 relative overflow-hidden">
+    
+    <!-- ================= BARRA LATERAL (SIDEBAR) ================= -->
+    <aside id="mainSidebar" class="w-72 bg-sena-mesh text-white flex flex-col justify-between transition-all duration-300 z-20 flex-shrink-0 shadow-xl border-r border-[#124d62]/50 relative">
+      
+      <!-- Top del Sidebar: Marca institucional -->
+      <div>
+        <div class="p-6 border-b border-white/10 flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div class="bg-sena-green text-white font-extrabold text-xl px-2.5 py-1 rounded-md shadow flex items-center">
+              ADSO
+            </div>
+            <div>
+              <div class="text-lg font-bold tracking-tight text-white leading-none">
+                CADPH <span class="text-xs text-sena-accent font-normal">Garzón</span>
+              </div>
+              <p class="text-[10px] text-cyan-200/80 mt-1 uppercase tracking-wider">
+                Formación Huila
+              </p>
+            </div>
+          </div>
+          <!-- Botón de colapso en pantallas móviles -->
+          <button onclick="toggleMobileSidebar()" class="lg:hidden text-cyan-200 hover:text-white p-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Menú de Navegación -->
+        <nav class="p-4 space-y-1.5 text-sm font-medium">
+          <!-- Item 1: Inicio (Activo por defecto) -->
+          <button onclick="switchTab('tab-inicio')" id="nav-inicio" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition bg-sena-green text-white shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span>Inicio</span>
+          </button>
+
+          <!-- Item 2: Checklist / Competencias -->
+          <button onclick="switchTab('tab-checklist')" id="nav-checklist" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-slate-200 hover:bg-white/10 hover:text-white">
+            <svg class="w-5 h-5 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+            <span>Checklist Curricular</span>
+          </button>
+
+          <!-- Item 3: Temarios y Guías Técnicas -->
+          <button onclick="switchTab('tab-temarios')" id="nav-temarios" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-slate-200 hover:bg-white/10 hover:text-white">
+            <svg class="w-5 h-5 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            <span>Temarios & Explicaciones</span>
+          </button>
+
+          <!-- Item 4: Fases de Proyecto -->
+          <button onclick="switchTab('tab-fases')" id="nav-fases" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-slate-200 hover:bg-white/10 hover:text-white">
+            <svg class="w-5 h-5 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            <span>Fases del Proyecto</span>
+          </button>
+
+          <!-- Item 5: Repositorio & GitHub -->
+          <button onclick="switchTab('tab-repo')" id="nav-repo" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-slate-200 hover:bg-white/10 hover:text-white">
+            <svg class="w-5 h-5 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Repositorio & Despliegue</span>
+          </button>
+
+          <!-- Item 6: Formulario / Ficha ADSO -->
+          <button onclick="switchTab('tab-ficha')" id="nav-ficha" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-slate-200 hover:bg-white/10 hover:text-white">
+            <svg class="w-5 h-5 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span>Información del Programa</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Footer del Sidebar: Perfil de usuario (Héctor David Toledo) idéntico a la captura -->
+      <div class="p-4 border-t border-white/10">
+        <div class="bg-black/30 hover:bg-black/40 border border-sena-green/40 p-3 rounded-2xl flex items-center justify-between cursor-pointer transition">
+          <div class="flex items-center space-x-3 overflow-hidden">
+            <!-- Avatar HD Verde idéntico -->
+            <div class="w-10 h-10 rounded-full bg-[#112416] border-2 border-sena-green flex items-center justify-center font-bold text-white text-xs tracking-wider shadow">
+              HD
+            </div>
+            <div class="truncate">
+              <div class="text-xs font-bold text-white uppercase truncate">
+                HECTOR DAVID...
+              </div>
+              <div class="text-[10px] text-sena-accent flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-sena-accent animate-pulse"></span>
+                <span>Instructor ADSO</span>
+              </div>
+            </div>
+          </div>
+          <svg class="w-4 h-4 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Botón pill de alternar ancho de barra (idéntico al botón verde de la división) -->
+      <button onclick="toggleSidebarWidth()" class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-12 bg-sena-green hover:bg-sena-hover text-white rounded-r-md items-center justify-center shadow-lg cursor-pointer transition z-30" title="Expandir/Contraer menú">
+        <svg id="sidebarToggleIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+    </aside>
+
+    <!-- Overlay móvil para cuando el sidebar está abierto -->
+    <div id="sidebarBackdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-black/50 z-10 hidden lg:hidden"></div>
+
+    <!-- ================= CONTENIDO PRINCIPAL ================= -->
+    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto custom-scroll relative">
+      
+      <!-- Barra de navegación de ruta (Breadcrumbs) y Avance Superior -->
+      <div class="px-6 md:px-10 py-4 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-10">
+        <!-- Breadcrumbs -->
+        <div class="flex items-center space-x-2 text-xs md:text-sm text-slate-500">
+          <button onclick="toggleMobileSidebar()" class="lg:hidden p-1 mr-2 text-slate-700 hover:text-sena-green">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <a href="#" onclick="switchTab('tab-inicio')" class="hover:text-sena-green flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span>Inicio</span>
+          </a>
+          <span>&gt;</span>
+          <span id="currentBreadcrumb" class="font-semibold text-sena-dark">Formación ADSO 2026 - CADPH Garzón</span>
+        </div>
+
+        <!-- Barra de Avance idéntica a la captura ("Avance del Alistamiento 100%") -->
+        <div class="flex items-center space-x-3">
+          <div class="flex items-center bg-slate-100 rounded-full px-3 py-1 border border-slate-200">
+            <span class="text-[11px] font-semibold text-slate-600 mr-2">Avance Curricular</span>
+            <div class="w-24 md:w-36 h-3 bg-slate-300 rounded-full overflow-hidden relative">
+              <div class="h-full bg-gradient-to-r from-teal-500 via-emerald-500 to-sena-green rounded-full w-full"></div>
+            </div>
+            <span class="text-[11px] font-bold text-sena-dark ml-2">100%</span>
+          </div>
+
+          <!-- Botón de ayuda (?) idéntico -->
+          <button onclick="showHelpModal()" class="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center text-slate-500 hover:text-sena-dark hover:border-sena-dark transition text-xs font-bold" title="Información del repositorio">
+            ?
+          </button>
+        </div>
+      </div>
+
+      <!-- ================= CONTENEDOR DE PESTAÑAS / VISTAS ================= -->
+      <div class="p-6 md:p-10 space-y-8 flex-1">
+
+        <!-- ================= PESTAÑA 1: INICIO (DASHBOARD COMPLETO) ================= -->
+        <div id="tab-inicio" class="tab-content space-y-8">
+          
+          <!-- BANNER HERO PRINCIPAL (Replicación exacta del Hero de la captura 2) -->
+          <div class="rounded-3xl bg-gradient-to-r from-[#0c394b] via-[#104b5c] to-[#155a6c] text-white p-8 md:p-12 relative overflow-hidden shadow-xl border border-white/10">
+            <!-- Efectos de luz y gradiente de fondo -->
+            <div class="absolute -right-20 -top-20 w-80 h-80 bg-sena-green/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+              <div class="max-w-2xl space-y-4">
+                <div class="text-[11px] md:text-xs font-bold tracking-widest uppercase text-cyan-200 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-sena-accent"></span>
+                  <span>SERVICIO NACIONAL DE APRENDIZAJE • REGIONAL HUILA</span>
+                </div>
+                
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                  Bienvenido al Repositorio ADSO
+                </h1>
+
+                <p class="text-slate-200 text-sm md:text-base leading-relaxed font-light">
+                  <strong>Centro Agroempresarial y Desarrollo Pecuario del Huila (CADPH) — Garzón.</strong> 
+                  Accede a los módulos de explicación temática, código fuente, guías de aprendizaje y arquitecturas de software para la formación tecnóloga en <em>Análisis y Desarrollo de Software</em>.
+                </p>
+
+                <!-- Barra decorativa verde idéntica -->
+                <div class="h-1 bg-sena-green w-48 rounded-full"></div>
+
+                <!-- Botones de Acción Directa -->
+                <div class="pt-2 flex flex-wrap gap-3">
+                  <button onclick="switchTab('tab-temarios')" class="bg-sena-green hover:bg-sena-hover text-white text-xs md:text-sm font-semibold px-5 py-2.5 rounded-full shadow transition flex items-center gap-2">
+                    <span>Ver Explicaciones Técnicas</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </button>
+
+                  <a href="https://github.com/hdtoledo/cadphAdso" target="_blank" class="bg-white/10 hover:bg-white/20 text-white text-xs md:text-sm font-semibold px-5 py-2.5 rounded-full border border-white/20 transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                    </svg>
+                    <span>Repositorio GitHub</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Lado Derecho: Ilustración / Personaje representativo de la formación -->
+              <div class="relative flex-shrink-0 flex items-center justify-center">
+                <div class="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-tr from-sena-green/30 to-cyan-400/20 p-2 shadow-2xl flex items-center justify-center border border-white/20">
+                  <div class="w-full h-full rounded-full bg-[#0d3444] flex flex-col items-center justify-center p-4 text-center">
+                    <!-- Icono SENA -->
+                    <svg class="w-16 h-16 text-sena-accent mb-2" viewBox="0 0 100 100" fill="currentColor">
+                      <circle cx="50" cy="18" r="8" />
+                      <path d="M50 32 L35 48 L44 48 L44 85 L56 85 L56 48 L65 48 Z" />
+                      <path d="M22 45 L15 62 L32 62 Z" />
+                      <path d="M78 45 L85 62 L68 62 Z" />
+                    </svg>
+                    <span class="text-xs font-bold text-white uppercase tracking-wider">ADSO Huila</span>
+                    <span class="text-[10px] text-cyan-200">Sede Garzón 2026</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= GRID DE LAS 4 TARJETAS MODULARES ================= -->
+          <!-- Idéntico al grid de 4 tarjetas de la captura 2 -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- TARJETA 1: Fase Análisis -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md border border-slate-200/80 transition flex flex-col justify-between group">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <!-- Icono de documento/portapapeles con fondo azul suave -->
+                  <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-gov-blue">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                  </div>
+                  <!-- Badge COMPLETADO idéntico a la captura -->
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold tracking-wider uppercase text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    COMPLETO
+                  </span>
+                </div>
+
+                <h2 class="text-lg font-bold text-slate-800 mb-1 group-hover:text-sena-green transition">
+                  Fase 1: Análisis
+                </h2>
+                <p class="text-xs text-slate-500 mb-6 leading-relaxed">
+                  Levantamiento de requisitos, especificación de software (SRS), diagramas UML, casos de uso y metodologías ágiles.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-end">
+                <button onclick="openModalDetalle('Fase 1: Análisis', 'Requisitos funcionales y no funcionales, diagramas de casos de uso, especificación IEEE 830, historias de usuario y matriz de trazabilidad.')" class="w-9 h-9 rounded-lg bg-sena-green hover:bg-sena-hover text-white flex items-center justify-center transition shadow-sm group-hover:scale-105" title="Ver detalles">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- TARJETA 2: Fase Planeación -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md border border-slate-200/80 transition flex flex-col justify-between group">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <!-- Icono de diseño/arquitectura -->
+                  <div class="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                  </div>
+                  <!-- Badge COMPLETADO -->
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold tracking-wider uppercase text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    COMPLETO
+                  </span>
+                </div>
+
+                <h2 class="text-lg font-bold text-slate-800 mb-1 group-hover:text-sena-green transition">
+                  Fase 2: Planeación
+                </h2>
+                <p class="text-xs text-slate-500 mb-6 leading-relaxed">
+                  Modelado relacional y NoSQL de bases de datos (MER/MR), prototipado UX/UI en Figma y arquitectura de software.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-end">
+                <button onclick="openModalDetalle('Fase 2: Planeación', 'Diseño de base de datos relacional y NoSQL, diccionario de datos, wireframes en Figma, arquitectura MVC y selección del stack tecnológico.')" class="w-9 h-9 rounded-lg bg-sena-green hover:bg-sena-hover text-white flex items-center justify-center transition shadow-sm group-hover:scale-105" title="Ver detalles">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- TARJETA 3: Fase Ejecución -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md border border-slate-200/80 transition flex flex-col justify-between group">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <!-- Icono de desarrollo/código -->
+                  <div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                  </div>
+                  <!-- Badge COMPLETADO -->
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold tracking-wider uppercase text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    COMPLETO
+                  </span>
+                </div>
+
+                <h2 class="text-lg font-bold text-slate-800 mb-1 group-hover:text-sena-green transition">
+                  Fase 3: Ejecución
+                </h2>
+                <p class="text-xs text-slate-500 mb-6 leading-relaxed">
+                  Programación web frontend (HTML, Tailwind, JS), backend con APIs RESTful, persistencia y control de versiones Git.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-end">
+                <button onclick="openModalDetalle('Fase 3: Ejecución', 'Codificación modular, construcción de APIs, componentes frontend reactivos, buenas prácticas de desarrollo limpio (Clean Code) y versionamiento Git.')" class="w-9 h-9 rounded-lg bg-sena-green hover:bg-sena-hover text-white flex items-center justify-center transition shadow-sm group-hover:scale-105" title="Ver detalles">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- TARJETA 4: Fase Evaluación -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md border border-slate-200/80 transition flex flex-col justify-between group">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <!-- Icono de pruebas/evaluación -->
+                  <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-sena-green">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <!-- Badge COMPLETADO -->
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold tracking-wider uppercase text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    COMPLETO
+                  </span>
+                </div>
+
+                <h2 class="text-lg font-bold text-slate-800 mb-1 group-hover:text-sena-green transition">
+                  Fase 4: Evaluación
+                </h2>
+                <p class="text-xs text-slate-500 mb-6 leading-relaxed">
+                  Pruebas de software unitarias e integración, despliegue en GitHub Pages / servidores en la nube y manuales técnicos.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-end">
+                <button onclick="openModalDetalle('Fase 4: Evaluación', 'Plan de pruebas de software, casos de prueba, manual de usuario y técnico, entrega del producto y despliegue continuo en GitHub Pages.')" class="w-9 h-9 rounded-lg bg-sena-green hover:bg-sena-hover text-white flex items-center justify-center transition shadow-sm group-hover:scale-105" title="Ver detalles">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ================= BANNER INFERIOR DE ASISTENTE / SOPORTE ================= -->
+          <!-- Idéntico al banner de "¡Conoce a Buddy el Chatbot!" de la captura 2 -->
+          <div class="rounded-3xl bg-gradient-to-r from-[#1b4e37] to-[#123e2b] text-white p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md relative overflow-hidden">
+            <div class="space-y-2 max-w-3xl">
+              <h2 class="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
+                <span>¡Conoce a SofIA el Asistente Formativo ADSO CADPH!</span>
+              </h2>
+              <p class="text-xs md:text-sm text-emerald-100 font-light leading-relaxed">
+                Descubre el espacio de soporte técnico para aprendices e instructores. Consulta guías de estudio, estándares de desarrollo de software, rúbricas de evaluación y repositorios oficiales del Centro Agroempresarial y Desarrollo Pecuario del Huila en Garzón.
+              </p>
+            </div>
+
+            <!-- Botón y Mascota amigable idéntica al icono del documento con carita -->
+            <div class="flex items-center gap-4 flex-shrink-0">
+              <button onclick="showAssistantDialog()" class="bg-sena-green hover:bg-sena-hover text-white text-xs md:text-sm font-semibold px-5 py-2.5 rounded-full shadow transition flex items-center gap-2">
+                <span>Consultar Preguntas Frecuentes</span>
+              </button>
+
+              <div class="w-14 h-14 bg-white rounded-2xl shadow-lg border-2 border-emerald-300 flex items-center justify-center text-slate-800 rotate-6 transform hover:rotate-0 transition">
+                <span class="text-3xl">🤖</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================= PESTAÑA 2: CHECKLIST CURRICULAR (ESTILO CAPTURA 3) ================= -->
+        <div id="tab-checklist" class="tab-content hidden space-y-6">
+          <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5 mb-6">
+              <div>
+                <h2 class="text-2xl font-bold text-slate-800">Checklist de Competencias Formativas ADSO</h2>
+                <p class="text-xs text-slate-500 mt-1">
+                  Verificación de resultados de aprendizaje alcanzados y actividades del proyecto CADPH Garzón.
+                </p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold px-3 py-1 bg-emerald-100 text-sena-dark rounded-full">
+                  6/6 Requisitos Validados
+                </span>
+              </div>
+            </div>
+
+            <!-- Lista de Chequeo interactiva -->
+            <div class="space-y-4">
+              <!-- Item 1 -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white hover:shadow-sm transition">
+                <div class="flex items-start space-x-3">
+                  <div class="w-6 h-6 rounded-full bg-sena-green text-white flex items-center justify-center text-xs mt-0.5">✓</div>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-800">Fase 1: Especificación de Requerimientos de Software</h3>
+                    <p class="text-xs text-slate-500">Documento SRS, levantamiento de información y modelado de casos de uso según estándares IEEE.</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">CUMPLIDO</span>
+                  <button onclick="openModalDetalle('Requerimientos de Software', 'Levantamiento estructurado de requerimientos con técnicas de entrevista, observación y casos de uso en el municipio de Garzón.')" class="text-xs bg-sena-green text-white font-medium px-3.5 py-1.5 rounded-lg hover:bg-sena-hover transition">Consultar</button>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white hover:shadow-sm transition">
+                <div class="flex items-start space-x-3">
+                  <div class="w-6 h-6 rounded-full bg-sena-green text-white flex items-center justify-center text-xs mt-0.5">✓</div>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-800">Fase 2: Diseño de Base de Datos y Prototipado</h3>
+                    <p class="text-xs text-slate-500">Diseño entidad-relación, normalización de tablas SQL y mockups de alta fidelidad.</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">CUMPLIDO</span>
+                  <button onclick="openModalDetalle('Bases de Datos & Prototipos', 'Normalización hasta 3FN en motores relacionales (MySQL/PostgreSQL) y wireframing responsive.')" class="text-xs bg-sena-green text-white font-medium px-3.5 py-1.5 rounded-lg hover:bg-sena-hover transition">Consultar</button>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white hover:shadow-sm transition">
+                <div class="flex items-start space-x-3">
+                  <div class="w-6 h-6 rounded-full bg-sena-green text-white flex items-center justify-center text-xs mt-0.5">✓</div>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-800">Fase 3: Desarrollo Frontend & Backend Modular</h3>
+                    <p class="text-xs text-slate-500">Implementación de componentes semánticos, diseño con Tailwind CSS y servicios RESTful.</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">CUMPLIDO</span>
+                  <button onclick="openModalDetalle('Desarrollo Full Stack', 'Patrón arquitectónico cliente-servidor con integración de APIs y diseño totalmente responsivo.')" class="text-xs bg-sena-green text-white font-medium px-3.5 py-1.5 rounded-lg hover:bg-sena-hover transition">Consultar</button>
+                </div>
+              </div>
+
+              <!-- Item 4 -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white hover:shadow-sm transition">
+                <div class="flex items-start space-x-3">
+                  <div class="w-6 h-6 rounded-full bg-sena-green text-white flex items-center justify-center text-xs mt-0.5">✓</div>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-800">Fase 4: Control de Versiones con Git y GitHub</h3>
+                    <p class="text-xs text-slate-500">Estrategias de ramificación (Gitflow), commits semánticos y sincronización en repositorio remoto.</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">CUMPLIDO</span>
+                  <button onclick="openModalDetalle('Git y GitHub', 'Repositorio configurado con branch main, .gitignore, README.md técnico y enlace remoto.')" class="text-xs bg-sena-green text-white font-medium px-3.5 py-1.5 rounded-lg hover:bg-sena-hover transition">Consultar</button>
+                </div>
+              </div>
+
+              <!-- Item 5 -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white hover:shadow-sm transition">
+                <div class="flex items-start space-x-3">
+                  <div class="w-6 h-6 rounded-full bg-sena-green text-white flex items-center justify-center text-xs mt-0.5">✓</div>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-800">Fase 5: Despliegue en GitHub Pages & Rutas 404</h3>
+                    <p class="text-xs text-slate-500">Publicación del sitio en la web mediante GitHub Pages con página 404 institucional.</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">CUMPLIDO</span>
+                  <button onclick="openModalDetalle('Despliegue GitHub Pages', 'Configuración de entrega estática en producción accesible a aprendices e instructores las 24/7.')" class="text-xs bg-sena-green text-white font-medium px-3.5 py-1.5 rounded-lg hover:bg-sena-hover transition">Consultar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= PESTAÑA 3: TEMARIOS Y EXPLICACIONES DETALLADAS ================= -->
+        <div id="tab-temarios" class="tab-content hidden space-y-6">
+          <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+            <div class="border-b border-slate-100 pb-5 mb-6">
+              <h2 class="text-2xl font-bold text-slate-800">Explicaciones de los Temas ADSO</h2>
+              <p class="text-xs text-slate-500 mt-1">
+                Guías técnicas, síntesis de conceptos y ejemplos preparados para los aprendices del SENA Garzón.
+              </p>
+            </div>
+
+            <!-- Buscador y Filtros -->
+            <div class="mb-6 flex flex-col sm:flex-row gap-3">
+              <div class="relative flex-1">
+                <input type="text" id="topicSearchInput" onkeyup="filterTopics()" placeholder="Buscar tema (ej. HTML, Tailwind, Git, SQL, APIs)..." class="w-full text-xs md:text-sm pl-9 pr-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sena-green">
+                <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Acordeones / Tarjetas de Temas -->
+            <div id="topicsContainer" class="space-y-4">
+              
+              <!-- TEMA 1: Frontend & Tailwind CSS -->
+              <div class="topic-card border border-slate-200 rounded-xl p-5 hover:border-sena-green/60 transition bg-slate-50/30">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                    <span class="w-9 h-9 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-sm">🎨</span>
+                    <div>
+                      <h3 class="text-base font-bold text-slate-800">1. Maquetación Web Moderna: HTML5 Semántico & Tailwind CSS</h3>
+                      <p class="text-xs text-slate-500">Estructura accesible, diseño responsivo móvil-primero (Mobile-First) y utility classes.</p>
+                    </div>
+                  </div>
+                  <span class="text-[11px] font-semibold text-sena-dark bg-sena-light px-2.5 py-1 rounded-full">Frontend</span>
+                </div>
+                <div class="mt-4 text-xs text-slate-600 space-y-2 border-t border-slate-200/60 pt-3">
+                  <p><strong>Conceptos clave:</strong> Etiquetas semánticas (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>), Grid y Flexbox responsivo, configuración de paletas institucionales y diseño adaptativo a smartphones, tablets y pantallas de escritorio.</p>
+                  <p><strong>Buenas prácticas:</strong> No usar estilos inline, garantizar ratios de contraste accesibles (WCAG) y mantener etiquetas descriptivas con IDs únicos.</p>
+                </div>
+              </div>
+
+              <!-- TEMA 2: Git y GitHub -->
+              <div class="topic-card border border-slate-200 rounded-xl p-5 hover:border-sena-green/60 transition bg-slate-50/30">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                    <span class="w-9 h-9 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-sm">🐙</span>
+                    <div>
+                      <h3 class="text-base font-bold text-slate-800">2. Control de Versiones con Git y Despliegue en GitHub Pages</h3>
+                      <p class="text-xs text-slate-500">Manejo de repositorios locales y remotos, ramas, commits semánticos y hosting gratuito.</p>
+                    </div>
+                  </div>
+                  <span class="text-[11px] font-semibold text-orange-700 bg-orange-50 px-2.5 py-1 rounded-full">DevOps / Git</span>
+                </div>
+                <div class="mt-4 text-xs text-slate-600 space-y-2 border-t border-slate-200/60 pt-3">
+                  <p><strong>Flujo esencial de trabajo:</strong></p>
+                  <pre class="bg-slate-900 text-slate-100 p-3 rounded-lg text-[11px] font-mono overflow-x-auto">git init
+git add .
+git commit -m "feat: interfaz inicial institucional ADSO CADPH"
+git branch -M main
+git remote add origin https://github.com/hdtoledo/cadphAdso.git
+git push -u origin main</pre>
+                  <p><strong>Despliegue GitHub Pages:</strong> Activar desde <em>Settings &gt; Pages &gt; Branch: main &gt; Save</em>. El sitio queda activo en <code>https://hdtoledo.github.io/cadphAdso/</code>.</p>
+                </div>
+              </div>
+
+              <!-- TEMA 3: Bases de Datos -->
+              <div class="topic-card border border-slate-200 rounded-xl p-5 hover:border-sena-green/60 transition bg-slate-50/30">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                    <span class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">🗄️</span>
+                    <div>
+                      <h3 class="text-base font-bold text-slate-800">3. Diseño y Gestión de Bases de Datos Relacionales (SQL)</h3>
+                      <p class="text-xs text-slate-500">Modelos Entidad-Relación, normalización (1FN, 2FN, 3FN), claves primarias/foráneas y sentencias DDL/DML.</p>
+                    </div>
+                  </div>
+                  <span class="text-[11px] font-semibold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">Datos</span>
+                </div>
+                <div class="mt-4 text-xs text-slate-600 space-y-2 border-t border-slate-200/60 pt-3">
+                  <p><strong>Competencias SENA:</strong> Construcción de tablas con integridad referencial, vistas, disparadores (triggers), procedimientos almacenados y optimización de índices para consultas de alto rendimiento en software empresarial.</p>
+                </div>
+              </div>
+
+              <!-- TEMA 4: Lógica de Programación & Backend -->
+              <div class="topic-card border border-slate-200 rounded-xl p-5 hover:border-sena-green/60 transition bg-slate-50/30">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                    <span class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-sm">⚡</span>
+                    <div>
+                      <h3 class="text-base font-bold text-slate-800">4. Lógica de Programación y Construcción de APIs RESTful</h3>
+                      <p class="text-xs text-slate-500">Estructuras de datos, POO (Programación Orientada a Objetos), arquitectura de servicios web y seguridad.</p>
+                    </div>
+                  </div>
+                  <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Backend</span>
+                </div>
+                <div class="mt-4 text-xs text-slate-600 space-y-2 border-t border-slate-200/60 pt-3">
+                  <p><strong>Estándares aplicados:</strong> Verbos HTTP estándar (GET, POST, PUT, DELETE), códigos de estado (200, 201, 400, 404, 500), autenticación JWT y manejo defensivo de excepciones.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= PESTAÑA 4: FASES DEL PROYECTO ================= -->
+        <div id="tab-fases" class="tab-content hidden space-y-6">
+          <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+            <div class="border-b border-slate-100 pb-5 mb-6">
+              <h2 class="text-2xl font-bold text-slate-800">Fases del Proyecto Formativo ADSO</h2>
+              <p class="text-xs text-slate-500 mt-1">
+                Estructura metodológica del programa en el Centro Agroempresarial y Desarrollo Pecuario del Huila.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">1</span>
+                  <h3 class="text-base font-bold text-slate-800">Fase de Análisis</h3>
+                </div>
+                <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                  <li>Identificar las necesidades del cliente y del sector productivo de Garzón.</li>
+                  <li>Elaborar el mapa de procesos de la organización.</li>
+                  <li>Definir los requerimientos funcionales y no funcionales (IEEE 830).</li>
+                  <li>Modelar historias de usuario y diagramas de casos de uso UML.</li>
+                </ul>
+              </div>
+
+              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-xs">2</span>
+                  <h3 class="text-base font-bold text-slate-800">Fase de Planeación</h3>
+                </div>
+                <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                  <li>Diseñar la arquitectura tecnológica de la solución de software.</li>
+                  <li>Construir el modelo relacional de base de datos normalizado.</li>
+                  <li>Diseñar las interfaces de usuario (UI) y la experiencia de usuario (UX).</li>
+                  <li>Planificar el cronograma del proyecto bajo metodología ágil (Scrum).</li>
+                </ul>
+              </div>
+
+              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold text-xs">3</span>
+                  <h3 class="text-base font-bold text-slate-800">Fase de Ejecución</h3>
+                </div>
+                <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                  <li>Codificar los módulos del sistema según los estándares de codificación.</li>
+                  <li>Integrar la persistencia de datos mediante ORM o consultas optimizadas.</li>
+                  <li>Implementar seguridad, control de acceso y validación de entradas.</li>
+                  <li>Gestionar el código colaborativo en GitHub mediante ramas y pull requests.</li>
+                </ul>
+              </div>
+
+              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="w-8 h-8 rounded-full bg-sena-green text-white flex items-center justify-center font-bold text-xs">4</span>
+                  <h3 class="text-base font-bold text-slate-800">Fase de Evaluación</h3>
+                </div>
+                <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                  <li>Ejecutar pruebas funcionales, de seguridad y de rendimiento.</li>
+                  <li>Elaborar manuales técnicos de instalación y manuales de usuario.</li>
+                  <li>Desplegar la solución en servidores de producción o GitHub Pages.</li>
+                  <li>Capacitar al usuario final y realizar la entrega formal del software.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= PESTAÑA 5: REPOSITORIO & DESPLIEGUE ================= -->
+        <div id="tab-repo" class="tab-content hidden space-y-6">
+          <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+            <div class="border-b border-slate-100 pb-5 mb-6">
+              <h2 class="text-2xl font-bold text-slate-800">Repositorio Oficial & Despliegue en GitHub Pages</h2>
+              <p class="text-xs text-slate-500 mt-1">
+                Instrucciones para sincronizar, clonar y desplegar este portal en la web.
+              </p>
+            </div>
+
+            <!-- Datos del Repo -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Repositorio GitHub</span>
+                <span class="text-xs font-mono font-bold text-slate-800 break-all">https://github.com/hdtoledo/cadphAdso.git</span>
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">URL GitHub Pages</span>
+                <span class="text-xs font-mono font-bold text-sena-dark break-all">https://hdtoledo.github.io/cadphAdso/</span>
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Página de Error Personalizada</span>
+                <span class="text-xs font-mono font-bold text-slate-800">404.html (Configurada)</span>
+              </div>
+            </div>
+
+            <!-- Guía de Comandos Paso a Paso -->
+            <div class="space-y-4">
+              <h3 class="text-sm font-bold text-slate-800">Comandos para subir el proyecto a GitHub:</h3>
+              <div class="bg-slate-900 text-slate-100 p-4 rounded-xl text-xs font-mono space-y-2">
+                <p class="text-slate-400"># 1. Verificar estado local</p>
+                <p>git status</p>
+                <p class="text-slate-400"># 2. Agregar archivos creados</p>
+                <p>git add .</p>
+                <p class="text-slate-400"># 3. Crear commit</p>
+                <p>git commit -m "feat: interfaz institucional SENA CADPH Garzon con Tailwind CSS y GitHub Pages"</p>
+                <p class="text-slate-400"># 4. Asegurar rama principal main</p>
+                <p>git branch -M main</p>
+                <p class="text-slate-400"># 5. Conectar con el repositorio remoto</p>
+                <p>git remote add origin https://github.com/hdtoledo/cadphAdso.git</p>
+                <p class="text-slate-400"># 6. Subir cambios</p>
+                <p class="text-emerald-400">git push -u origin main</p>
+              </div>
+
+              <!-- Pasos para activar GitHub Pages -->
+              <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 space-y-1.5">
+                <p class="font-bold">🚀 Pasos para habilitar GitHub Pages en el repositorio:</p>
+                <ol class="list-decimal list-inside space-y-1">
+                  <li>Ingresa al repositorio en GitHub: <a href="https://github.com/hdtoledo/cadphAdso" target="_blank" class="underline font-semibold">github.com/hdtoledo/cadphAdso</a>.</li>
+                  <li>Ve a la pestaña <strong>Settings</strong> (Configuración) &gt; menú lateral <strong>Pages</strong>.</li>
+                  <li>En <strong>Build and deployment &gt; Source</strong>, selecciona <em>Deploy from a branch</em>.</li>
+                  <li>En <strong>Branch</strong>, selecciona la rama <code>main</code> y la carpeta <code>/ (root)</code>.</li>
+                  <li>Haz clic en <strong>Save</strong>. ¡En un par de minutos tu sitio estará en línea!</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= PESTAÑA 6: INFORMACIÓN DEL PROGRAMA (ESTILO CAPTURA 4) ================= -->
+        <div id="tab-ficha" class="tab-content hidden space-y-6">
+          <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+            
+            <!-- Encabezado con Avatar idéntico a la captura 4 -->
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 pb-6 border-b border-slate-200">
+              <div class="w-16 h-16 rounded-full bg-sena-green text-white flex items-center justify-center font-extrabold text-xl shadow-md border-2 border-white">
+                HD
+              </div>
+              <div class="text-center sm:text-left">
+                <h2 class="text-xl md:text-2xl font-bold text-slate-800 uppercase tracking-tight">
+                  HECTOR DAVID TOLEDO GARCIA
+                </h2>
+                <p class="text-xs text-sena-dark font-semibold">
+                  Instructor Líder del Programa • ADSO Garzón
+                </p>
+                <p class="text-[11px] text-slate-500 mt-0.5">
+                  Centro Agroempresarial y Desarrollo Pecuario del Huila
+                </p>
+              </div>
+            </div>
+
+            <!-- Formulario de Datos del Programa (Replicación estética de los campos con borde de la captura 4) -->
+            <div class="pt-6 space-y-6">
+              <h3 class="text-base font-bold text-slate-800">Datos Institucionales del Programa Formativo</h3>
+              <p class="text-xs text-slate-500">
+                Información técnica y administrativa registrada en el diseño curricular del SENA.
+              </p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-xs">
+                
+                <!-- Campo 1 -->
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nombre del Programa</label>
+                  <input type="text" readonly value="ANÁLISIS Y DESARROLLO DE SOFTWARE (ADSO)" class="w-full p-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-800 font-medium">
+                </div>
+
+                <!-- Campo 2 -->
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nivel de Formación</label>
+                  <input type="text" readonly value="TECNÓLOGO" class="w-full p-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-800 font-medium">
+                </div>
+
+                <!-- Campo 3 -->
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Centro de Formación</label>
+                  <input type="text" readonly value="CENTRO AGROEMPRESARIAL Y DESARROLLO PECUARIO" class="w-full p-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-800 font-medium">
+                </div>
+
+                <!-- Campo 4 -->
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Sede / Municipio</label>
+                  <input type="text" readonly value="GARZÓN - HUILA" class="w-full p-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-800 font-medium">
+                </div>
+
+                <!-- Campo 5 -->
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Regional</label>
+                  <input type="text" readonly value="REGIONAL HUILA" class="w-full p-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-800 font-medium">
+                </div>
+
+                <!-- Campo 6 -->
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Modalidad</label>
+                  <input type="text" readonly value="PRESENCIAL / COMPLEMENTARIA" class="w-full p-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-800 font-medium">
+                </div>
+
+                <!-- Campo 7 -->
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Correo Institucional</label>
+                  <input type="text" readonly value="htoledog@sena.edu.co" class="w-full p-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-800 font-medium">
+                </div>
+
+                <!-- Campo 8 -->
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Documento Curricular Oficial</label>
+                  <a href="docs/DisenoCurricularADSO.pdf" target="_blank" class="w-full inline-flex items-center justify-center p-2.5 rounded-xl border border-sena-green bg-emerald-50 text-sena-dark font-semibold hover:bg-emerald-100 transition">
+                    Ver Diseño Curricular (PDF)
+                  </a>
+                </div>
+
+                <!-- Campo 9 -->
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 mb-1">Estado en Plataforma</label>
+                  <input type="text" readonly value="ACTIVO / VIGENTE 2026" class="w-full p-2.5 rounded-xl border border-slate-300 bg-slate-50 text-emerald-700 font-bold">
+                </div>
+
+              </div>
+
+              <!-- Botón verde de acción al estilo del screenshot 4 -->
+              <div class="pt-4 flex justify-end">
+                <button onclick="openModalDetalle('Información ADSO Actualizada', 'Los datos del programa de formación ADSO CADPH Garzón están sincronizados con el diseño curricular oficial.')" class="bg-sena-green hover:bg-sena-hover text-white font-semibold text-xs md:text-sm py-2.5 px-6 rounded-full shadow transition flex items-center gap-2">
+                  <span>Guardar información</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= FOOTER INFERIOR INSTITUCIONAL ================= -->
+      <footer class="w-full bg-white border-t border-slate-200 py-4 px-6 md:px-10 text-center text-xs text-slate-500">
+        <p>
+          CADPH Garzón © Copyright. Servicio Nacional de Aprendizaje SENA, Regional Huila, República de Colombia.
+          <a href="https://www.sena.edu.co" target="_blank" rel="noopener noreferrer" class="text-sena-dark hover:underline ml-1">
+            portal oficial SENA ↗
+          </a>
+        </p>
+      </footer>
+    </main>
+
+    <!-- ================= BOTÓN FLOTANTE DE ACCESIBILIDAD (IDÉNTICO A LAS CAPTURAS) ================= -->
+    <aside aria-label="Accesibilidad" class="fixed right-0 top-1/2 -translate-y-1/2 z-30">
+      <button onclick="toggleAccessibilityMenu()" class="w-9 h-12 bg-sena-green hover:bg-sena-hover text-white rounded-l-xl flex items-center justify-center shadow-lg cursor-pointer transition focus:outline-none" title="Opciones de accesibilidad">
+        <!-- Icono de accesibilidad idéntico al de las capturas -->
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="4" r="2" />
+          <path d="M19 13v-2c-1.54.02-3.09-.75-4.07-1.83l-1.29-1.43c-.17-.19-.38-.34-.62-.44-.24-.1-.5-.15-.76-.15-.26 0-.52.05-.76.15-.24.1-.45.25-.62.44L9.59 9.17C8.61 10.25 7.06 11.02 5.52 11V13c1.93-.02 3.88-.93 5.09-2.23l.39-.42V20h2v-6.5h2V20h2v-9.65l.39.42c1.21 1.3 3.16 2.21 5.09 2.23z"/>
+        </svg>
+      </button>
+
+      <!-- Menú desplegable de Accesibilidad -->
+      <div id="accessibilityMenu" class="hidden absolute right-10 top-0 w-52 bg-white rounded-xl shadow-2xl border border-slate-200 p-3 text-xs space-y-2">
+        <div class="font-bold text-slate-800 border-b border-slate-100 pb-1.5">Accesibilidad Web</div>
+        <button onclick="adjustFontSize(1)" class="w-full text-left px-2.5 py-1.5 hover:bg-slate-100 rounded flex justify-between items-center text-slate-700">
+          <span>Aumentar letra</span>
+          <span class="font-bold">A+</span>
+        </button>
+        <button onclick="adjustFontSize(-1)" class="w-full text-left px-2.5 py-1.5 hover:bg-slate-100 rounded flex justify-between items-center text-slate-700">
+          <span>Disminuir letra</span>
+          <span class="font-bold">A-</span>
+        </button>
+        <button onclick="resetFontSize()" class="w-full text-left px-2.5 py-1.5 hover:bg-slate-100 rounded flex justify-between items-center text-slate-700">
+          <span>Restablecer tamaño</span>
+          <span>↺</span>
+        </button>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ================= MODAL INTERACTIVO DE CONFIRMACIÓN ================= -->
+  <!-- Replicación idéntica del modal "Acción completada" de la Captura 3 -->
+  <div id="genericModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <!-- Backdrop oscuro con desenfoque de fondo idéntico -->
+    <div onclick="closeModal()" class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"></div>
+    
+    <!-- Contenido del modal estilo SENA -->
+    <div class="relative bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-slate-100 flex flex-col items-center text-center transform transition-all">
+      
+      <!-- Botón cerrar (X) en la esquina superior derecha -->
+      <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Ícono verde de verificación checkmark idéntico a la captura 3 -->
+      <div class="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-sena-green mb-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <h3 id="modalTitle" class="text-xl font-bold text-slate-800 mb-2">Acción completada</h3>
+      
+      <p id="modalBody" class="text-xs md:text-sm text-slate-500 mb-6 leading-relaxed">
+        El módulo de la formación ADSO ha sido seleccionado correctamente.
+      </p>
+
+      <!-- Botón verde "Aceptar" idéntico a la captura 3 -->
+      <button onclick="closeModal()" class="w-32 bg-sena-green hover:bg-sena-hover text-white font-semibold py-2.5 px-6 rounded-full shadow transition text-sm">
+        Aceptar
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= MODAL ASISTENTE / FAQ ================= -->
+  <div id="assistantModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div onclick="closeAssistantModal()" class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+    <div class="relative bg-white rounded-3xl p-6 md:p-8 max-w-lg w-full shadow-2xl border border-slate-100">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🤖</span>
+          <h3 class="text-lg font-bold text-slate-800">Asistente ADSO - CADPH Garzón</h3>
+        </div>
+        <button onclick="closeAssistantModal()" class="text-slate-400 hover:text-slate-600">✕</button>
+      </div>
+      <div class="text-xs text-slate-600 space-y-3 max-h-96 overflow-y-auto custom-scroll pr-1">
+        <div class="p-3 bg-slate-50 rounded-xl">
+          <p class="font-bold text-slate-800">¿Dónde se encuentra ubicado el CADPH?</p>
+          <p class="mt-1">El Centro Agroempresarial y Desarrollo Pecuario del Huila está localizado en Garzón, Huila, liderando procesos de formación técnica y tecnológica.</p>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-xl">
+          <p class="font-bold text-slate-800">¿Qué tecnologías se estudian en ADSO?</p>
+          <p class="mt-1">HTML5, CSS3, Tailwind CSS, JavaScript, TypeScript, Python, Java, SQL, Git/GitHub, Docker, y metodologías ágiles Scrum.</p>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-xl">
+          <p class="font-bold text-slate-800">¿Cómo descargar el diseño curricular?</p>
+          <p class="mt-1">Puedes abrir directamente el archivo PDF oficial incluido en la carpeta <code>docs/DisenoCurricularADSO.pdf</code>.</p>
+        </div>
+      </div>
+      <div class="mt-5 flex justify-end">
+        <button onclick="closeAssistantModal()" class="bg-sena-green hover:bg-sena-hover text-white text-xs font-semibold px-5 py-2 rounded-full">
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= LÓGICA JAVASCRIPT ================= -->
+  <script>
+    // Conmutador de vista de bienvenida / login (Pantalla 1)
+    function toggleWelcomeView() {
+      const welcome = document.getElementById('welcomeScreen');
+      const label = document.getElementById('btnViewToggleLabel');
+      if (welcome.classList.contains('hidden')) {
+        welcome.classList.remove('hidden');
+        label.innerText = 'Ver Dashboard';
+      } else {
+        welcome.classList.add('hidden');
+        label.innerText = 'Ver Vista Acceso';
+      }
+    }
+
+    // Navegación de pestañas en el dashboard
+    function switchTab(tabId) {
+      // Ocultar todas las pestañas
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      // Mostrar la seleccionada
+      const target = document.getElementById(tabId);
+      if (target) target.classList.remove('hidden');
+
+      // Actualizar estados visuales de los botones del sidebar
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.classList.remove('bg-sena-green', 'text-white', 'shadow-md');
+        btn.classList.add('text-slate-200', 'hover:bg-white/10', 'hover:text-white');
+      });
+
+      const navBtnMap = {
+        'tab-inicio': 'nav-inicio',
+        'tab-checklist': 'nav-checklist',
+        'tab-temarios': 'nav-temarios',
+        'tab-fases': 'nav-fases',
+        'tab-repo': 'nav-repo',
+        'tab-ficha': 'nav-ficha'
+      };
+
+      const breadcrumbMap = {
+        'tab-inicio': 'Formación ADSO 2026 - CADPH Garzón',
+        'tab-checklist': 'Checklist de Competencias Curriculares',
+        'tab-temarios': 'Temarios & Explicaciones de Desarrollo',
+        'tab-fases': 'Fases Metodológicas del Proyecto',
+        'tab-repo': 'Repositorio GitHub & Despliegue Pages',
+        'tab-ficha': 'Información del Programa Formativo'
+      };
+
+      const activeBtn = document.getElementById(navBtnMap[tabId]);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-200', 'hover:bg-white/10', 'hover:text-white');
+        activeBtn.classList.add('bg-sena-green', 'text-white', 'shadow-md');
+      }
+
+      // Actualizar breadcrumb
+      const bc = document.getElementById('currentBreadcrumb');
+      if (bc && breadcrumbMap[tabId]) bc.innerText = breadcrumbMap[tabId];
+
+      // En móviles, cerrar el sidebar al seleccionar
+      if (window.innerWidth < 1024) {
+        const sidebar = document.getElementById('mainSidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        sidebar.classList.add('-translate-x-full');
+        backdrop.classList.add('hidden');
+      }
+    }
+
+    // Modal de confirmación genérico idéntico al de la captura 3
+    function openModalDetalle(titulo, descripcion) {
+      document.getElementById('modalTitle').innerText = titulo;
+      document.getElementById('modalBody').innerText = descripcion;
+      document.getElementById('genericModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('genericModal').classList.add('hidden');
+    }
+
+    function showHelpModal() {
+      openModalDetalle('Repositorio Formativo ADSO CADPH', 'Este portal contiene la organización curricular, guías y recursos de formación para el programa Análisis y Desarrollo de Software del SENA Garzón Huila.');
+    }
+
+    // Modal del asistente
+    function showAssistantDialog() {
+      document.getElementById('assistantModal').classList.remove('hidden');
+    }
+    function closeAssistantModal() {
+      document.getElementById('assistantModal').classList.add('hidden');
+    }
+
+    // Alternar menú móvil
+    function toggleMobileSidebar() {
+      const sidebar = document.getElementById('mainSidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      const isClosed = sidebar.classList.contains('-translate-x-full');
+      if (isClosed) {
+        sidebar.classList.remove('-translate-x-full');
+        backdrop.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+        backdrop.classList.add('hidden');
+      }
+    }
+
+    // Colapsar ancho de sidebar en escritorio
+    let isCollapsed = false;
+    function toggleSidebarWidth() {
+      const sidebar = document.getElementById('mainSidebar');
+      const icon = document.getElementById('sidebarToggleIcon');
+      if (!isCollapsed) {
+        sidebar.classList.remove('w-72');
+        sidebar.classList.add('w-20');
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />';
+        isCollapsed = true;
+      } else {
+        sidebar.classList.remove('w-20');
+        sidebar.classList.add('w-72');
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />';
+        isCollapsed = false;
+      }
+    }
+
+    // Menú de accesibilidad
+    function toggleAccessibilityMenu() {
+      const menu = document.getElementById('accessibilityMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    let currentZoom = 100;
+    function adjustFontSize(delta) {
+      currentZoom += delta * 10;
+      if (currentZoom < 80) currentZoom = 80;
+      if (currentZoom > 140) currentZoom = 140;
+      document.body.style.fontSize = currentZoom + '%';
+    }
+    function resetFontSize() {
+      currentZoom = 100;
+      document.body.style.fontSize = '100%';
+    }
+
+    // Filtrar temas
+    function filterTopics() {
+      const query = document.getElementById('topicSearchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.topic-card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Configuración responsiva inicial
+    window.addEventListener('resize', () => {
+      const sidebar = document.getElementById('mainSidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (window.innerWidth >= 1024) {
+        sidebar.classList.remove('-translate-x-full');
+        backdrop.classList.add('hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+      }
+    });
+
+    // Inicialización al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.innerWidth < 1024) {
+        document.getElementById('mainSidebar').classList.add('-translate-x-full');
+      }
+    });
+  </script>
+</body>
+</html>

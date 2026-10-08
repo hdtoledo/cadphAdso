@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Página no encontrada | ADSO CADPH SENA Garzón</title>
+  <meta name="description" content="Página de error 404 - Centro Agroempresarial y Desarrollo Pecuario del Huila - SENA Garzón.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%2339a900'/><path d='M50 20 L75 75 L25 75 Z' fill='white'/></svg>">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sena: {
+              green: '#39a900',
+              hover: '#2e8b00',
+              dark: '#007832',
+              light: '#f2f9ed',
+              accent: '#4ade80'
+            },
+            gov: {
+              blue: '#3366cc',
+              darkblue: '#1e4b9e'
+            }
+          },
+          fontFamily: {
+            sans: ['"Work Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts: Work Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#0b3244] text-white min-h-screen flex flex-col font-sans selection:bg-sena-green selection:text-white">
+
+  <!-- BARRA SUPERIOR INSTITUCIONAL GOV.CO -->
+  <header class="w-full bg-gov-blue text-white h-10 px-4 md:px-8 flex items-center justify-between z-10 select-none shadow-sm">
+    <div class="flex items-center space-x-3">
+      <a href="index.html" class="flex items-center text-white font-extrabold text-lg tracking-tight hover:opacity-90 transition">
+        gov<span class="text-white">.co</span>
+      </a>
+      <span class="text-blue-200 text-xs hidden sm:inline-block">|</span>
+      <span class="text-[11px] md:text-xs text-blue-100 font-normal tracking-wide hidden sm:inline-block">
+        Portal Único del Estado Colombiano
+      </span>
+    </div>
+    <div class="text-xs text-blue-100 font-medium">
+      ADSO • Sede Garzón - Huila
+    </div>
+  </header>
+
+  <!-- CONTENIDO CENTRAL DE ERROR 404 -->
+  <main class="flex-1 flex items-center justify-center p-6 relative overflow-hidden">
+    <!-- Efectos de luz y gradiente de fondo -->
+    <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-sena-green/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -right-20 -top-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-xl w-full bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white/20 text-center shadow-2xl relative z-10">
+      
+      <!-- Logo SENA SVG -->
+      <div class="flex justify-center mb-6">
+        <svg class="w-16 h-16 text-sena-accent fill-current" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="18" r="8" fill="currentColor" />
+          <path d="M50 32 L35 48 L44 48 L44 85 L56 85 L56 48 L65 48 Z" fill="currentColor" />
+          <path d="M22 45 L15 62 L32 62 Z" fill="currentColor" />
+          <path d="M78 45 L85 62 L68 62 Z" fill="currentColor" />
+        </svg>
+      </div>
+
+      <div class="inline-block bg-sena-green text-white text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-wider mb-3">
+        Error 404
+      </div>
+
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-tight">
+        Página no encontrada
+      </h1>
+
+      <p class="text-sm md:text-base text-cyan-100/90 font-light mb-8 leading-relaxed">
+        El recurso o tema de la formación ADSO al que intentas acceder no está disponible o la ruta fue modificada.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="index.html" class="w-full sm:w-auto bg-sena-green hover:bg-sena-hover text-white text-sm font-semibold px-6 py-3 rounded-full transition shadow-lg flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          <span>Regresar al Portal Principal</span>
+        </a>
+
+        <a href="https://github.com/hdtoledo/cadphAdso" target="_blank" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white text-sm font-semibold px-6 py-3 rounded-full border border-white/20 transition flex items-center justify-center gap-2">
+          <span>Ver Repositorio GitHub</span>
+        </a>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-white/10 text-[11px] text-cyan-200/70">
+        Centro Agroempresarial y Desarrollo Pecuario del Huila (CADPH) — Garzón
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-4 text-center text-xs text-slate-400 bg-black/20">
+    CADPH Garzón © Copyright. Servicio Nacional de Aprendizaje SENA, Regional Huila.
+  </footer>
+</body>
+</html>

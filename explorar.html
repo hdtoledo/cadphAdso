@@ -60,7 +60,7 @@
     <aside id="mainSidebar" class="fixed inset-y-0 left-0 z-40 w-72 bg-sena-mesh text-white flex flex-col justify-between -translate-x-full lg:translate-x-0 lg:static lg:h-full lg:z-20 lg:flex-shrink-0 shadow-2xl lg:shadow-xl border-r border-[#124d62]/50 select-none">
       
       <!-- Top del Sidebar: Encabezado institucional con Logo Oficial SENA -->
-      <div>
+      <div class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden sidebar-scroll">
         <div class="px-5 py-4 border-b border-white/10 flex items-center justify-between">
           <div class="sidebar-header-box flex items-center space-x-3 w-full overflow-hidden">
             <!-- Icono Oficial SENA con enlace al inicio -->
@@ -111,11 +111,44 @@
             <span class="sidebar-label truncate">Temarios & Guías</span>
           </button>
 
-          <!-- Item 4: Fases de Proyecto -->
-          <button onclick="switchTab('tab-fases')" id="nav-fases" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-slate-200 hover:bg-white/10 hover:text-white group" title="Fases del Proyecto">
-            <i data-lucide="layers" class="w-5 h-5 flex-shrink-0 text-cyan-300 group-hover:text-white"></i>
-            <span class="sidebar-label truncate">Fases del Proyecto</span>
-          </button>
+          <!-- Item 4: Fases de Proyecto (desplegable) -->
+          <div class="nav-group">
+            <button onclick="toggleFasesMenu()" id="nav-fases" aria-expanded="false" aria-controls="fasesSubmenu" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-slate-200 hover:bg-white/10 hover:text-white group" title="Fases del Proyecto">
+              <i data-lucide="layers" class="w-5 h-5 flex-shrink-0 text-cyan-300 group-hover:text-white"></i>
+              <span class="sidebar-label truncate flex-1 text-left">Fases del Proyecto</span>
+              <i data-lucide="chevron-down" id="fasesChevron" class="sidebar-label w-4 h-4 flex-shrink-0 transition-transform duration-300"></i>
+            </button>
+
+            <!-- Submenú de fases -->
+            <div id="fasesSubmenu" class="nav-submenu max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <ul class="mt-1 ml-6 pl-3 border-l border-white/15 space-y-0.5 py-1">
+                <li>
+                  <button onclick="goToFase(1)" data-fase="1" class="nav-subitem w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-slate-300 hover:bg-white/10 hover:text-white transition">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></span>
+                    <span class="truncate">Fase 1: Análisis</span>
+                  </button>
+                </li>
+                <li>
+                  <button onclick="goToFase(2)" data-fase="2" class="nav-subitem w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-slate-300 hover:bg-white/10 hover:text-white transition">
+                    <span class="w-1.5 h-1.5 rounded-full bg-purple-400 flex-shrink-0"></span>
+                    <span class="truncate">Fase 2: Planeación</span>
+                  </button>
+                </li>
+                <li>
+                  <button onclick="goToFase(3)" data-fase="3" class="nav-subitem w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-slate-300 hover:bg-white/10 hover:text-white transition">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0"></span>
+                    <span class="truncate">Fase 3: Ejecución</span>
+                  </button>
+                </li>
+                <li>
+                  <button onclick="goToFase(4)" data-fase="4" class="nav-subitem w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-slate-300 hover:bg-white/10 hover:text-white transition">
+                    <span class="w-1.5 h-1.5 rounded-full bg-sena-accent flex-shrink-0"></span>
+                    <span class="truncate">Fase 4: Evaluación</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
 
           <!-- Item 5: Repositorio & GitHub -->
           <button onclick="switchTab('tab-repo')" id="nav-repo" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-slate-200 hover:bg-white/10 hover:text-white group" title="Repositorio & Despliegue">
@@ -648,7 +681,7 @@ git push -u origin main</pre>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white cursor-pointer">
+              <div id="fase-1" class="fase-card scroll-mt-6 border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white cursor-pointer">
                 <div class="flex items-center gap-3 mb-3">
                   <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">1</span>
                   <h3 class="text-base font-bold text-slate-800">Fase de Análisis</h3>
@@ -661,7 +694,7 @@ git push -u origin main</pre>
                 </ul>
               </div>
 
-              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white cursor-pointer">
+              <div id="fase-2" class="fase-card scroll-mt-6 border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white cursor-pointer">
                 <div class="flex items-center gap-3 mb-3">
                   <span class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-xs">2</span>
                   <h3 class="text-base font-bold text-slate-800">Fase de Planeación</h3>
@@ -674,7 +707,7 @@ git push -u origin main</pre>
                 </ul>
               </div>
 
-              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white cursor-pointer">
+              <div id="fase-3" class="fase-card scroll-mt-6 border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white cursor-pointer">
                 <div class="flex items-center gap-3 mb-3">
                   <span class="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold text-xs">3</span>
                   <h3 class="text-base font-bold text-slate-800">Fase de Ejecución</h3>
@@ -687,7 +720,7 @@ git push -u origin main</pre>
                 </ul>
               </div>
 
-              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white cursor-pointer">
+              <div id="fase-4" class="fase-card scroll-mt-6 border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white cursor-pointer">
                 <div class="flex items-center gap-3 mb-3">
                   <span class="w-8 h-8 rounded-full bg-sena-green text-white flex items-center justify-center font-bold text-xs">4</span>
                   <h3 class="text-base font-bold text-slate-800">Fase de Evaluación</h3>

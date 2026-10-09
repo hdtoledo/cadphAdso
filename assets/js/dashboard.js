@@ -3,7 +3,8 @@
  */
 
 // Navegación de pestañas en el dashboard
-function switchTab(tabId) {
+// opts.keepSidebar = true evita cerrar el sidebar en móviles (p. ej. al abrir un submenú)
+function switchTab(tabId, opts = {}) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
   const target = document.getElementById(tabId);
   if (target) target.classList.remove('hidden');
@@ -44,8 +45,11 @@ function switchTab(tabId) {
   const bc = document.getElementById('currentBreadcrumb');
   if (bc && breadcrumbMap[tabId]) bc.innerText = breadcrumbMap[tabId];
 
+  // Limpiar la fase activa del submenú al cambiar de pestaña
+  setActiveFase(null);
+
   // En móviles, cerrar el sidebar al seleccionar
-  if (window.innerWidth < 1024) {
+  if (window.innerWidth < 1024 && !opts.keepSidebar) {
     const sidebar = document.getElementById('mainSidebar');
     const backdrop = document.getElementById('sidebarBackdrop');
     if (sidebar) sidebar.classList.add('-translate-x-full');
@@ -53,6 +57,77 @@ function switchTab(tabId) {
   }
 
   if (window.lucide) lucide.createIcons();
+}
+
+// ================= SUBMENÚ DESPLEGABLE: FASES DEL PROYECTO =================
+const FASES = {
+  1: 'Fase 1: Análisis',
+  2: 'Fase 2: Planeación',
+  3: 'Fase 3: Ejecución',
+  4: 'Fase 4: Evaluación'
+};
+
+function setFasesMenuOpen(open) {
+  const submenu = document.getElementById('fasesSubmenu');
+  const chevron = document.getElementById('fasesChevron');
+  const btn = document.getElementById('nav-fases');
+  if (!submenu) return;
+  submenu.classList.toggle('max-h-0', !open);
+  submenu.classList.toggle('max-h-64', open);
+  if (chevron) chevron.classList.toggle('rotate-180', open);
+  if (btn) btn.setAttribute('aria-expanded', String(open));
+}
+
+// Clic en "Fases del Proyecto": muestra la pestaña y abre/cierra el desplegable
+function toggleFasesMenu() {
+  const submenu = document.getElementById('fasesSubmenu');
+  const sidebar = document.getElementById('mainSidebar');
+  const isOpen = submenu && !submenu.classList.contains('max-h-0');
+  const collapsed = sidebar && sidebar.classList.contains('is-collapsed');
+
+  // Con el sidebar colapsado solo navega a la pestaña
+  if (collapsed) {
+    switchTab('tab-fases');
+    return;
+  }
+  switchTab('tab-fases', { keepSidebar: true });
+  setFasesMenuOpen(!isOpen);
+}
+
+// Resalta la fase seleccionada en el submenú y en las tarjetas
+function setActiveFase(num) {
+  document.querySelectorAll('.nav-subitem').forEach(item => {
+    const active = Number(item.dataset.fase) === num;
+    item.classList.toggle('bg-white/10', active);
+    item.classList.toggle('text-white', active);
+    item.classList.toggle('font-semibold', active);
+    item.classList.toggle('text-slate-300', !active);
+  });
+  document.querySelectorAll('.fase-card').forEach(card => {
+    const active = card.id === 'fase-' + num;
+    card.classList.toggle('ring-2', active);
+    card.classList.toggle('ring-sena-green', active);
+    card.classList.toggle('bg-white', active);
+  });
+}
+
+// Navega a una fase concreta desde el submenú
+function goToFase(num) {
+  switchTab('tab-fases');
+  setFasesMenuOpen(true);
+  setActiveFase(num);
+
+  const bc = document.getElementById('currentBreadcrumb');
+  if (bc && FASES[num]) bc.innerText = 'Fases del Proyecto › ' + FASES[num];
+
+  const card = document.getElementById('fase-' + num);
+  // Desplazar solo el contenedor principal (no todo el layout)
+  const main = card && card.closest('main');
+  if (main) {
+    const top = card.getBoundingClientRect().top - main.getBoundingClientRect().top + main.scrollTop - 24;
+    main.scrollTo({ top, behavior: 'smooth' });
+  }
+  history.replaceState(null, '', '#fase-' + num);
 }
 
 // Modal de confirmación genérico
@@ -187,7 +262,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Soporte para enlaces directos con hash (ej. #diseno, #checklist, etc.)
   const hash = window.location.hash.replace('#', '');
-  if (hash) {
+  const faseMatch = hash.match(/^fase-([1-4])$/);
+  if (faseMatch) {
+    goToFase(Number(faseMatch[1]));
+  } else if (hash) {
     const tabTarget = hash.startsWith('tab-') ? hash : 'tab-' + hash;
     if (document.getElementById(tabTarget)) {
       switchTab(tabTarget);

@@ -1086,35 +1086,109 @@ git push -u origin main</pre>
             </div>
           </div>
 
-          <!-- Contenedor del Visor PDF Embebido Directo en el HTML -->
-          <div class="bg-white rounded-2xl p-2 sm:p-4 shadow-sm border border-slate-200">
-            <div class="w-full h-[75vh] md:h-[82vh] rounded-xl overflow-hidden border border-slate-200 bg-slate-100 relative">
-              <iframe 
-                src="docs/DisenoCurricularADSO.pdf#toolbar=1&navpanes=0&scrollbar=1" 
-                type="application/pdf"
-                class="w-full h-full border-0 rounded-xl" 
-                title="Visor del Diseño Curricular Oficial ADSO SENA">
-                <div class="p-8 text-center flex flex-col items-center justify-center h-full space-y-4">
-                  <div class="w-14 h-14 rounded-full bg-emerald-50 text-sena-green flex items-center justify-center">
-                    <i data-lucide="file-text" class="w-7 h-7"></i>
-                  </div>
-                  <div>
-                    <p class="font-bold text-slate-800 text-base">Visualizador PDF integrado</p>
-                    <p class="text-xs text-slate-500 mt-1 max-w-md">Si tu navegador no permite renderizado directo de PDF dentro de marcos, puedes descargarlo o abrirlo:</p>
-                  </div>
-                  <div class="flex gap-3">
-                    <a href="docs/DisenoCurricularADSO.pdf" download="DisenoCurricularADSO.pdf" class="bg-sena-green text-white text-xs font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
-                      <i data-lucide="download" class="w-4 h-4"></i>
-                      Descargar PDF
-                    </a>
-                    <a href="docs/DisenoCurricularADSO.pdf" target="_blank" class="bg-slate-200 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
-                      <i data-lucide="external-link" class="w-4 h-4"></i>
-                      Abrir PDF
-                    </a>
-                  </div>
+          <!-- ================= TARJETA PRINCIPAL DEL VISOR INTERACTIVO Y RESPONSIVO ================= -->
+          <div id="pdfViewerMainCard" class="bg-white rounded-2xl p-2.5 sm:p-5 shadow-sm border border-slate-200 transition-all">
+            
+            <!-- BARRA DE HERRAMIENTAS / TOOLBAR MULTIFUNCIÓN -->
+            <div class="p-2 sm:p-3 bg-slate-50 border border-slate-200 rounded-xl mb-3 flex flex-wrap items-center justify-between gap-2.5">
+              
+              <!-- Selector de Modos de Lectura -->
+              <div class="flex items-center bg-slate-200/80 p-0.5 rounded-lg text-xs font-semibold">
+                <button type="button" onclick="setPdfViewMode('canvas')" id="btnModeCanvas" class="px-2.5 sm:px-3 py-1.5 rounded-md transition flex items-center gap-1.5 bg-sena-green text-white shadow-xs" title="Modo adaptativo optimizado para lectura móvil">
+                  <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+                  <span class="text-[11px] sm:text-xs">Adaptativo</span>
+                </button>
+                <button type="button" onclick="setPdfViewMode('iframe')" id="btnModeIframe" class="px-2.5 sm:px-3 py-1.5 rounded-md transition flex items-center gap-1.5 bg-white text-slate-700 hover:text-slate-900 shadow-xs" title="Modo marco con desplazamiento horizontal y vertical continuo">
+                  <i data-lucide="file" class="w-3.5 h-3.5"></i>
+                  <span class="text-[11px] sm:text-xs">Marco</span>
+                </button>
+              </div>
+
+              <!-- Paginación de Documento -->
+              <div id="pdfPaginationControls" class="flex items-center space-x-1 sm:space-x-1.5">
+                <button type="button" onclick="pdfPrevPage()" id="pdfPrevBtn" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center text-slate-700 transition shadow-xs" title="Página anterior">
+                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                
+                <div class="flex items-center text-xs font-semibold text-slate-700 px-1 sm:px-2 gap-1">
+                  <span class="hidden sm:inline text-slate-500">Pág.</span>
+                  <input type="number" id="pdfPageInput" onchange="pdfJumpToPage(this)" min="1" value="1" class="w-10 sm:w-12 text-center py-0.5 sm:py-1 px-1 rounded-md border border-slate-300 font-bold bg-white text-xs">
+                  <span class="text-slate-400">/</span>
+                  <span id="pdfTotalPages" class="text-slate-600 font-bold">69</span>
                 </div>
-              </iframe>
+
+                <button type="button" onclick="pdfNextPage()" id="pdfNextBtn" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center text-slate-700 transition shadow-xs" title="Página siguiente">
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <!-- Controles de Zoom y Pantalla Completa -->
+              <div class="flex items-center gap-1 sm:gap-1.5">
+                <!-- Zoom Out -->
+                <button type="button" onclick="pdfZoomOut()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-xs" title="Reducir zoom">
+                  <i data-lucide="zoom-out" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                </button>
+
+                <!-- Nivel de Zoom -->
+                <span id="pdfZoomLevel" class="text-[11px] sm:text-xs font-bold text-slate-600 px-1 min-w-[38px] text-center">100%</span>
+
+                <!-- Zoom In -->
+                <button type="button" onclick="pdfZoomIn()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-xs" title="Aumentar zoom">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                </button>
+
+                <!-- Ajustar al Ancho de Pantalla (Fit Width) -->
+                <button type="button" onclick="pdfToggleFitWidth()" id="pdfFitWidthBtn" class="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border border-slate-300 bg-sena-green text-white text-[11px] sm:text-xs font-semibold flex items-center gap-1 transition shadow-xs" title="Ajustar documento al ancho disponible">
+                  <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                  <span class="hidden md:inline">Ajustar Ancho</span>
+                </button>
+
+                <!-- Pantalla Completa -->
+                <button type="button" onclick="togglePdfFullscreen()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-xs" title="Pantalla completa">
+                  <i data-lucide="expand" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                </button>
+              </div>
+
             </div>
+
+            <!-- VISTA 1: MODO ADAPTATIVO (HTML5 CANVAS CON PDF.JS Y SCROLL BIDIRECCIONAL COMPLETO) -->
+            <div id="pdfCanvasView" class="relative">
+              
+              <!-- Indicador de Carga -->
+              <div id="pdfLoadingIndicator" class="hidden absolute inset-0 bg-white/80 backdrop-blur-xs flex flex-col items-center justify-center z-20 rounded-xl">
+                <div class="w-10 h-10 border-4 border-slate-200 border-t-sena-green rounded-full animate-spin mb-3"></div>
+                <p class="text-xs font-bold text-slate-700">Cargando Diseño Curricular ADSO...</p>
+              </div>
+
+              <!-- Contenedor con Desplazamiento Fluido Horizontal y Vertical -->
+              <div id="pdfScrollContainer" class="w-full overflow-x-auto overflow-y-auto custom-scroll max-h-[72vh] md:max-h-[80vh] bg-slate-200/80 p-2 sm:p-5 rounded-xl flex flex-col items-center justify-start touch-pan-x touch-pan-y shadow-inner relative border border-slate-300/80">
+                <canvas id="pdfCanvas" class="shadow-2xl rounded-md bg-white max-w-none transition-all border border-slate-300"></canvas>
+                
+                <!-- Guía de navegación para usuarios móviles -->
+                <div class="mt-3 text-[11px] text-slate-500 bg-white/90 backdrop-blur-xs px-3 py-1 rounded-full shadow-xs flex items-center gap-1.5 select-none">
+                  <i data-lucide="hand" class="w-3.5 h-3.5 text-sena-green"></i>
+                  <span>Desliza a los lados para cambiar de página • Scroll libre horizontal y vertical</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- VISTA 2: MODO MARCO (IFRAME CON SCROLL BIDIRECCIONAL Y ANCHO MÍNIMO SEGURO) -->
+            <div id="pdfIframeView" class="hidden">
+              <div class="w-full overflow-x-auto overflow-y-auto custom-scroll rounded-xl border border-slate-200 bg-slate-100 shadow-inner" style="-webkit-overflow-scrolling: touch;">
+                <div class="min-w-[700px] md:min-w-full h-[75vh] md:h-[82vh]">
+                  <iframe 
+                    src="docs/DisenoCurricularADSO.pdf#toolbar=1&navpanes=0&scrollbar=1" 
+                    type="application/pdf"
+                    class="w-full h-full border-0" 
+                    title="Visor en marco del Diseño Curricular Oficial ADSO SENA">
+                  </iframe>
+                </div>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-2 text-center">
+                En este modo puedes deslizar horizontalmente para ver columnas a la derecha en pantallas estrechas.
+              </p>
+            </div>
+
           </div>
 
         </div>
@@ -1229,6 +1303,8 @@ git push -u origin main</pre>
   </div>
 
   <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="assets/js/pdf-viewer.js"></script>
   <script src="assets/js/dashboard.js"></script>
 </body>
 </html>

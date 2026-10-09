@@ -52,6 +52,11 @@ function switchTab(tabId) {
     if (backdrop) backdrop.classList.add('hidden');
   }
 
+  // Inicializar visor PDF interactivo si se selecciona la pestaña de diseño curricular
+  if (tabId === 'tab-diseno' && typeof initPdfViewer === 'function') {
+    setTimeout(initPdfViewer, 60);
+  }
+
   if (window.lucide) lucide.createIcons();
 }
 

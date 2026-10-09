@@ -29,7 +29,7 @@ function switchTab(tabId) {
     'tab-temarios': 'Temarios & Explicaciones de Desarrollo',
     'tab-fases': 'Fases Metodológicas del Proyecto',
     'tab-repo': 'Repositorio GitHub & Despliegue Pages',
-    'tab-ficha': 'Información del Programa Formativo'
+    'tab-ficha': 'Acerca de ADSO: Programa, Repositorio & Instructores'
   };
 
   const activeBtn = document.getElementById(navBtnMap[tabId]);
@@ -71,6 +71,10 @@ function closeModal() {
 
 function showHelpModal() {
   openModalDetalle('Repositorio Formativo ADSO CADPH', 'Este portal contiene la organización curricular, guías y recursos de formación para el programa Análisis y Desarrollo de Software del SENA Garzón Huila.');
+}
+
+function returnToWelcome() {
+  window.location.href = 'index.html';
 }
 
 // Modal del asistente

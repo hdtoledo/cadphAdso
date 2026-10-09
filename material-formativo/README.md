@@ -1,6 +1,11 @@
 # 📚 Materiales de Formación — ADSO SENA CADPH Garzón
 
-Bienvenido a la carpeta de **Material Formativo Oficial**. Este directorio está diseñado para almacenar y centralizar todas las Guías de Aprendizaje, Instrumentos de Evaluación y Talleres Técnicos del programa **Tecnólogo en Análisis y Desarrollo de Software (ADSO)**.
+Bienvenido a la carpeta de **Material Formativo Oficial**. Este directorio está diseñado para almacenar y centralizar todas las Guías de Aprendizaje, Explicaciones Técnicas de Sesiones, Actividades de Aprendizaje e Instrumentos de Evaluación del programa **Tecnólogo en Análisis y Desarrollo de Software (ADSO)**.
+
+> [!IMPORTANT]
+> **Canal Exclusivo para Instructores:**  
+> Esta carpeta es de uso **exclusivo para que los instructores** carguen el material de formación, notas y explicaciones de las sesiones formativas, talleres y especificaciones de las evidencias requeridas.  
+> **Los aprendices NO deben subir a este repositorio sus evidencias desarrolladas ni archivos personales**. La entrega, sustentación y calificación de evidencias se realiza exclusivamente a través de los canales institucionales oficiales del SENA (**Zajuna** / **Territorium**) o en sus propios repositorios de proyectos.
 
 ---
 

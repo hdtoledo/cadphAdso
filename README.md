@@ -121,17 +121,23 @@ Este repositorio integra una arquitectura agnóstica de contexto para **Intelige
    - [`.cursorrules`](file:///.cursorrules) — Cursor AI y Windsurf.
    - [`.github/copilot-instructions.md`](file:///.github/copilot-instructions.md) — GitHub Copilot en Visual Studio Code.
 
-3. **Depósito Abierto de Material Formativo (`material-formativo/`):**
-   - Instructores y aprendices pueden alojar directamente sus documentos PDF, Markdown o DOCX en las carpetas correspondientes por fase (`Fase1_Analisis`, `Fase2_Planeacion`, `Fase3_Ejecucion`, `Fase4_Evaluacion`), así como rúbricas en `instrumentos-evaluacion` y casos en `talleres-ejercicios`. Cualquier IA con acceso al repositorio los analizará y utilizará de forma nativa.
+3. **Depósito Institucional de Material Formativo (`material-formativo/`):**
+   - Espacio reservado **exclusivamente para que el equipo de instructores** cargue el material oficial de formación, explicaciones técnicas de las sesiones, actividades de aprendizaje (AA) y las especificaciones/rúbricas de las evidencias que deben desarrollar los aprendices.
+   - ⚠️ **Nota de Gobernanza y Alcance:** Los aprendices **NO** deben cargar en este repositorio sus evidencias resueltas ni archivos personales. La entrega, retroalimentación y calificación de evidencias se gestiona a través de la plataforma institucional designada (**Zajuna** / **Territorium**) o en los repositorios de código personales del aprendiz. Este repositorio actúa como la fuente oficial de consulta y directrices técnicas.
 
 ---
 
-## 📥 Guía de Uso y Cómo Agregar Material Formativo
+## 📥 Guía de Publicación de Material Formativo (Exclusivo para Instructores)
 
-El repositorio está concebido como una plataforma viva de formación donde confluyen tres componentes:
+El repositorio está concebido como una plataforma institucional viva donde confluyen tres componentes:
 1. **La Interfaz Web Institucional:** El portal de bienvenida ([`index.html`](file:///index.html)) y el dashboard curricular ([`explorar.html`](file:///explorar.html)) con visor de PDF integrado.
-2. **El Depósito Curricular (`material-formativo/`):** Almacén organizado de guías, talleres y rúbricas.
+2. **El Depósito Curricular Oficial (`material-formativo/`):** Almacén organizado de guías, talleres y rúbricas administrado por instructores.
 3. **El Contexto de IA (`.ai/`):** Instrucciones técnicas para que cualquier asistente inteligente entienda la formación SENA y asista tanto a aprendices como a formadores.
+
+> [!IMPORTANT]
+> **Gobernanza del Repositorio:**  
+> Este espacio es administrado **únicamente por los instructores** para publicar guías de aprendizaje, explicaciones de sesiones, talleres e instrumentos de evaluación.  
+> **Los aprendices son exclusivamente consultores y usuarios de este material**; no deben enviar *Pull Requests*, commits ni almacenar aquí el código o entregables de sus evidencias de formación.
 
 ---
 
@@ -172,9 +178,9 @@ Para facilitar la indexación automática de los modelos de IA y la búsqueda po
 
 ---
 
-### 3. Procedimiento Paso a Paso para Agregar Material
+### 3. Procedimiento Paso a Paso para Instructores
 
-Para agregar un nuevo documento al repositorio:
+Para que un instructor publique nuevo material de formación, notas de sesión, talleres o especificaciones de evidencias en el repositorio:
 
 1. **Identificar la Fase o Categoría:**
    Determina a qué fase formativa pertenece el recurso (Análisis, Planeación, Ejecución o Evaluación) o si corresponde a un instrumento o taller transversal.

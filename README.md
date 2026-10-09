@@ -20,20 +20,20 @@
 
 Este repositorio contiene el **Portal Institucional y Repositorio de Aprendizaje** para la formación del programa **Tecnólogo en Análisis y Desarrollo de Software (ADSO)** del **SENA**, adscrito al **Centro Agroempresarial y Desarrollo Pecuario del Huila (CADPH)** en el municipio de **Garzón, Huila**.
 
-El portal ha sido diseñado replicando con máxima fidelidad la experiencia de usuario (**UI/UX**) y los estándares gráficos oficiales del ecosistema digital del SENA y **GOV.CO** (*SI Contratista / SENA Digital*):
-- Barra superior gubernamental **GOV.CO** (`#3366CC`).
-- Paleta de color institucional oficial del SENA: Verde institucional (`#39A900`), verde oscuro (`#007832`) y acentos de contraste.
-- Barra lateral de navegación dinámica con perfil de instructor, botón colapsable e indicador de estado.
-- Banner de bienvenida con resumen formativo del Huila y avance curricular del 100%.
-- Tarjetas modulares de las **4 Fases del Proyecto Formativo** (Análisis, Planeación, Ejecución, Evaluación) con badges interactivos y modales de confirmación fieles al sistema.
-- Modal de bienvenida / pantalla de login estilo portal estatal con glassmorphism.
-- Soporte para accesibilidad web (A+/A-) y diseño 100% responsivo para computadores, tabletas y dispositivos móviles.
+El portal ha sido diseñado bajo las mejores prácticas de **UI/UX**, rendimiento y accesibilidad web, reflejando la identidad corporativa oficial del **SENA**:
+- **Paleta Institucional Oficial:** Verde SENA (`#39A900`), verde oscuro (`#0c384a` / `#007832`), azul petróleo profundo y acentos de alto contraste.
+- **Barra Lateral de Altura Completa (Full-Height Sidebar):** Diseño moderno de 100vh con el escudo oficial del SENA como ancla de identidad, botón colapsable a modo compacto (84px) en escritorio y cajón desplegable (*off-canvas*) en móviles.
+- **Barra Superior Limpia:** Barra blanca superior independiente para el área de contenido con indicador de ruta (*breadcrumbs*), píldora de avance formativo al 100%, botón de ayuda contextual y botón de salida a la pantalla de bienvenida.
+- **Visor PDF Interactivo y Responsivo del Diseño Curricular:** Lector embebido directamente en HTML con soporte para desplazamiento bidireccional (scroll horizontal y vertical libre), ajuste automático al ancho de la pantalla (*Fit Width*), controles de zoom, paginación completa de las 69 páginas, gestos táctiles (*swipe*) en móviles y botón de descarga directa.
+- **Estructura Curricular por Fases:** Módulos de las 4 fases del proyecto formativo (*Análisis, Planeación, Ejecución, Evaluación*) con modales interactivos de consulta técnica.
+- **Sección «Acerca de ADSO»:** Pestaña dedicada con la ficha técnica detallada del programa, métricas de duración lectiva/productiva y la información del equipo de instructores.
+- **Accesibilidad Web Integral:** Menú flotante de accesibilidad para ajuste dinámico de tamaño de texto (A+ / A- / Restablecer) y contraste legible.
 
 ---
 
 ## 🎯 Estructura Curricular del Programa ADSO
 
-El proyecto formativo está alineado con el [Diseño Curricular Oficial de ADSO](docs/DisenoCurricularADSO.pdf):
+El proyecto formativo está alineado con el [Diseño Curricular Oficial de ADSO (Código 228118)](docs/DisenoCurricularADSO.pdf):
 
 | Fase | Enfoque Principal | Tecnologías y Competencias Clave |
 | :--- | :--- | :--- |
@@ -41,6 +41,23 @@ El proyecto formativo está alineado con el [Diseño Curricular Oficial de ADSO]
 | **2. Planeación** | Arquitectura de software, UI/UX y modelado de datos | Diagramas Entidad-Relación (MER), Normalización SQL (1FN-3FN), Wireframes en Figma. |
 | **3. Ejecución** | Codificación Full Stack y servicios web | HTML5, Tailwind CSS, JavaScript, APIs RESTful, Python, Java, Git & GitHub. |
 | **4. Evaluación** | Aseguramiento de calidad, testing y despliegue | Pruebas unitarias e integración, manuales técnicos y despliegue en GitHub Pages / Cloud. |
+
+---
+
+## 📖 Características del Visor de Diseño Curricular Integrado
+
+Para optimizar la experiencia en computadores, tabletas y celulares, el visor de PDF integrado en `explorar.html` ofrece:
+
+1. **Desplazamiento Bidireccional Fluido:** Contenedor optimizado con `overflow-x: auto` y `overflow-y: auto`, eliminando cualquier bloqueo de scroll en pantallas táctiles y ratón.
+2. **Ajuste al Ancho de Pantalla (*Fit Width*):** En dispositivos móviles, calcula dinámicamente la escala para que el documento ocupe el 100% del ancho visible sin cortar texto a la derecha.
+3. **Controles de Zoom en Vivo:** Botones de `Zoom -`, porcentaje de escala en tiempo real y `Zoom +` para lectura precisa de tablas técnicas.
+4. **Paginación Interactiva (1 a 69):** Botones `◀ Anterior` / `Siguiente ▶` y cuadro de salto directo a cualquier página.
+5. **Gestos Táctiles Móviles (*Swipe*):** Deslizar horizontalmente sobre la pantalla en teléfonos avanza o retrocede de página de forma intuitiva.
+6. **Doble Modo de Visualización:**
+   - **📱 Modo Adaptativo (Predeterminado):** Renderizado acelerado en HTML5 Canvas mediante **PDF.js** de Mozilla.
+   - **📄 Modo Marco:** Visor alternativo en marco protegido con barras de desplazamiento visibles.
+7. **Descarga Directa:** Botón institucional con el atributo nativo `download="DisenoCurricularADSO.pdf"`.
+8. **Modo Pantalla Completa:** Botón para maximizar la lectura a toda la pantalla.
 
 ---
 
@@ -53,13 +70,14 @@ cadphAdso/
 ├── explorar.html                # Dashboard y explorador curricular completo de ADSO
 ├── assets/                      # Recursos estáticos organizados por buenas prácticas
 │   ├── css/
-│   │   └── styles.css           # Estilos institucionales, glassmorphism y transiciones
+│   │   └── styles.css           # Estilos institucionales, layout fluido y visor PDF
 │   ├── js/
-│   │   └── dashboard.js         # Lógica interactiva del explorador, filtros y modales
+│   │   ├── dashboard.js         # Lógica interactiva del explorador, pestañas y modales
+│   │   └── pdf-viewer.js        # Motor interactivo de renderizado PDF con PDF.js
 │   └── images/
 │       └── sena_logo.svg        # Logotipo vectorial oficial del SENA
 ├── docs/
-│   └── DisenoCurricularADSO.pdf # Documento curricular oficial del SENA
+│   └── DisenoCurricularADSO.pdf # Documento curricular oficial del SENA (69 páginas)
 ├── .gitignore                   # Exclusión de temporales y configuraciones locales
 └── README.md                    # Documentación técnica y guía de despliegue
 ```
@@ -69,10 +87,12 @@ cadphAdso/
 ## 🚀 Tecnologías Empleadas
 
 - **HTML5 Semántico**: Estructura accesible y modular optimizada para SEO y lectores de pantalla.
-- **Tailwind CSS (v3)**: Sistema de diseño atómico con paleta personalizada SENA y GOV.CO.
-- **JavaScript Vanilla**: Lógica reactiva para conmutación de pestañas, acordeones, modales y menú lateral sin dependencias pesadas.
-- **Google Fonts (Work Sans)**: Tipografía limpia acorde a los lineamientos del estado colombiano.
-- **GitHub Pages**: Infraestructura de alojamiento estático rápido y continuo.
+- **Tailwind CSS (v3)**: Sistema de diseño atómico con paleta corporativa del SENA y transiciones fluidas.
+- **JavaScript Vanilla**: Lógica reactiva para conmutación de pestañas, modales, modo colapsable y gestos táctiles.
+- **PDF.js (Mozilla)**: Motor de renderizado en HTML5 Canvas para visualización fluida de documentos PDF en cualquier dispositivo.
+- **Lucide Icons**: Iconografía moderna, consistente y de alto contraste.
+- **Google Fonts (Work Sans)**: Tipografía limpia y profesional de alta legibilidad.
+- **GitHub Pages**: Infraestructura de alojamiento estático continuo y seguro.
 
 ---
 
@@ -97,25 +117,24 @@ cadphAdso/
 
 ## 🌐 Publicación en GitHub Pages
 
-Para publicar este proyecto en la web de manera gratuita con GitHub Pages:
+Para publicar este proyecto en la web con GitHub Pages:
 
 1. Realizar el commit y push de los cambios al repositorio:
    ```bash
    git add .
-   git commit -m "feat: interfaz institucional SENA CADPH Garzón con Tailwind CSS"
+   git commit -m "feat: interfaz institucional SENA CADPH Garzón y visor curricular interactivo"
    git branch -M main
    git push -u origin main
    ```
 
-2. Ir al repositorio en GitHub:
+2. Configurar la publicación en GitHub:
    - Entra a `https://github.com/hdtoledo/cadphAdso`.
-   - Haz clic en la pestaña **Settings** (Configuración) en la parte superior.
-   - En el menú lateral izquierdo, haz clic en **Pages**.
+   - Haz clic en **Settings** (Configuración) > **Pages**.
    - En **Build and deployment > Source**, selecciona **Deploy from a branch**.
    - En **Branch**, selecciona la rama `main` y la carpeta `/ (root)`.
    - Haz clic en **Save** (Guardar).
 
-3. En 1-2 minutos el sitio estará disponible públicamente en:
+3. El sitio estará disponible públicamente en:
    **`https://hdtoledo.github.io/cadphAdso/`**
 
 ---

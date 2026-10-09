@@ -129,11 +129,11 @@
             <span class="sidebar-label truncate">Acerca de ADSO</span>
           </button>
 
-          <!-- Item 7: Enlace a Diseño Curricular Oficial PDF -->
-          <a href="docs/DisenoCurricularADSO.pdf" target="_blank" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-slate-200 hover:bg-white/10 hover:text-white group" title="Diseño Curricular PDF">
+          <!-- Item 7: Diseño Curricular Oficial PDF Embebido -->
+          <button onclick="switchTab('tab-diseno')" id="nav-diseno" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-slate-200 hover:bg-white/10 hover:text-white group" title="Diseño Curricular PDF">
             <i data-lucide="file-text" class="w-5 h-5 flex-shrink-0 text-cyan-300 group-hover:text-white"></i>
             <span class="sidebar-label truncate">Diseño Curricular</span>
-          </a>
+          </button>
 
           <!-- Item 8: Salir a Pantalla de Bienvenida -->
           <a href="index.html" class="nav-item w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition text-rose-300 hover:bg-rose-500/20 hover:text-rose-100 group mt-4 pt-2 border-t border-white/10" title="Regresar a la pantalla de bienvenida">
@@ -801,10 +801,10 @@ git push -u origin main</pre>
                   <i data-lucide="github" class="w-4 h-4"></i>
                   <span>Repositorio GitHub</span>
                 </a>
-                <a href="docs/DisenoCurricularADSO.pdf" target="_blank" class="bg-sena-green hover:bg-sena-hover text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center justify-center gap-2 shadow-sm flex-1 sm:flex-initial">
-                  <i data-lucide="file-down" class="w-4 h-4"></i>
+                <button onclick="switchTab('tab-diseno')" class="bg-sena-green hover:bg-sena-hover text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center justify-center gap-2 shadow-sm flex-1 sm:flex-initial" title="Ver Diseño Curricular en el explorador">
+                  <i data-lucide="file-text" class="w-4 h-4"></i>
                   <span>Diseño Curricular</span>
-                </a>
+                </button>
               </div>
             </div>
 
@@ -901,10 +901,10 @@ git push -u origin main</pre>
                 <!-- Campo 8 -->
                 <div>
                   <label class="block text-[11px] font-semibold text-slate-600 mb-1">Documento Curricular Oficial</label>
-                  <a href="docs/DisenoCurricularADSO.pdf" target="_blank" class="w-full inline-flex items-center justify-center p-2.5 rounded-xl border border-sena-green bg-emerald-50 text-sena-dark font-semibold hover:bg-emerald-100 transition gap-1.5">
-                    <i data-lucide="file-down" class="w-4 h-4"></i>
+                  <button type="button" onclick="switchTab('tab-diseno')" class="w-full inline-flex items-center justify-center p-2.5 rounded-xl border border-sena-green bg-emerald-50 text-sena-dark font-semibold hover:bg-emerald-100 transition gap-1.5" title="Ver Diseño Curricular en el explorador">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
                     <span>Ver Diseño Curricular (PDF)</span>
-                  </a>
+                  </button>
                 </div>
 
                 <!-- Campo 9 -->
@@ -1024,6 +1024,99 @@ git push -u origin main</pre>
 
             </div>
           </div>
+        </div>
+
+        <!-- ================= PESTAÑA 7: DISEÑO CURRICULAR (VISOR PDF EMBEBIDO) ================= -->
+        <div id="tab-diseno" class="tab-content hidden space-y-6">
+          
+          <!-- Encabezado y Barra de Acciones del Documento -->
+          <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-start sm:items-center space-x-3.5">
+              <div class="w-12 h-12 rounded-2xl bg-sena-green/15 text-sena-green flex items-center justify-center flex-shrink-0 shadow-sm border border-sena-green/30">
+                <i data-lucide="file-text" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-800">
+                    Diseño Curricular Oficial ADSO
+                  </h2>
+                  <span class="text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-sena-dark uppercase tracking-wider">
+                    Código 228118 • Vigente 2026
+                  </span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">
+                  Tecnólogo en Análisis y Desarrollo de Software • SENA Regional Huila • Centro Agroempresarial y Desarrollo Pecuario (CADPH Garzón).
+                </p>
+              </div>
+            </div>
+
+            <!-- Botones de Acción (Descarga + Nueva Pestaña) -->
+            <div class="flex items-center gap-2.5 flex-wrap sm:flex-nowrap flex-shrink-0">
+              <!-- Botón Descargar PDF Directo -->
+              <a href="docs/DisenoCurricularADSO.pdf" download="DisenoCurricularADSO.pdf" class="bg-sena-green hover:bg-sena-hover text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-2 hover:scale-[1.02] flex-1 sm:flex-initial" title="Descargar documento PDF del diseño curricular">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                <span>Descargar PDF</span>
+              </a>
+
+              <!-- Botón Abrir en Nueva Ventana / Pantalla Completa -->
+              <a href="docs/DisenoCurricularADSO.pdf" target="_blank" rel="noopener noreferrer" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold px-3.5 sm:px-4 py-2.5 rounded-xl border border-slate-300 transition flex items-center justify-center gap-2 flex-1 sm:flex-initial" title="Abrir documento en una pestaña independiente">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Nueva Pestaña</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Barra de Ficha Técnica del Programa -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-xs">
+              <span class="text-[10px] uppercase font-bold text-slate-400 block">Duración Total</span>
+              <span class="text-xs sm:text-sm font-bold text-slate-800">3.984 Horas</span>
+            </div>
+            <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-xs">
+              <span class="text-[10px] uppercase font-bold text-slate-400 block">Nivel Formativo</span>
+              <span class="text-xs sm:text-sm font-bold text-sena-dark">Tecnólogo</span>
+            </div>
+            <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-xs">
+              <span class="text-[10px] uppercase font-bold text-slate-400 block">Etapa Lectiva</span>
+              <span class="text-xs sm:text-sm font-bold text-slate-800">3.120 Horas</span>
+            </div>
+            <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-xs">
+              <span class="text-[10px] uppercase font-bold text-slate-400 block">Etapa Productiva</span>
+              <span class="text-xs sm:text-sm font-bold text-emerald-700">864 Horas</span>
+            </div>
+          </div>
+
+          <!-- Contenedor del Visor PDF Embebido Directo en el HTML -->
+          <div class="bg-white rounded-2xl p-2 sm:p-4 shadow-sm border border-slate-200">
+            <div class="w-full h-[75vh] md:h-[82vh] rounded-xl overflow-hidden border border-slate-200 bg-slate-100 relative">
+              <iframe 
+                src="docs/DisenoCurricularADSO.pdf#toolbar=1&navpanes=0&scrollbar=1" 
+                type="application/pdf"
+                class="w-full h-full border-0 rounded-xl" 
+                title="Visor del Diseño Curricular Oficial ADSO SENA">
+                <div class="p-8 text-center flex flex-col items-center justify-center h-full space-y-4">
+                  <div class="w-14 h-14 rounded-full bg-emerald-50 text-sena-green flex items-center justify-center">
+                    <i data-lucide="file-text" class="w-7 h-7"></i>
+                  </div>
+                  <div>
+                    <p class="font-bold text-slate-800 text-base">Visualizador PDF integrado</p>
+                    <p class="text-xs text-slate-500 mt-1 max-w-md">Si tu navegador no permite renderizado directo de PDF dentro de marcos, puedes descargarlo o abrirlo:</p>
+                  </div>
+                  <div class="flex gap-3">
+                    <a href="docs/DisenoCurricularADSO.pdf" download="DisenoCurricularADSO.pdf" class="bg-sena-green text-white text-xs font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
+                      <i data-lucide="download" class="w-4 h-4"></i>
+                      Descargar PDF
+                    </a>
+                    <a href="docs/DisenoCurricularADSO.pdf" target="_blank" class="bg-slate-200 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
+                      <i data-lucide="external-link" class="w-4 h-4"></i>
+                      Abrir PDF
+                    </a>
+                  </div>
+                </div>
+              </iframe>
+            </div>
+          </div>
+
         </div>
 
       </div>

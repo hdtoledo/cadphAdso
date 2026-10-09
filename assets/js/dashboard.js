@@ -20,7 +20,8 @@ function switchTab(tabId) {
     'tab-temarios': 'nav-temarios',
     'tab-fases': 'nav-fases',
     'tab-repo': 'nav-repo',
-    'tab-ficha': 'nav-ficha'
+    'tab-ficha': 'nav-ficha',
+    'tab-diseno': 'nav-diseno'
   };
 
   const breadcrumbMap = {
@@ -29,7 +30,8 @@ function switchTab(tabId) {
     'tab-temarios': 'Temarios & Explicaciones de Desarrollo',
     'tab-fases': 'Fases Metodológicas del Proyecto',
     'tab-repo': 'Repositorio GitHub & Despliegue Pages',
-    'tab-ficha': 'Acerca de ADSO: Programa, Repositorio & Instructores'
+    'tab-ficha': 'Acerca de ADSO: Programa, Repositorio & Instructores',
+    'tab-diseno': 'Diseño Curricular Oficial ADSO (Documento PDF)'
   };
 
   const activeBtn = document.getElementById(navBtnMap[tabId]);
@@ -182,5 +184,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sidebar && window.innerWidth < 1024) {
     sidebar.classList.add('-translate-x-full');
   }
+
+  // Soporte para enlaces directos con hash (ej. #diseno, #checklist, etc.)
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    const tabTarget = hash.startsWith('tab-') ? hash : 'tab-' + hash;
+    if (document.getElementById(tabTarget)) {
+      switchTab(tabTarget);
+    }
+  }
+
   if (window.lucide) lucide.createIcons();
 });

@@ -68,6 +68,25 @@ cadphAdso/
 ├── 404.html                     # Página personalizada de error 404 para GitHub Pages
 ├── index.html                   # Portal principal de bienvenida / acceso institucional
 ├── explorar.html                # Dashboard y explorador curricular completo de ADSO
+├── AGENTS.md                    # Directivas universales para agentes de Inteligencia Artificial
+├── GEMINI.md                    # Contexto para Google Gemini / Antigravity IDE
+├── CLAUDE.md                    # Instrucciones para Anthropic Claude / Claude Code
+├── .cursorrules                 # Reglas de desarrollo para Cursor AI y Windsurf
+├── .github/
+│   └── copilot-instructions.md  # Instrucciones contextuales para GitHub Copilot
+├── .ai/                         # 🧠 Base de conocimiento y contexto pedagógico para IAs
+│   ├── CONTEXTO_ADSO.md         # Contexto institucional SENA CADPH, ficha y fases
+│   ├── REGLAS_CODIGO.md         # Estándares técnicos y lineamientos de programación
+│   ├── INDICE_MATERIALES.md     # Mapeo curricular de competencias y materiales
+│   └── PROMPTS_ASISTENCIA.md    # Plantillas de prompts para aprendices e instructores
+├── material-formativo/          # 📚 Depósito curricular de guías, talleres e instrumentos
+│   ├── guias-aprendizaje/       # Guías organizadas por las 4 fases del proyecto
+│   │   ├── Fase1_Analisis/      # Requisitos, especificación, levantamiento de información
+│   │   ├── Fase2_Planeacion/    # Arquitectura, diseño de bases de datos, diagramas UML
+│   │   ├── Fase3_Ejecucion/     # Desarrollo frontend/backend, codificación, APIs
+│   │   └── Fase4_Evaluacion/    # Pruebas de software, despliegue, manuales técnicos
+│   ├── instrumentos-evaluacion/ # Listas de chequeo, rúbricas y criterios de evaluación
+│   └── talleres-ejercicios/     # Casos de estudio prácticos y ejercicios de codificación
 ├── assets/                      # Recursos estáticos organizados por buenas prácticas
 │   ├── css/
 │   │   └── styles.css           # Estilos institucionales, layout fluido y visor PDF
@@ -81,6 +100,28 @@ cadphAdso/
 ├── .gitignore                   # Exclusión de temporales y configuraciones locales
 └── README.md                    # Documentación técnica y guía de despliegue
 ```
+
+---
+
+## 🤖 Ecosistema de Asistencia con Inteligencia Artificial
+
+Este repositorio integra una arquitectura agnóstica de contexto para **Inteligencia Artificial** diseñada para que cualquier modelo o agente (Google Gemini, Claude, ChatGPT, GitHub Copilot, Cursor AI, Windsurf, DeepSeek, etc.) comprenda de forma inmediata el contexto curricular del programa **ADSO (228118)** en el **CADPH Garzón**:
+
+1. **Contexto Institucional Centralizado (`.ai/`):**
+   - [`CONTEXTO_ADSO.md`](file:///.ai/CONTEXTO_ADSO.md): Explica las 4 fases formativas (Análisis, Planeación, Ejecución, Evaluación), el rol de los instructores y aprendices, y la metodología por proyectos SENA.
+   - [`REGLAS_CODIGO.md`](file:///.ai/REGLAS_CODIGO.md): Define las normas de codificación pedagógicas (HTML semántico, Tailwind CSS / Vanilla CSS, JavaScript limpio, diseño accesible y responsivo).
+   - [`INDICE_MATERIALES.md`](file:///.ai/INDICE_MATERIALES.md): Mapa de ruta curricular para que la IA sepa qué guía y competencia consultar según la fase solicitada.
+   - [`PROMPTS_ASISTENCIA.md`](file:///.ai/PROMPTS_ASISTENCIA.md): Plantillas listas para usar orientadas a generar código limpio, diseñar bases de datos, elaborar guías y resolver dudas de aprendices.
+
+2. **Puntos de Entrada Automáticos para Asistentes:**
+   - [`AGENTS.md`](file:///AGENTS.md) — Agentes autónomos multiherramienta.
+   - [`GEMINI.md`](file:///GEMINI.md) — Google Gemini y Antigravity.
+   - [`CLAUDE.md`](file:///CLAUDE.md) — Anthropic Claude y Claude Code.
+   - [`.cursorrules`](file:///.cursorrules) — Cursor AI y Windsurf.
+   - [`.github/copilot-instructions.md`](file:///.github/copilot-instructions.md) — GitHub Copilot en Visual Studio Code.
+
+3. **Depósito Abierto de Material Formativo (`material-formativo/`):**
+   - Instructores y aprendices pueden alojar directamente sus documentos PDF, Markdown o DOCX en las carpetas correspondientes por fase (`Fase1_Analisis`, `Fase2_Planeacion`, `Fase3_Ejecucion`, `Fase4_Evaluacion`), así como rúbricas en `instrumentos-evaluacion` y casos en `talleres-ejercicios`. Cualquier IA con acceso al repositorio los analizará y utilizará de forma nativa.
 
 ---
 

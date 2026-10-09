@@ -24,7 +24,10 @@ El portal ha sido diseñado bajo las mejores prácticas de **UI/UX**, rendimient
 - **Paleta Institucional Oficial:** Verde SENA (`#39A900`), verde oscuro (`#0c384a` / `#007832`), azul petróleo profundo y acentos de alto contraste.
 - **Barra Lateral de Altura Completa (Full-Height Sidebar):** Diseño moderno de 100vh con el escudo oficial del SENA como ancla de identidad, botón colapsable a modo compacto (84px) en escritorio y cajón desplegable (*off-canvas*) en móviles.
 - **Barra Superior Limpia:** Barra blanca superior independiente para el área de contenido con indicador de ruta (*breadcrumbs*), píldora de avance formativo al 100%, botón de ayuda contextual y botón de salida a la pantalla de bienvenida.
-- **Visor PDF Interactivo y Responsivo del Diseño Curricular:** Lector embebido directamente en HTML con soporte para desplazamiento bidireccional (scroll horizontal y vertical libre), ajuste automático al ancho de la pantalla (*Fit Width*), controles de zoom, paginación completa de las 69 páginas, gestos táctiles (*swipe*) en móviles y botón de descarga directa.
+- **Diseño Curricular Oficial como Vista Principal (#1):** El menú sitúa como primer ítem activo por defecto el Diseño Curricular, ofreciendo un conmutador fluido entre el visor de PDF oficial y el nuevo explorador interactivo.
+- **Explorador Interactivo de Competencias, RAPs y Horas:** Extracción analítica completa del documento oficial (69 páginas), estructurando 20 competencias, 75 Resultados de Aprendizaje (RAPs) y 3.984 horas totales. Cuenta con búsqueda en vivo, filtros por categoría (*Todas, Técnicas Específicas, Clave & Transversales, Institucional, Etapa Productiva*), métricas superiores (KPIs), barras visuales de intensidad horaria y acordeones independientes para consultar la descripción detallada de cada RAP.
+- **Modal de Resumen Ejecutivo Curricular:** Ventana modal accesible de alto nivel con ficha técnica, tabla comparativa de horas y porcentajes (Técnicas 55.4%, Clave 22.9%, Inducción 1.2%, Productiva 21.7%), distribución por las 4 fases del proyecto y perfiles ocupacionales de egreso.
+- **Visor PDF Oficial de 69 Páginas:** Lector embebido directamente en HTML con soporte para desplazamiento bidireccional (scroll horizontal y vertical libre), ajuste automático al ancho (*Fit Width*), controles de zoom, paginación, gestos táctiles (*swipe*) en móviles y descarga directa.
 - **Estructura Curricular por Fases:** Módulos de las 4 fases del proyecto formativo (*Análisis, Planeación, Ejecución, Evaluación*) con modales interactivos de consulta técnica.
 - **Sección «Acerca de ADSO»:** Pestaña dedicada con la ficha técnica detallada del programa, métricas de duración lectiva/productiva y la información del equipo de instructores.
 - **Accesibilidad Web Integral (WCAG 2.1 / 2.2 AA):** Menú flotante persistente en todas las vistas con ajuste dinámico de tamaño de texto a nivel de raíz (`html` rem, de 80% a 150%), modo de alto contraste para baja visión, forzado de subrayado de enlaces para daltonismo, modo de lectura clara con espaciado expandido, enlace de salto para teclado (*skip link*) y persistencia automática en `localStorage`.
@@ -90,9 +93,12 @@ cadphAdso/
 ├── assets/                      # Recursos estáticos organizados por buenas prácticas
 │   ├── css/
 │   │   └── styles.css           # Estilos institucionales, layout fluido, visor PDF y temas WCAG
+│   ├── data/
+│   │   └── competencias_adso.json # Base de datos JSON con las 20 competencias, 75 RAPs y 3.984h
 │   ├── js/
 │   │   ├── accessibility.js     # Módulo integral de accesibilidad (zoom, contraste, teclado)
-│   │   ├── dashboard.js         # Lógica interactiva del explorador, pestañas y modales
+│   │   ├── competencias-data.js # Exportación estructurada de datos curriculares para el explorador
+│   │   ├── dashboard.js         # Lógica interactiva del explorador, filtros, acordeones y modales
 │   │   └── pdf-viewer.js        # Motor interactivo de renderizado PDF con PDF.js
 │   └── images/
 │       └── sena_logo.svg        # Logotipo vectorial oficial del SENA

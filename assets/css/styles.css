@@ -84,3 +84,105 @@ body {
   -webkit-user-select: none;
 }
 
+/* ==========================================================================
+   ESTILOS DE ACCESIBILIDAD WEB INTEGRAL (WCAG 2.1 / 2.2 AA)
+   ========================================================================== */
+
+/* Enlace de salto accesible para navegación por teclado (Skip Link) */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #39a900;
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  z-index: 99999;
+  text-decoration: none;
+  outline: 3px solid #ffffff;
+  transition: top 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Indicadores de foco visibles para teclado */
+:focus-visible {
+  outline: 2px solid #39a900 !important;
+  outline-offset: 2px !important;
+}
+
+/* Modo de Alto Contraste */
+html.high-contrast {
+  filter: contrast(115%);
+}
+
+html.high-contrast body {
+  background-color: #0b0f19 !important;
+  color: #f8fafc !important;
+}
+
+html.high-contrast header,
+html.high-contrast footer,
+html.high-contrast aside#mainSidebar,
+html.high-contrast .bg-slate-50,
+html.high-contrast .bg-slate-100,
+html.high-contrast .bg-white,
+html.high-contrast .glass-card,
+html.high-contrast .topic-card {
+  background-color: #111827 !important;
+  color: #f9fafb !important;
+  border-color: #4b5563 !important;
+}
+
+html.high-contrast .text-slate-500,
+html.high-contrast .text-slate-600,
+html.high-contrast .text-slate-400 {
+  color: #e5e7eb !important;
+}
+
+html.high-contrast .text-slate-700,
+html.high-contrast .text-slate-800,
+html.high-contrast .text-slate-900 {
+  color: #ffffff !important;
+}
+
+html.high-contrast .border-slate-200,
+html.high-contrast .border-slate-100,
+html.high-contrast .border-slate-300 {
+  border-color: #6b7280 !important;
+}
+
+html.high-contrast #accessibilityMenu {
+  background-color: #030712 !important;
+  border: 2px solid #39a900 !important;
+  color: #ffffff !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8) !important;
+}
+
+html.high-contrast #accessibilityMenu button:hover {
+  background-color: #1f2937 !important;
+}
+
+/* Subrayado de Enlaces */
+html.underline-links a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+
+/* Modo de Lectura y Espaciado Legible */
+html.legible-font body,
+html.legible-font p,
+html.legible-font span,
+html.legible-font a,
+html.legible-font button,
+html.legible-font div {
+  letter-spacing: 0.03em !important;
+  word-spacing: 0.06em !important;
+  line-height: 1.65 !important;
+}
+

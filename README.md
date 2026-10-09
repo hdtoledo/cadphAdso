@@ -27,7 +27,7 @@ El portal ha sido diseñado bajo las mejores prácticas de **UI/UX**, rendimient
 - **Visor PDF Interactivo y Responsivo del Diseño Curricular:** Lector embebido directamente en HTML con soporte para desplazamiento bidireccional (scroll horizontal y vertical libre), ajuste automático al ancho de la pantalla (*Fit Width*), controles de zoom, paginación completa de las 69 páginas, gestos táctiles (*swipe*) en móviles y botón de descarga directa.
 - **Estructura Curricular por Fases:** Módulos de las 4 fases del proyecto formativo (*Análisis, Planeación, Ejecución, Evaluación*) con modales interactivos de consulta técnica.
 - **Sección «Acerca de ADSO»:** Pestaña dedicada con la ficha técnica detallada del programa, métricas de duración lectiva/productiva y la información del equipo de instructores.
-- **Accesibilidad Web Integral:** Menú flotante de accesibilidad para ajuste dinámico de tamaño de texto (A+ / A- / Restablecer) y contraste legible.
+- **Accesibilidad Web Integral (WCAG 2.1 / 2.2 AA):** Menú flotante persistente en todas las vistas con ajuste dinámico de tamaño de texto a nivel de raíz (`html` rem, de 80% a 150%), modo de alto contraste para baja visión, forzado de subrayado de enlaces para daltonismo, modo de lectura clara con espaciado expandido, enlace de salto para teclado (*skip link*) y persistencia automática en `localStorage`.
 
 ---
 
@@ -89,8 +89,9 @@ cadphAdso/
 │   └── talleres-ejercicios/     # Casos de estudio prácticos y ejercicios de codificación
 ├── assets/                      # Recursos estáticos organizados por buenas prácticas
 │   ├── css/
-│   │   └── styles.css           # Estilos institucionales, layout fluido y visor PDF
+│   │   └── styles.css           # Estilos institucionales, layout fluido, visor PDF y temas WCAG
 │   ├── js/
+│   │   ├── accessibility.js     # Módulo integral de accesibilidad (zoom, contraste, teclado)
 │   │   ├── dashboard.js         # Lógica interactiva del explorador, pestañas y modales
 │   │   └── pdf-viewer.js        # Motor interactivo de renderizado PDF con PDF.js
 │   └── images/

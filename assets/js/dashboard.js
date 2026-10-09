@@ -133,25 +133,8 @@ function toggleSidebarWidth() {
   if (window.lucide) lucide.createIcons();
 }
 
-// Menú de accesibilidad
-function toggleAccessibilityMenu() {
-  const menu = document.getElementById('accessibilityMenu');
-  if (menu) menu.classList.toggle('hidden');
-  if (window.lucide) lucide.createIcons();
-}
-
-let currentZoom = 100;
-function adjustFontSize(delta) {
-  currentZoom += delta * 10;
-  if (currentZoom < 80) currentZoom = 80;
-  if (currentZoom > 140) currentZoom = 140;
-  document.body.style.fontSize = currentZoom + '%';
-}
-
-function resetFontSize() {
-  currentZoom = 100;
-  document.body.style.fontSize = '100%';
-}
+// Nota: Las funciones de accesibilidad web (toggleAccessibilityMenu, adjustFontSize, 
+// toggleHighContrast, etc.) se gestionan de forma integral y desacoplada en assets/js/accessibility.js
 
 // Filtrar temas
 function filterTopics() {

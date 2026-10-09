@@ -125,6 +125,89 @@ Este repositorio integra una arquitectura agnóstica de contexto para **Intelige
 
 ---
 
+## 📥 Guía de Uso y Cómo Agregar Material Formativo
+
+El repositorio está concebido como una plataforma viva de formación donde confluyen tres componentes:
+1. **La Interfaz Web Institucional:** El portal de bienvenida ([`index.html`](file:///index.html)) y el dashboard curricular ([`explorar.html`](file:///explorar.html)) con visor de PDF integrado.
+2. **El Depósito Curricular (`material-formativo/`):** Almacén organizado de guías, talleres y rúbricas.
+3. **El Contexto de IA (`.ai/`):** Instrucciones técnicas para que cualquier asistente inteligente entienda la formación SENA y asista tanto a aprendices como a formadores.
+
+---
+
+### 1. Jerarquía y Orden Pedagógico del SENA
+
+Para preservar la coherencia pedagógica oficial del SENA, todo material formativo que se agregue debe ubicarse respetando el ciclo del proyecto:
+
+$$\text{Fase Formativa} \longrightarrow \text{Actividad de Proyecto (AP)} \longrightarrow \text{Guía de Aprendizaje (GA)} \longrightarrow \text{Actividad de Aprendizaje (AA)} \longrightarrow \text{Evidencia (EV)}$$
+
+| Directorio | Tipo de Recurso | Tipo de Evidencias / Temáticas |
+| :--- | :--- | :--- |
+| [`material-formativo/guias-aprendizaje/Fase1_Analisis/`](file:///material-formativo/guias-aprendizaje/Fase1_Analisis/) | **Fase 1: Análisis** | Requisitos de software (SRS), historias de usuario, casos de uso, levantamiento y validación de información. |
+| [`material-formativo/guias-aprendizaje/Fase2_Planeacion/`](file:///material-formativo/guias-aprendizaje/Fase2_Planeacion/) | **Fase 2: Planeación** | Arquitectura de software, diagramas de clases/secuencia UML, modelos relacionales/NoSQL, diseño UI/UX y prototipos. |
+| [`material-formativo/guias-aprendizaje/Fase3_Ejecucion/`](file:///material-formativo/guias-aprendizaje/Fase3_Ejecucion/) | **Fase 3: Ejecución** | Codificación frontend, desarrollo backend, APIs RESTful, persistencia de datos, control de versiones en equipo. |
+| [`material-formativo/guias-aprendizaje/Fase4_Evaluacion/`](file:///material-formativo/guias-aprendizaje/Fase4_Evaluacion/) | **Fase 4: Evaluación** | Pruebas unitarias/integración, aseguramiento de calidad (QA), despliegue a producción, manuales técnicos y de usuario. |
+| [`material-formativo/instrumentos-evaluacion/`](file:///material-formativo/instrumentos-evaluacion/) | **Instrumentos de Evaluación** | Rúbricas y listas de chequeo que especifican los criterios de evaluación de cada evidencia. |
+| [`material-formativo/talleres-ejercicios/`](file:///material-formativo/talleres-ejercicios/) | **Talleres y Laboratorios** | Guías de ejercicios prácticos, retos de código, laboratorios paso a paso y casos de estudio. |
+
+---
+
+### 2. Estándares y Convenciones de Nomenclatura
+
+Para facilitar la indexación automática de los modelos de IA y la búsqueda por parte de los aprendices, nombra los archivos siguiendo estas pautas:
+
+- **Guías de Aprendizaje Oficiales:**  
+  `GA[Fase]-[CódigoCompetencia]-[Nombre_Descriptivo].pdf`  
+  *Ejemplo:* `GA1-220501092-EspecificacionRequisitos.pdf`
+- **Instrumentos de Evaluación (Rúbricas / Listas de Chequeo):**  
+  `IE-[Guia]-AA[Actividad]-EV[Evidencia]-[Nombre].pdf`  
+  *Ejemplo:* `IE-GA1-AA1-EV01-ListaChequeo.pdf`
+- **Talleres y Prácticas:**  
+  `Taller-[Tema]-[Tecnologia].md` *(o `.pdf`)*  
+  *Ejemplo:* `Taller-Modelado-Datos-MySQL.md`
+- **Formatos Recomendados:**  
+  - **Markdown (`.md`):** Formato ideal para talleres y documentación de lectura directa por IA y humanos.
+  - **PDF (`.pdf`):** Para documentos oficiales institucionales del SENA.
+  - **DOCX / ZIP:** Si incluye plantillas editables o paquetes de código inicial.
+
+---
+
+### 3. Procedimiento Paso a Paso para Agregar Material
+
+Para agregar un nuevo documento al repositorio:
+
+1. **Identificar la Fase o Categoría:**
+   Determina a qué fase formativa pertenece el recurso (Análisis, Planeación, Ejecución o Evaluación) o si corresponde a un instrumento o taller transversal.
+
+2. **Depositar el Archivo:**
+   Copia el archivo en la subcarpeta correspondiente dentro de `material-formativo/`.
+
+3. **Registrar el Documento en el `README.md` Local:**
+   Cada subcarpeta posee un archivo `README.md` que lista los materiales disponibles. Abre ese archivo y añade una fila o viñeta con el enlace:
+   ```markdown
+   - [📄 GA1-220501092-EspecificacionRequisitos.pdf](./GA1-220501092-EspecificacionRequisitos.pdf) — *Guía de levantamiento y especificación de requisitos*.
+   ```
+
+4. **Sincronizar el Índice para la IA (Recomendado):**
+   Edita [`.ai/INDICE_MATERIALES.md`](file:///.ai/INDICE_MATERIALES.md) para registrar la nueva guía junto a su código de competencia. De esta forma, cualquier modelo de IA (Gemini, Copilot, ChatGPT, Claude) sabrá exactamente qué guía consultar cuando un aprendiz o instructor haga una pregunta técnica.
+
+5. **Guardar y Publicar los Cambios con Git:**
+   En la terminal del proyecto, ejecuta:
+   ```bash
+   # 1. Verificar los archivos agregados
+   git status
+
+   # 2. Agregar los nuevos archivos al control de versiones
+   git add material-formativo/ .ai/
+
+   # 3. Confirmar los cambios con un mensaje descriptivo
+   git commit -m "docs: agregar Guía de Aprendizaje GA1-220501092 de Fase 1"
+
+   # 4. Enviar los cambios al repositorio en GitHub
+   git push origin main
+   ```
+
+---
+
 ## 🚀 Tecnologías Empleadas
 
 - **HTML5 Semántico**: Estructura accesible y modular optimizada para SEO y lectores de pantalla.

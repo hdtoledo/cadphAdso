@@ -144,6 +144,7 @@ Para publicar este proyecto en la web con GitHub Pages:
 | Instructor | Rol / Área Formativa | Centro / Sede |
 | :--- | :--- | :--- |
 | **Héctor David Toledo García** | Instructor de Formación ADSO | CADPH — Garzón |
+| **Moises Cartagena** | Instructor de Formación ADSO | CADPH — Garzón |
 | **Julián Andrés Trujillo** | Instructor de Formación ADSO | CADPH — Garzón |
 | **Jimmy Alexander Lombana** | Instructor de Formación ADSO | CADPH — Garzón |
 | **Manuel Galíndez** | Instructor de Formación ADSO | CADPH — Garzón |

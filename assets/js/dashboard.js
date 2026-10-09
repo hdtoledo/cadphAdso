@@ -168,6 +168,7 @@ window.addEventListener('resize', () => {
     if (backdrop) backdrop.classList.add('hidden');
   } else {
     sidebar.classList.add('-translate-x-full');
+    if (backdrop) backdrop.classList.add('hidden');
   }
 });
 

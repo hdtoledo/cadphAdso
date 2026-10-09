@@ -94,7 +94,7 @@
   <div id="dashboardLayout" class="flex-1 flex relative overflow-hidden">
     
     <!-- ================= BARRA LATERAL (SIDEBAR) ================= -->
-    <aside id="mainSidebar" class="w-72 bg-sena-mesh text-white flex flex-col justify-between transition-all duration-300 z-20 flex-shrink-0 shadow-xl border-r border-[#124d62]/50 relative select-none">
+    <aside id="mainSidebar" class="fixed inset-y-0 left-0 z-40 w-72 bg-sena-mesh text-white flex flex-col justify-between -translate-x-full lg:translate-x-0 lg:static lg:z-20 lg:flex-shrink-0 shadow-2xl lg:shadow-xl border-r border-[#124d62]/50 select-none">
       
       <!-- Top del Sidebar: Marca institucional con logo oficial -->
       <div>
@@ -201,88 +201,88 @@
         </div>
       </div>
 
-      <!-- Botón pill de alternar ancho de barra -->
-      <button onclick="toggleSidebarWidth()" class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-12 bg-sena-green hover:bg-sena-hover text-white rounded-r-md items-center justify-center shadow-lg cursor-pointer transition z-30" title="Expandir/Contraer menú">
+      <!-- Botón pill de alternar ancho de barra (solo desktop) -->
+      <button onclick="toggleSidebarWidth()" class="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-12 bg-sena-green hover:bg-sena-hover text-white rounded-r-md items-center justify-center shadow-lg cursor-pointer transition z-30" title="Expandir/Contraer menú">
         <i data-lucide="chevron-left" id="sidebarToggleIcon" class="w-4 h-4"></i>
       </button>
     </aside>
 
     <!-- Overlay móvil para cuando el sidebar está abierto -->
-    <div id="sidebarBackdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-black/50 z-10 hidden lg:hidden"></div>
+    <div id="sidebarBackdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 hidden lg:hidden"></div>
 
     <!-- ================= CONTENIDO PRINCIPAL DEL DASHBOARD ================= -->
-    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto custom-scroll relative">
+    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto custom-scroll relative w-full">
       
       <!-- Barra de navegación de ruta (Breadcrumbs) y Avance Superior -->
-      <div class="px-6 md:px-10 py-4 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-10">
+      <div class="px-4 sm:px-6 md:px-10 py-3 sm:py-4 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-10">
         <!-- Breadcrumbs con Lucide Icons -->
-        <div class="flex items-center space-x-2 text-xs md:text-sm text-slate-500">
-          <button onclick="toggleMobileSidebar()" class="lg:hidden p-1 mr-2 text-slate-700 hover:text-sena-green">
-            <i data-lucide="menu" class="w-6 h-6"></i>
+        <div class="flex items-center space-x-2 text-xs md:text-sm text-slate-500 min-w-0">
+          <button onclick="toggleMobileSidebar()" class="lg:hidden p-1.5 -ml-1 mr-1 text-slate-700 hover:text-sena-green hover:bg-slate-100 rounded-lg transition" title="Abrir menú" aria-label="Abrir menú">
+            <i data-lucide="menu" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </button>
-          <a href="#" onclick="switchTab('tab-inicio')" class="hover:text-sena-green flex items-center gap-1.5">
+          <a href="#" onclick="switchTab('tab-inicio')" class="hover:text-sena-green flex items-center gap-1.5 flex-shrink-0">
             <i data-lucide="home" class="w-4 h-4"></i>
-            <span>Inicio</span>
+            <span class="hidden sm:inline">Inicio</span>
           </a>
-          <span>&gt;</span>
-          <span id="currentBreadcrumb" class="font-semibold text-sena-dark">Formación ADSO 2026 - CADPH Garzón</span>
+          <span class="text-slate-300">&gt;</span>
+          <span id="currentBreadcrumb" class="font-semibold text-sena-dark truncate text-xs sm:text-sm">Formación ADSO 2026 - CADPH Garzón</span>
         </div>
 
         <!-- Barra de Avance idéntica a la captura ("Avance del Alistamiento 100%") -->
-        <div class="flex items-center space-x-3">
-          <div class="flex items-center bg-slate-100 rounded-full px-3 py-1 border border-slate-200">
-            <span class="text-[11px] font-semibold text-slate-600 mr-2">Avance Curricular</span>
-            <div class="w-24 md:w-36 h-3 bg-slate-300 rounded-full overflow-hidden relative">
+        <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+          <div class="flex items-center bg-slate-100 rounded-full px-2.5 sm:px-3 py-1 border border-slate-200">
+            <span class="text-[10px] sm:text-[11px] font-semibold text-slate-600 mr-1.5 sm:mr-2 whitespace-nowrap">Avance</span>
+            <div class="w-16 sm:w-28 md:w-36 h-2.5 sm:h-3 bg-slate-300 rounded-full overflow-hidden relative">
               <div class="h-full bg-gradient-to-r from-teal-500 via-emerald-500 to-sena-green rounded-full w-full"></div>
             </div>
-            <span class="text-[11px] font-bold text-sena-dark ml-2">100%</span>
+            <span class="text-[10px] sm:text-[11px] font-bold text-sena-dark ml-1.5 sm:ml-2">100%</span>
           </div>
 
           <!-- Botón de ayuda (?) idéntico -->
-          <button onclick="showHelpModal()" class="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center text-slate-500 hover:text-sena-dark hover:border-sena-dark transition text-xs font-bold" title="Información del repositorio">
+          <button onclick="showHelpModal()" class="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-slate-300 flex items-center justify-center text-slate-500 hover:text-sena-dark hover:border-sena-dark transition text-xs font-bold flex-shrink-0" title="Información del repositorio">
             ?
           </button>
         </div>
       </div>
 
       <!-- ================= CONTENEDOR DE PESTAÑAS / VISTAS ================= -->
-      <div class="p-6 md:p-10 space-y-8 flex-1">
+      <div class="p-4 sm:p-6 md:p-10 space-y-6 sm:space-y-8 flex-1">
 
         <!-- ================= PESTAÑA 1: INICIO (DASHBOARD COMPLETO) ================= -->
         <div id="tab-inicio" class="tab-content space-y-8">
           
           <!-- BANNER HERO PRINCIPAL CON EL LOGO DEL SENA -->
-          <div class="rounded-3xl bg-gradient-to-r from-[#0c394b] via-[#104b5c] to-[#155a6c] text-white p-8 md:p-12 relative overflow-hidden shadow-xl border border-white/10">
+          <div class="rounded-3xl bg-gradient-to-r from-[#0c394b] via-[#104b5c] to-[#155a6c] text-white p-5 sm:p-8 md:p-12 relative overflow-hidden shadow-xl border border-white/10">
             <!-- Efectos de luz y gradiente de fondo -->
             <div class="absolute -right-20 -top-20 w-80 h-80 bg-sena-green/10 rounded-full blur-3xl pointer-events-none"></div>
             
-            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-              <div class="max-w-2xl space-y-4">
-                <div class="text-[11px] md:text-xs font-bold tracking-widest uppercase text-cyan-200 flex items-center gap-2">
+            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
+              <div class="max-w-2xl space-y-3 sm:space-y-4 text-center lg:text-left">
+                <div class="text-[10px] sm:text-[11px] md:text-xs font-bold tracking-widest uppercase text-cyan-200 flex items-center justify-center lg:justify-start gap-2">
                   <span class="w-2 h-2 rounded-full bg-sena-accent"></span>
                   <span>SERVICIO NACIONAL DE APRENDIZAJE • REGIONAL HUILA</span>
                 </div>
                 
-                <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
                   Bienvenido al Repositorio ADSO
                 </h1>
 
-                <p class="text-slate-200 text-sm md:text-base leading-relaxed font-light">
+                <p class="text-slate-200 text-xs sm:text-sm md:text-base leading-relaxed font-light">
                   <strong>Centro Agroempresarial y Desarrollo Pecuario del Huila (CADPH) — Garzón.</strong> 
                   Accede a los módulos de explicación temática, código fuente, guías de aprendizaje y arquitecturas de software para la formación tecnóloga en <em>Análisis y Desarrollo de Software</em>.
                 </p>
 
                 <!-- Barra decorativa verde -->
-                <div class="h-1 bg-sena-green w-48 rounded-full"></div>
+                <div class="h-1 bg-sena-green w-36 sm:w-48 rounded-full mx-auto lg:mx-0"></div>
 
                 <!-- Botones de Acción Directa -->
-                <div class="pt-2 flex flex-wrap gap-3">
-                  <button onclick="switchTab('tab-temarios')" class="bg-sena-green hover:bg-sena-hover text-white text-xs md:text-sm font-semibold px-5 py-2.5 rounded-full shadow transition flex items-center gap-2">
+                <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-2.5 sm:gap-3">
+                  <button onclick="switchTab('tab-temarios')" class="bg-sena-green hover:bg-sena-hover text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-full shadow transition flex items-center gap-2">
                     <span>Ver Explicaciones Técnicas</span>
                     <i data-lucide="arrow-right" class="w-4 h-4"></i>
                   </button>
 
-                  <a href="https://github.com/hdtoledo/cadphAdso" target="_blank" class="bg-white/10 hover:bg-white/20 text-white text-xs md:text-sm font-semibold px-5 py-2.5 rounded-full border border-white/20 transition flex items-center gap-2">
+                  <a href="https://github.com/hdtoledo/cadphAdso" target="_blank" class="bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-full border border-white/20 transition flex items-center gap-2">
                     <i data-lucide="github" class="w-4 h-4"></i>
                     <span>Repositorio GitHub</span>
                   </a>
@@ -290,11 +290,11 @@
               </div>
 
               <!-- Lado Derecho: Logosímbolo Oficial SENA en Medallón -->
-              <div class="relative flex-shrink-0 flex items-center justify-center">
-                <div class="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-tr from-sena-green/30 to-cyan-400/20 p-2 shadow-2xl flex items-center justify-center border border-white/20">
-                  <div class="w-full h-full rounded-full bg-[#0d3444] flex flex-col items-center justify-center p-4 text-center">
+              <div class="relative flex-shrink-0 flex items-center justify-center mt-2 lg:mt-0">
+                <div class="w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-tr from-sena-green/30 to-cyan-400/20 p-2 shadow-2xl flex items-center justify-center border border-white/20">
+                  <div class="w-full h-full rounded-full bg-[#0d3444] flex flex-col items-center justify-center p-3 sm:p-4 text-center">
                     <!-- Icono Oficial SENA SVG -->
-                    <svg class="w-16 h-16 text-sena-accent fill-current mb-2" viewBox="0 0 64 62" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-12 h-12 sm:w-16 sm:h-16 text-sena-accent fill-current mb-1.5 sm:mb-2" viewBox="0 0 64 62" xmlns="http://www.w3.org/2000/svg">
                       <g transform="translate(-377 -19)">
                         <path d="M409.164 19C412.922 19 415.992 22.09 415.992 25.8778 415.992 29.6656 412.932 32.7556 409.164 32.7556 405.397 32.7556 402.336 29.6656 402.336 25.8778 402.336 22.09 405.407 19 409.164 19" fill="currentColor"/>
                         <path d="M384.305 41.1884 384.305 41.2183C384.285 41.3379 384.275 41.4177 384.275 41.4675 384.275 41.8264 384.474 42.0855 384.873 42.265 385.282 42.4344 385.9 42.5241 386.747 42.5241 387.395 42.5241 387.893 42.4543 388.262 42.3148 388.631 42.1752 388.81 41.9759 388.81 41.7267 388.81 41.3479 388.082 41.0489 386.647 40.8096 386.478 40.7797 386.348 40.7598 386.268 40.7498 386.179 40.7299 386.039 40.71 385.86 40.6801 383.567 40.3013 382.092 39.8926 381.434 39.454 381.115 39.2347 380.876 38.9855 380.706 38.6965 380.547 38.4074 380.467 38.0785 380.467 37.7096 380.467 36.8125 380.995 36.1248 382.052 35.6563 383.109 35.1878 384.654 34.9486 386.677 34.9486 388.7 34.9486 390.166 35.1678 391.133 35.6064 392.1 36.045 392.578 36.7228 392.578 37.6399L392.578 37.7495 388.78 37.7495 388.78 37.7096C388.78 37.3907 388.591 37.1614 388.202 36.992 387.813 36.8325 387.255 36.7428 386.508 36.7428 385.929 36.7428 385.481 36.8026 385.182 36.9122 384.863 37.0318 384.713 37.1913 384.713 37.4006 384.713 37.7794 385.541 38.1084 387.195 38.3675 387.514 38.4174 387.764 38.4572 387.943 38.4871 389.119 38.6865 389.966 38.8559 390.465 38.9955 390.963 39.135 391.392 39.3045 391.761 39.4939 392.159 39.7132 392.478 39.9923 392.698 40.3312 392.917 40.6701 393.027 41.0389 393.027 41.4476 393.027 42.3746 392.448 43.0823 391.302 43.5907 390.156 44.0891 388.501 44.3383 386.348 44.3383 384.195 44.3383 382.67 44.099 381.723 43.6206 380.766 43.1421 380.298 42.3746 380.298 41.308L380.298 41.1685 384.305 41.1685ZM394.711 44.1987 394.711 35.0881 405.546 35.0881 405.546 37.0518 398.778 37.0518 398.778 38.5071 405.028 38.5071 405.028 40.4508 398.778 40.4508 398.778 42.2151 405.795 42.2151 405.795 44.2087 394.711 44.2087ZM407.5 44.1987 407.5 35.0881 412.643 35.0881 418.155 41.2084 418.155 35.0881 422.063 35.0881 422.063 44.1987 416.72 44.1987 411.387 38.0585 411.387 44.1987 407.49 44.1987ZM432.569 40.5604 430.625 37.2511 428.572 40.5604 432.579 40.5604ZM426.369 44.1987 422.292 44.1987 428.592 35.0881 433.107 35.0881 439.118 44.1987 434.592 44.1987 433.675 42.554 427.366 42.554 426.389 44.1987Z" fill="currentColor"/>
@@ -303,8 +303,8 @@
                         <path d="M408.965 51.5949C408.965 51.5949 409.005 51.5251 409.005 51.5251L425.432 78.7174 421.066 80.99 410.48 63.2373C409.852 62.1907 408.347 62.1907 407.729 63.2373 404.2 69.1981 397.213 80.99 397.213 80.99L392.947 78.8768C392.947 78.8768 408.088 53.09 408.965 51.5949" fill="currentColor"/>
                       </g>
                     </svg>
-                    <span class="text-xs font-bold text-white uppercase tracking-wider">ADSO Huila</span>
-                    <span class="text-[10px] text-cyan-200">Sede Garzón 2026</span>
+                    <span class="text-[11px] sm:text-xs font-bold text-white uppercase tracking-wider">ADSO Huila</span>
+                    <span class="text-[9px] sm:text-[10px] text-cyan-200">Sede Garzón 2026</span>
                   </div>
                 </div>
               </div>

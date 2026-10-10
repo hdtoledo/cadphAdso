@@ -18,22 +18,13 @@ function switchTab(tabId) {
   const navBtnMap = {
     'tab-diseno': 'nav-diseno',
     'tab-guias': 'nav-guias',
-    'tab-fases': 'nav-fases',
-    'tab-temarios': 'nav-temarios',
-    'tab-checklist': 'nav-checklist',
-    'tab-inicio': 'nav-inicio',
-    'tab-repo': 'nav-repo',
-    'tab-ficha': 'nav-ficha'
+    'tab-fases': 'nav-fases'
   };
 
   const breadcrumbMap = {
     'tab-diseno': 'Diseño Curricular Oficial ADSO (Documento PDF & Competencias)',
     'tab-guias': 'Guías de Aprendizaje & Materiales de Formación',
     'tab-fases': 'Fases Metodológicas del Proyecto Formativo',
-    'tab-temarios': 'Temarios & Explicaciones de Desarrollo',
-    'tab-checklist': 'Checklist de Competencias Curriculares',
-    'tab-inicio': 'Dashboard General de Formación ADSO',
-    'tab-repo': 'Repositorio GitHub & Despliegue Pages',
     'tab-ficha': 'Acerca de ADSO: Programa, Repositorio & Instructores'
   };
 

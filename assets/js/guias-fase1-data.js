@@ -6,12 +6,41 @@ window.GUIAS_FASE1_DATA = {
   "fase": "Fase 1: Análisis",
   "fase_id": "fase-1-analisis",
   "descripcion": "Caracterización de procesos, evaluación de requerimientos, modelado UML, algoritmia y estructuración de la propuesta técnica para el sector productivo del Huila.",
-  "horas_totales_fase": 432,
+  "horas_totales_fase": 448,
   "actividades": [
+    {
+      "id": "actividad-1",
+      "numero": 1,
+      "codigo_actividad": "AP01-AA01",
+      "titulo": "Caracterización de Procesos y Levantamiento Inicial de Requisitos",
+      "subtitulo": "Acercamiento a la unidad productiva, técnicas de recolección y especificación preliminar de requisitos",
+      "descripcion": "Identificación de necesidades organizacionales en empresas del Huila, mapeo de procesos, técnicas de recolección de información (entrevistas, encuestas, observación) y formulación preliminar de requerimientos funcionales y no funcionales.",
+      "horas_totales": 144,
+      "horas_directas": 120,
+      "horas_independientes": 24,
+      "cargada": false,
+      "estado": "Pendiente Próximamente",
+      "competencias": [
+        {
+          "codigo": "220501092",
+          "nombre": "Especificación de Requisitos del Software",
+          "denominacion": "Establecer requisitos de la solución de software de acuerdo con estándares y procedimiento técnico",
+          "tipo": "Tecnica",
+          "horas": 144,
+          "instructor": "Instructor Técnico",
+          "raps": [
+            "220501092-01: Caracterizar los procesos de la organización de acuerdo con el marco de trabajo.",
+            "220501092-02: Recolectar información del estado actual de los procesos según técnicas de análisis.",
+            "220501092-03: Formular los requisitos preliminares del software según metodologías y estándares."
+          ]
+        }
+      ]
+    },
     {
       "id": "actividad-2",
       "numero": 2,
       "codigo_actividad": "AP01-AA02",
+      "cargada": true,
       "titulo": "Evaluación de Requisitos, Modelado UML, Algoritmia y Razonamiento Cuantitativo",
       "descripcion": "Establecer los requisitos de una solución de software mediante recolección, organización e interpretación de información, aplicando técnicas de análisis, estándares técnicos y herramientas matemáticas.",
       "horas_totales": 336,
@@ -383,23 +412,7 @@ window.GUIAS_FASE1_DATA = {
           "tipo": "docx"
         }
       ]
-    },
-    {
-      "id": "actividad-1",
-      "numero": 1,
-      "codigo_actividad": "AP01-AA01",
-      "titulo": "Caracterización de Procesos y Levantamiento Inicial de Requisitos",
-      "descripcion": "Identificación de necesidades organizacionales en empresas del Huila, levantamiento de información mediante entrevistas y estructuración inicial de requisitos.",
-      "horas_totales": 144,
-      "estado": "En preparación",
-      "competencias": [
-        {
-          "codigo": "220501092",
-          "nombre": "Especificación de Requisitos del Software",
-          "tipo": "Tecnica",
-          "horas": 144
-        }
-      ]
     }
   ]
 };
+

@@ -9,7 +9,7 @@
   'use strict';
 
   let currentPhaseId = 'fase-1-analisis';
-  let currentActivityId = 'actividad-2';
+  let currentActivityId = 'actividad-1';
   let currentSessionFilter = 'all'; // 'all' | 'Tecnica' | 'Matematicas'
   let currentSearchQuery = '';
 
@@ -240,21 +240,30 @@
     let html = '';
     activities.forEach(act => {
       const isActive = act.id === currentActivityId;
+      const isCargada = act.cargada === true;
       const activeClasses = isActive
         ? 'bg-sena-green text-white shadow-md'
         : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200';
       
-      const badgeHours = act.horas_totales ? `${act.horas_totales}h` : '96h est.';
+      const badgeHours = act.horas_totales ? `${act.horas_totales}h` : '96h';
+      const statusPill = isCargada
+        ? `<span class="text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase ${isActive ? 'bg-white/20 text-white' : 'bg-emerald-100 text-emerald-800'}">Cargada</span>`
+        : `<span class="text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase ${isActive ? 'bg-amber-400 text-slate-900' : 'bg-amber-100 text-amber-800 border border-amber-200'}">Próximamente</span>`;
       
+      const shortName = act.numero === 1 
+        ? 'Actividad 1: Caracterización & Requisitos' 
+        : (act.numero === 2 ? 'Actividad 2: Requisitos & Matemáticas' : 'Actividad 3: Propuesta & Inglés');
+
       html += `
         <button type="button" 
           onclick="window.selectGuiaActivity('${act.id}')"
-          class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition ${activeClasses}"
-          title="${act.titulo}">
+          class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition ${activeClasses}"
+          title="${act.titulo} - ${isCargada ? 'Material Disponible' : 'Pendiente Próximamente'}">
           <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'}">
             ${act.numero}
           </span>
-          <span class="truncate">Actividad ${act.numero}: ${act.numero === 2 ? 'Requisitos & Matemáticas' : (act.numero === 3 ? 'Propuesta & Inglés' : 'Requisitos Iniciales')}</span>
+          <span class="truncate">${shortName}</span>
+          ${statusPill}
           <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${isActive ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-600'}">
             ${badgeHours}
           </span>
@@ -704,39 +713,133 @@
   }
 
   /**
-   * Renderiza la vista de Actividad 1 (En estructuración)
+   * Renderiza la vista de Actividad 1 (Pendiente Próximamente)
    */
   function renderActividad1(act) {
-    return `
-      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-        <div class="flex items-start gap-4">
-          <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center flex-shrink-0">
-            <i data-lucide="folder-clock" class="w-6 h-6"></i>
+    const comps = act.competencias || [];
+    let compsHtml = comps.map(c => `
+      <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="font-mono font-bold text-sena-dark bg-white px-2 py-0.5 rounded border border-slate-200">${c.codigo}</span>
+            <span class="font-bold text-slate-800">${c.nombre}</span>
           </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider">
-                ${act.estado}
-              </span>
-              <span class="text-xs text-slate-400">96 Horas Estimadas</span>
+          <span class="font-bold text-slate-600">${c.horas} Horas (${c.tipo})</span>
+        </div>
+        <p class="text-[11px] text-slate-600 leading-relaxed font-light">${c.denominacion}</p>
+        <div class="mt-2 pt-2 border-t border-slate-200">
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Resultados de Aprendizaje Previstos:</span>
+          <ul class="space-y-1">
+            ${(c.raps || []).map(r => `
+              <li class="text-[11px] text-slate-600 flex items-start gap-1.5">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-sena-green flex-shrink-0 mt-0.5"></i>
+                <span>${r}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="space-y-6">
+        <!-- Banner de Encabezado de la Actividad 1 -->
+        <div class="rounded-3xl bg-gradient-to-r from-slate-900 via-[#0c384a] to-[#1a4a5e] text-white p-6 sm:p-8 shadow-md border border-white/10">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div class="space-y-3 max-w-2xl">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[11px] font-extrabold uppercase tracking-wider">
+                  ${act.codigo_actividad}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-200 text-[11px] font-semibold border border-amber-400/30">
+                  ⏳ Pendiente Próximamente
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-white/10 text-cyan-200 text-[11px] font-semibold">
+                  ${act.horas_totales} Horas Formativas Planificadas
+                </span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-extrabold tracking-tight text-white leading-tight">
+                ${act.titulo}
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
+                ${act.descripcion}
+              </p>
             </div>
-            <h3 class="text-lg font-bold text-slate-800 mt-1">${act.titulo}</h3>
-            <p class="text-xs text-slate-500 mt-1 leading-relaxed">${act.descripcion}</p>
+
+            <!-- Botón de Acción para ir a la Actividad 2 cargada -->
+            <div class="flex flex-col gap-2 flex-shrink-0">
+              <button type="button" onclick="window.selectGuiaActivity('actividad-2')"
+                class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-sena-green hover:bg-sena-hover text-white text-xs sm:text-sm font-bold rounded-xl transition shadow hover:scale-[1.02]">
+                <span>Ir a Actividad 2 (Cargada)</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-700 space-y-2">
-          <div class="font-bold text-slate-800 flex items-center gap-2">
-            <i data-lucide="info" class="w-4 h-4 text-blue-600"></i>
-            <span>Instrucciones para Instructores: Depósito de Materiales</span>
+        <!-- Estado de Carga y Aviso Didáctico -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-4 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i data-lucide="clock" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-amber-900 uppercase tracking-wider">Estado de la Guía</h5>
+              <p class="text-[11px] text-amber-800 mt-1 leading-relaxed">
+                Guía en fase de estructuración pedagógica y validación institucional por el equipo técnico.
+              </p>
+            </div>
           </div>
-          <p>
-            Esta carpeta está reservada para la <strong>Actividad de Aprendizaje 1</strong> vinculada a la competencia <code>220501092</code> (Caracterización de Procesos y Levantamiento Inicial de Requisitos).
-          </p>
-          <p>
-            Los instructores pueden depositar sus archivos en la ruta del repositorio:
-            <code class="block bg-white p-2.5 rounded-xl border border-slate-200 font-mono text-[11px] text-slate-800 mt-1.5">material-formativo/guias-aprendizaje/Fase1_Analisis/ACTIVIDAD 1/</code>
-          </p>
+
+          <div class="bg-blue-50/70 border border-blue-200/80 rounded-2xl p-4 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i data-lucide="building-2" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-blue-900 uppercase tracking-wider">Contexto Productivo</h5>
+              <p class="text-[11px] text-blue-800 mt-1 leading-relaxed">
+                Selección de empresas agroindustriales y comerciales en Garzón para el levantamiento de requisitos.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-4 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-emerald-900 uppercase tracking-wider">Actividades Disponibles</h5>
+              <p class="text-[11px] text-emerald-800 mt-1 leading-relaxed">
+                Puedes consultar la <strong>Actividad 2</strong> (14 sesiones, UML, algoritmia) y la <strong>Actividad 3</strong> (talleres cafeteros).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Competencias Curriculares de la Actividad 1 -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4">
+          <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+            <h4 class="text-sm font-bold text-slate-800 uppercase tracking-wider">
+              Competencia Técnica Curricular Planificada
+            </h4>
+            <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">144 Horas</span>
+          </div>
+
+          <div class="space-y-3">
+            ${compsHtml}
+          </div>
+
+          <!-- Nota para instructores -->
+          <div class="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1.5">
+            <div class="flex items-center gap-2 text-slate-800 font-bold">
+              <i data-lucide="folder-git-2" class="w-4 h-4 text-sena-green"></i>
+              <span>Ruta de depósito de materiales para instructores:</span>
+            </div>
+            <p>
+              Una vez finalizada la guía y las diapositivas de esta actividad, los instructores podrán cargarlas en la carpeta:
+              <code class="block bg-white p-2.5 rounded-xl border border-slate-200 font-mono text-[11px] text-slate-800 mt-1">material-formativo/guias-aprendizaje/Fase1_Analisis/ACTIVIDAD 1/</code>
+            </p>
+          </div>
         </div>
       </div>
     `;

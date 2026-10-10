@@ -17,6 +17,7 @@ function switchTab(tabId) {
 
   const navBtnMap = {
     'tab-diseno': 'nav-diseno',
+    'tab-guias': 'nav-guias',
     'tab-fases': 'nav-fases',
     'tab-temarios': 'nav-temarios',
     'tab-checklist': 'nav-checklist',
@@ -27,6 +28,7 @@ function switchTab(tabId) {
 
   const breadcrumbMap = {
     'tab-diseno': 'Diseño Curricular Oficial ADSO (Documento PDF & Competencias)',
+    'tab-guias': 'Guías de Aprendizaje & Materiales de Formación',
     'tab-fases': 'Fases Metodológicas del Proyecto Formativo',
     'tab-temarios': 'Temarios & Explicaciones de Desarrollo',
     'tab-checklist': 'Checklist de Competencias Curriculares',
@@ -60,7 +62,7 @@ function switchTab(tabId) {
     } else if (currentCurriculumSubTab === 'competencias') {
       renderCompetenciasCards();
     }
-  } else if (tabId === 'tab-fases') {
+  } else if (tabId === 'tab-guias') {
     if (typeof window.initGuiasViewer === 'function') {
       window.initGuiasViewer();
     }

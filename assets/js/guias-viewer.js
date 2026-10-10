@@ -1,44 +1,240 @@
 /**
  * Módulo Interactivo para Visualización y Gestión de Guías de Aprendizaje
- * y Materiales de Formación — Fase 1: Análisis (ADSO CADPH Garzón)
+ * y Materiales de Formación — ADSO CADPH Garzón (Huila)
  * 
- * Basado en window.GUIAS_FASE1_DATA
+ * Permite navegar dinámicamente desde la Guía 1 en adelante y por Fases del Proyecto.
  */
 
 (function () {
   'use strict';
 
+  let currentPhaseId = 'fase-1-analisis';
   let currentActivityId = 'actividad-2';
   let currentSessionFilter = 'all'; // 'all' | 'Tecnica' | 'Matematicas'
   let currentSearchQuery = '';
+
+  const PHASES_INFO = {
+    'fase-1-analisis': {
+      id: 'fase-1-analisis',
+      numero: 1,
+      nombre: 'Fase 1: Análisis',
+      horas: 448,
+      estado: 'Cargada en Repositorio',
+      colorBadge: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+      icono: 'file-search',
+      descripcion: 'Levantamiento de requisitos de software (IEEE 830), diagramas de casos de uso y actividades en UML, lógica proposicional, algoritmia y razonamiento cuantitativo con datos agroempresariales.'
+    },
+    'fase-2-planeacion': {
+      id: 'fase-2-planeacion',
+      numero: 2,
+      nombre: 'Fase 2: Planeación',
+      horas: 576,
+      estado: 'Próximamente',
+      colorBadge: 'bg-purple-100 text-purple-800 border-purple-300',
+      icono: 'pen-tool',
+      descripcion: 'Diseño de arquitectura de software, modelado relacional (MER/MR) y NoSQL de bases de datos, diagramas de clases/secuencia, wireframes y prototipado interactivo en Figma.',
+      competencias: [
+        { codigo: '220501095', nombre: 'Diseñar artefactos de software', horas: 384 },
+        { codigo: '220501096', nombre: 'Modelado de base de datos relacional y NoSQL', horas: 192 }
+      ]
+    },
+    'fase-3-ejecucion': {
+      id: 'fase-3-ejecucion',
+      numero: 3,
+      nombre: 'Fase 3: Ejecución',
+      horas: 672,
+      estado: 'Próximamente',
+      colorBadge: 'bg-amber-100 text-amber-800 border-amber-300',
+      icono: 'code-2',
+      descripcion: 'Codificación frontend (HTML5 semántico, Tailwind CSS, JavaScript modular), desarrollo backend con APIs RESTful, seguridad, persistencia de datos y control de versiones con Gitflow.',
+      competencias: [
+        { codigo: '220501097', nombre: 'Codificar componentes de software', horas: 288 },
+        { codigo: '220501098', nombre: 'Desarrollar aplicaciones web y móviles', horas: 192 },
+        { codigo: '220501099', nombre: 'Integrar módulos y servicios web', horas: 192 }
+      ]
+    },
+    'fase-4-evaluacion': {
+      id: 'fase-4-evaluacion',
+      numero: 4,
+      nombre: 'Fase 4: Evaluación',
+      horas: 384,
+      estado: 'Próximamente',
+      colorBadge: 'bg-blue-100 text-blue-800 border-blue-300',
+      icono: 'shield-check',
+      descripcion: 'Plan de pruebas unitarias y de integración (QA), manuales de instalación y usuario, despliegue continuo en entornos de producción y entrega formal al sector productivo.',
+      competencias: [
+        { codigo: '220501100', nombre: 'Pruebas de calidad de software (QA)', horas: 192 },
+        { codigo: '220501101', nombre: 'Despliegue e implantación de software', horas: 96 },
+        { codigo: '220501102', nombre: 'Manuales y cierre del proyecto', horas: 96 }
+      ]
+    }
+  };
 
   /**
    * Inicializa el visor de guías y materiales
    */
   function initGuiasViewer() {
-    const container = document.getElementById('guiasFase1ExplorerContainer');
+    const container = document.getElementById('guiasExplorerContainer');
     if (!container) return;
 
-    if (!window.GUIAS_FASE1_DATA) {
-      container.innerHTML = `
-        <div class="p-6 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs">
-          <strong>Aviso:</strong> No se encontraron datos de guías en <code>window.GUIAS_FASE1_DATA</code>.
-        </div>`;
-      return;
-    }
-
-    renderGuiasNav();
-    renderActivityContent();
+    renderPhaseNavigation();
+    renderPhaseContent();
   }
 
   /**
-   * Renderiza los botones de navegación entre Actividades
+   * Renderiza el selector de Fases del Proyecto
+   */
+  function renderPhaseNavigation() {
+    const nav = document.getElementById('guiasPhaseNav');
+    if (!nav) return;
+
+    let html = '';
+    Object.values(PHASES_INFO).forEach(ph => {
+      const isActive = ph.id === currentPhaseId;
+      const activeClasses = isActive
+        ? 'bg-sena-green text-white shadow-md'
+        : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200';
+
+      html += `
+        <button type="button"
+          onclick="window.selectGuiaPhase('${ph.id}')"
+          class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition ${activeClasses}"
+          title="${ph.nombre} (${ph.horas} Horas)">
+          <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'}">
+            ${ph.numero}
+          </span>
+          <span class="truncate font-semibold">${ph.nombre}</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${isActive ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-600'}">
+            ${ph.horas}h
+          </span>
+        </button>
+      `;
+    });
+
+    nav.innerHTML = html;
+  }
+
+  /**
+   * Selecciona una Fase
+   */
+  window.selectGuiaPhase = function (phaseId) {
+    currentPhaseId = phaseId;
+    renderPhaseNavigation();
+    renderPhaseContent();
+  };
+
+  /**
+   * Renderiza el contenido de la Fase activa
+   */
+  function renderPhaseContent() {
+    const phaseWrapper = document.getElementById('guiasPhaseContentWrapper');
+    if (!phaseWrapper) return;
+
+    if (currentPhaseId === 'fase-1-analisis') {
+      phaseWrapper.innerHTML = `
+        <!-- Barra de Selector de Actividades de Fase 1 -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+            <div>
+              <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider">
+                Actividades de Aprendizaje & Guías de Fase 1 (Análisis)
+              </h3>
+              <p class="text-xs text-slate-500">Selecciona la actividad para explorar sus sesiones didácticas y materiales.</p>
+            </div>
+            <span class="text-xs font-bold text-sena-dark bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+              3 Actividades Formativas
+            </span>
+          </div>
+
+          <div id="guiasActivityNav" class="flex flex-wrap items-center gap-2 p-1.5 bg-slate-100 rounded-2xl">
+            <!-- Inyectado por renderGuiasNav -->
+          </div>
+
+          <div id="guiasActivityContent" class="space-y-6 pt-2">
+            <!-- Inyectado por renderActivityContent -->
+          </div>
+        </div>
+      `;
+      renderGuiasNav();
+      renderActivityContent();
+    } else {
+      // Fases 2, 3 o 4
+      const ph = PHASES_INFO[currentPhaseId];
+      let compsHtml = '';
+      if (ph.competencias) {
+        compsHtml = ph.competencias.map(c => `
+          <div class="p-3 bg-white rounded-xl border border-slate-200 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-mono font-bold text-sena-dark bg-slate-100 px-2 py-0.5 rounded mr-2">${c.codigo}</span>
+              <span class="text-xs font-semibold text-slate-800">${c.nombre}</span>
+            </div>
+            <span class="text-xs font-bold text-slate-600">${c.horas} Horas</span>
+          </div>
+        `).join('');
+      }
+
+      phaseWrapper.innerHTML = `
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+            <div class="flex items-start gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 flex-shrink-0">
+                <i data-lucide="${ph.icono}" class="w-7 h-7"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider border ${ph.colorBadge}">
+                    ${ph.estado}
+                  </span>
+                  <span class="text-xs text-slate-500 font-semibold">${ph.horas} Horas Formativas Planificadas</span>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mt-1">${ph.nombre}</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed max-w-2xl">${ph.descripcion}</p>
+              </div>
+            </div>
+
+            <button type="button" onclick="window.selectGuiaPhase('fase-1-analisis')"
+              class="px-4 py-2 bg-sena-green hover:bg-sena-hover text-white text-xs font-bold rounded-xl shadow-xs transition flex items-center gap-1.5 flex-shrink-0">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              <span>Volver a Guías Fase 1</span>
+            </button>
+          </div>
+
+          <!-- Competencias Planificadas -->
+          <div>
+            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
+              Competencias Oficiales del Diseño Curricular para esta Fase:
+            </h4>
+            <div class="space-y-2">
+              ${compsHtml}
+            </div>
+          </div>
+
+          <!-- Nota de depósito de materiales -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-2">
+            <div class="flex items-center gap-2 text-slate-800 font-bold">
+              <i data-lucide="info" class="w-4 h-4 text-sena-green"></i>
+              <span>Depósito de Guías y Materiales Formativos por los Instructores</span>
+            </div>
+            <p>
+              Las guías de aprendizaje, sesiones y rúbricas correspondientes a esta fase serán cargadas oportunamente por el equipo de instructores del CADPH Garzón en la carpeta designada del repositorio:
+              <code class="block bg-white p-2.5 rounded-xl border border-slate-200 font-mono text-[11px] text-slate-800 mt-1.5">material-formativo/guias-aprendizaje/${ph.nombre.replace(/[: ]+/g, '_')}/</code>
+            </p>
+          </div>
+        </div>
+      `;
+      if (window.lucide) lucide.createIcons();
+    }
+  }
+
+  /**
+   * Renderiza los botones de navegación entre Actividades de Fase 1
    */
   function renderGuiasNav() {
     const navContainer = document.getElementById('guiasActivityNav');
     if (!navContainer) return;
 
     const data = window.GUIAS_FASE1_DATA;
+    if (!data) return;
     const activities = data.actividades || [];
 
     let html = '';
@@ -88,6 +284,7 @@
     if (!contentContainer) return;
 
     const data = window.GUIAS_FASE1_DATA;
+    if (!data) return;
     const act = (data.actividades || []).find(a => a.id === currentActivityId);
 
     if (!act) {
@@ -116,7 +313,7 @@
       <div class="space-y-6">
         
         <!-- Tarjeta Principal de la Guía Oficial -->
-        <div class="rounded-2xl bg-gradient-to-r from-slate-900 via-[#0c384a] to-[#124d62] text-white p-5 sm:p-6 shadow-md border border-white/10">
+        <div class="rounded-3xl bg-gradient-to-r from-slate-900 via-[#0c384a] to-[#124d62] text-white p-5 sm:p-7 shadow-md border border-white/10">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
             <div class="space-y-2 max-w-2xl">
               <div class="flex flex-wrap items-center gap-2">
@@ -130,7 +327,7 @@
                   14 Sesiones Didácticas
                 </span>
               </div>
-              <h3 class="text-lg sm:text-xl font-extrabold tracking-tight text-white">
+              <h3 class="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-white leading-tight">
                 ${act.titulo}
               </h3>
               <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
@@ -157,8 +354,8 @@
           </div>
 
           <!-- Metadatos de Competencias Involucradas -->
-          <div class="mt-5 pt-4 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-            <div class="bg-black/20 p-3 rounded-xl border border-white/5">
+          <div class="mt-6 pt-5 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+            <div class="bg-black/25 p-3.5 rounded-2xl border border-white/5">
               <div class="flex items-center justify-between text-[11px] font-bold text-cyan-300 mb-1">
                 <span>COMPETENCIA TÉCNICA · 220501093</span>
                 <span class="text-white">288 Horas (9 Sesiones)</span>
@@ -167,7 +364,7 @@
                 Evaluar requisitos de la solución de software de acuerdo con metodologías de análisis y estándares (4 RAPs).
               </p>
             </div>
-            <div class="bg-black/20 p-3 rounded-xl border border-white/5">
+            <div class="bg-black/25 p-3.5 rounded-2xl border border-white/5">
               <div class="flex items-center justify-between text-[11px] font-bold text-emerald-300 mb-1">
                 <span>COMPETENCIA TRANSVERSAL · 240201528</span>
                 <span class="text-white">48 Horas (5 Sesiones)</span>
@@ -364,7 +561,6 @@
     currentSessionFilter = area;
     const act = (window.GUIAS_FASE1_DATA.actividades || []).find(a => a.id === currentActivityId);
     if (act) {
-      // Actualizar estilos de botones
       ['all', 'Tecnica', 'Matematicas'].forEach(id => {
         const btn = document.getElementById(`filter-btn-${id}`);
         if (!btn) return;
@@ -441,7 +637,7 @@
       <div class="space-y-6">
         
         <!-- Banner de la Guía 3.0 -->
-        <div class="rounded-2xl bg-gradient-to-r from-slate-900 via-[#0c384a] to-[#124d62] text-white p-5 sm:p-6 shadow-md border border-white/10">
+        <div class="rounded-3xl bg-gradient-to-r from-slate-900 via-[#0c384a] to-[#124d62] text-white p-5 sm:p-7 shadow-md border border-white/10">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
             <div class="space-y-2 max-w-2xl">
               <div class="flex flex-wrap items-center gap-2">
@@ -455,7 +651,7 @@
                   6 Anexos Prácticos
                 </span>
               </div>
-              <h3 class="text-lg sm:text-xl font-extrabold tracking-tight text-white">
+              <h3 class="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-white leading-tight">
                 ${act.titulo}
               </h3>
               <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
@@ -475,14 +671,14 @@
           </div>
 
           <!-- Caso de Estudio Cafetero del Huila -->
-          <div class="mt-5 p-3.5 bg-black/25 rounded-xl border border-white/10 flex items-start gap-3">
-            <div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/30 text-amber-300 flex items-center justify-center flex-shrink-0 mt-0.5">
-              <i data-lucide="coffee" class="w-4 h-4"></i>
+          <div class="mt-6 p-4 bg-black/25 rounded-2xl border border-white/10 flex items-start gap-3.5">
+            <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-400/30 text-amber-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i data-lucide="coffee" class="w-5 h-5"></i>
             </div>
             <div class="text-xs">
               <div class="font-bold text-amber-300 uppercase tracking-wider text-[11px]">Contexto Regional de Aplicación</div>
-              <div class="text-slate-200 font-semibold">${act.contexto_empresarial}</div>
-              <p class="text-slate-300 text-[11px] mt-0.5 leading-relaxed">
+              <div class="text-slate-200 font-semibold mt-0.5">${act.contexto_empresarial}</div>
+              <p class="text-slate-300 text-[11px] mt-1 leading-relaxed">
                 Diagnóstico de procesos en fincas y cooperativas cafeteras del centro del Huila (Garzón, Gigante, Agrado), estructuración de requerimientos IEEE 830, términos de referencia y comunicación técnica en inglés para software de trazabilidad y subasta de café.
               </p>
             </div>
@@ -512,7 +708,7 @@
    */
   function renderActividad1(act) {
     return `
-      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
         <div class="flex items-start gap-4">
           <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center flex-shrink-0">
             <i data-lucide="folder-clock" class="w-6 h-6"></i>
@@ -529,7 +725,7 @@
           </div>
         </div>
 
-        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-2">
+        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-700 space-y-2">
           <div class="font-bold text-slate-800 flex items-center gap-2">
             <i data-lucide="info" class="w-4 h-4 text-blue-600"></i>
             <span>Instrucciones para Instructores: Depósito de Materiales</span>
@@ -539,7 +735,7 @@
           </p>
           <p>
             Los instructores pueden depositar sus archivos en la ruta del repositorio:
-            <code class="block bg-white p-2 rounded border border-slate-200 font-mono text-[11px] text-slate-800 mt-1">material-formativo/guias-aprendizaje/Fase1_Analisis/ACTIVIDAD 1/</code>
+            <code class="block bg-white p-2.5 rounded-xl border border-slate-200 font-mono text-[11px] text-slate-800 mt-1.5">material-formativo/guias-aprendizaje/Fase1_Analisis/ACTIVIDAD 1/</code>
           </p>
         </div>
       </div>
@@ -551,15 +747,14 @@
    */
   window.openSessionModal = function (sessionId) {
     const data = window.GUIAS_FASE1_DATA;
+    if (!data) return;
     let foundSession = null;
-    let parentAct = null;
 
     for (const act of data.actividades || []) {
       if (act.sesiones) {
         const s = act.sesiones.find(item => item.id === sessionId);
         if (s) {
           foundSession = s;
-          parentAct = act;
           break;
         }
       }

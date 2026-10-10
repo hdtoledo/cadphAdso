@@ -69,6 +69,14 @@ Cada una de las 14 sesiones cuenta con:
 
 ---
 
+## 💻 Interfaz Web: Menú Exclusivo de Guías de Aprendizaje
+
+El portal interactivo (`explorar.html`) separa metodológicamente las **Fases del Proyecto** (`tab-fases`) del catálogo interactivo de **Guías de Aprendizaje** (`tab-guias`):
+* **Fases del Proyecto (`tab-fases`):** Expone el marco conceptual de las 4 fases de la ingeniería de software (Análisis, Planeación, Ejecución, Evaluación) con enlaces directos hacia sus guías.
+* **Guías de Aprendizaje (`tab-guias`):** Módulo dinámico principal donde el aprendiz y los instructores interactúan con cada guía (desde la Guía 1 en adelante), descargan sesiones didácticas, rúbricas de evaluación, diapositivas y hojas de cálculo, además de consultar los RAPs asociados y abrir fichas técnicas en modales accesibles.
+
+---
+
 ## 🤖 Protocolo para Automatización y Soporte con Agentes de IA
 
 Cuando un usuario solicite asistencia o automatización sobre las guías formativas:

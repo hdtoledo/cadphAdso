@@ -22,17 +22,16 @@ Este repositorio contiene el **Portal Institucional y Repositorio de Aprendizaje
 
 El portal ha sido diseñado bajo las mejores prácticas de **UI/UX**, rendimiento y accesibilidad web, reflejando la identidad corporativa oficial del **SENA**:
 - **Paleta Institucional Oficial:** Verde SENA (`#39A900`), verde oscuro (`#0c384a` / `#007832`), azul petróleo profundo y acentos de alto contraste.
-- **Barra Lateral de Altura Completa (Full-Height Sidebar):** Diseño moderno de 100vh con el escudo oficial del SENA como ancla de identidad, botón colapsable a modo compacto (84px) en escritorio y cajón desplegable (*off-canvas*) en móviles.
-- **Barra Superior Limpia:** Barra blanca superior independiente para el área de contenido con indicador de ruta (*breadcrumbs*), píldora de avance formativo al 100%, botón de ayuda contextual y botón de salida a la pantalla de bienvenida.
-- **Diseño Curricular Oficial como Vista Principal (#1):** El menú sitúa como primer ítem activo por defecto el Diseño Curricular, ofreciendo un conmutador fluido entre el visor de PDF oficial y el nuevo explorador interactivo.
+- **Arquitectura Modular de Componentes (`components/`):** Desacoplamiento total de la interfaz. [`explorar.html`](file:///explorar.html) actúa como un *shell ligero* (< 100 líneas) que inyecta asíncronamente componentes desde `components/layout/`, `components/views/` y `components/modals/` mediante [`assets/js/component-loader.js`](file:///assets/js/component-loader.js).
+- **Barra Lateral de Altura Completa (Full-Height Sidebar):** Diseño moderno de 100vh con el escudo oficial del SENA como ancla de identidad, botón colapsable a modo compacto en escritorio y cajón desplegable (*off-canvas*) en móviles.
+- **Barra Superior Limpia:** Barra superior blanca independiente con indicador de ruta (*breadcrumbs*), botón de ayuda contextual (?) y botón de salida a la pantalla de bienvenida.
+- **Diseño Curricular Oficial como Vista Principal (#1):** El menú sitúa como primer ítem activo por defecto el Diseño Curricular, ofreciendo un conmutador fluido entre el visor de PDF oficial y el explorador interactivo.
 - **Explorador Interactivo de Competencias, RAPs y Horas:** Extracción analítica completa del documento oficial (69 páginas), estructurando 20 competencias, 75 Resultados de Aprendizaje (RAPs) y 3.984 horas totales. Cuenta con búsqueda en vivo, filtros por categoría (*Todas, Técnicas Específicas, Clave & Transversales, Institucional, Etapa Productiva*), métricas superiores (KPIs), barras visuales de intensidad horaria y acordeones independientes para consultar la descripción detallada de cada RAP.
 - **Menú Exclusivo «Guías de Aprendizaje» (#2):** Pestaña dedicada (`tab-guias`) desacoplada de las fases metodológicas para que aprendices e instructores exploren e interactúen directamente con cada guía (desde la Guía 1 en adelante). Cuenta con switch interactivo por Fases (Fase 1: Análisis activa con 448h, y planeación de Fases 2, 3 y 4), desglose de 14 sesiones didácticas (9 técnicas · 288h y 5 matemáticas · 48h de la Actividad 2) con descarga directa de archivos Word (.docx), presentaciones (.pptx) y datos Excel (.xlsx), además de 6 anexos y talleres de la Actividad 3 (112h) aplicados a empresas cafeteras del Huila.
-- **Modal de Ficha Técnica de Sesión Formativa:** Ventana accesible con descripción de objetivos, RAPs oficiales asociados, evidencias evaluables y descarga directa de actividades, rúbricas e instrumentos de evaluación.
 - **Fases del Proyecto Metodológicas (#3):** Pestaña independiente (`tab-fases`) que expone el ciclo de vida del software con tarjetas explicativas y enlaces directos hacia las guías formativas de cada etapa.
-- **Modal de Resumen Ejecutivo Curricular:** Ventana modal accesible de alto nivel con ficha técnica, tabla comparativa de horas y porcentajes (Técnicas 55.4%, Clave 22.9%, Inducción 1.2%, Productiva 21.7%), distribución por las 4 fases del proyecto y perfiles ocupacionales de egreso.
+- **Sección «Acerca de ADSO»:** Ficha técnica detallada del programa formativo, métricas de duración lectiva/productiva y la información del equipo de 8 instructores.
+- **Modales Modulares Accesibles:** Diálogo de resumen curricular ejecutivo, ficha detallada de sesiones formativas con RAPs y descargas, diálogo de confirmación SENA y asistente interactivo FAQ.
 - **Visor PDF Oficial de 69 Páginas:** Lector embebido directamente en HTML con soporte para desplazamiento bidireccional (scroll horizontal y vertical libre), ajuste automático al ancho (*Fit Width*), controles de zoom, paginación, gestos táctiles (*swipe*) en móviles y descarga directa.
-- **Estructura Curricular por Fases:** Módulos de las 4 fases del proyecto formativo (*Análisis, Planeación, Ejecución, Evaluación*) con modales interactivos de consulta técnica.
-- **Sección «Acerca de ADSO»:** Pestaña dedicada con la ficha técnica detallada del programa, métricas de duración lectiva/productiva y la información del equipo de instructores.
 - **Accesibilidad Web Integral (WCAG 2.1 / 2.2 AA):** Menú flotante persistente en todas las vistas con ajuste dinámico de tamaño de texto a nivel de raíz (`html` rem, de 80% a 150%), modo de alto contraste para baja visión, forzado de subrayado de enlaces para daltonismo, modo de lectura clara con espaciado expandido, enlace de salto para teclado (*skip link*) y persistencia automática en `localStorage`.
 
 ---
@@ -147,91 +146,147 @@ Este repositorio integra una arquitectura agnóstica de contexto para **Intelige
 
 ---
 
-## 📥 Guía de Publicación de Material Formativo (Exclusivo para Instructores)
+## 🛠️ Guía Integral: Cómo Trabajar en el Repositorio de Manera Correcta
 
-El repositorio está concebido como una plataforma institucional viva donde confluyen tres componentes:
-1. **La Interfaz Web Institucional:** El portal de bienvenida ([`index.html`](file:///index.html)) y el dashboard curricular ([`explorar.html`](file:///explorar.html)) con visor de PDF integrado.
-2. **El Depósito Curricular Oficial (`material-formativo/`):** Almacén organizado de guías, talleres y rúbricas administrado por instructores.
-3. **El Contexto de IA (`.ai/`):** Instrucciones técnicas para que cualquier asistente inteligente entienda la formación SENA y asista tanto a aprendices como a formadores.
-
-> [!IMPORTANT]
-> **Gobernanza del Repositorio:**  
-> Este espacio es administrado **únicamente por los instructores** para publicar guías de aprendizaje, explicaciones de sesiones, talleres e instrumentos de evaluación.  
-> **Los aprendices son exclusivamente consultores y usuarios de este material**; no deben enviar *Pull Requests*, commits ni almacenar aquí el código o entregables de sus evidencias de formación.
+Para asegurar la calidad institucional, la coherencia pedagógica, la mantenibilidad del código y la interacción fluida con los agentes de Inteligencia Artificial, todo trabajo en este repositorio debe respetar las siguientes normas oficiales:
 
 ---
 
-### 1. Jerarquía y Orden Pedagógico del SENA
+### 1. 👥 Roles, Gobernanza y Delimitación de Responsabilidades
 
-Para preservar la coherencia pedagógica oficial del SENA, todo material formativo que se agregue debe ubicarse respetando el ciclo del proyecto:
+| Rol | Alcance y Responsabilidades | Qué NO debe hacer |
+| :--- | :--- | :--- |
+| **👨‍🏫 Instructores ADSO** | • Publicar y actualizar lineamientos, guías oficiales, presentaciones y rúbricas en `material-formativo/`.<br>• Mantener y optimizar la interfaz web institucional (`index.html`, `explorar.html`, `components/`, `assets/`).<br>• Documentar las competencias y resultados en `.ai/` y `docs/`. | • No guardar evidencias resueltas de aprendices.<br>• No modificar la identidad visual del SENA ni la arquitectura modular sin previo consenso. |
+| **👨‍🎓 Aprendices ADSO** | • Consultar el portal institucional para conocer guías, sesiones y evidencias evaluables.<br>• Descargar material complementario (ejercicios, presentaciones, conjuntos de datos).<br>• Desarrollar sus proyectos en sus propios repositorios personales de GitHub. | • **NUNCA subir evidencias resueltas, archivos personales ni código de proyectos a este repositorio**.<br>• La entrega oficial y calificación de evidencias es **exclusiva de la plataforma Zajuna** o repositorios personales de GitHub. |
+| **🤖 Agentes y Modelos de IA** | • Actuar como mentores técnicos y pedagógicos.<br>• Explicar el *porqué* de las decisiones de diseño y arquitectura.<br>• Generar código modular desacoplado en `components/`.<br>• Mantener sincronizados los índices formativos en `.ai/`. | • **NUNCA agregar código HTML monolítico en `explorar.html`**.<br>• **NUNCA** aceptar solicitudes de aprendices para almacenar o commitear evidencias en este repositorio. |
+
+---
+
+### 2. 🧩 Flujo de Trabajo con Componentes Modulares (`components/`)
+
+El portal explorador ([`explorar.html`](file:///explorar.html)) está construido bajo el patrón de **Arquitectura Modular de Componentes** desacoplados, coordinados por el cargador reactivo [`assets/js/component-loader.js`](file:///assets/js/component-loader.js).
+
+#### 📌 Regla Estricta para IAs y Desarrolladores:
+> **`explorar.html` debe mantenerse como un shell minimalista (< 100 líneas). Nunca agregues bloques masivos de HTML dentro de `explorar.html`. Cualquier vista, sección o modal debe crearse como un componente independiente en `components/`.**
+
+#### Distribución de Componentes:
+- **`components/layout/` (Estructura global):**
+  - [`sidebar.html`](components/layout/sidebar.html): Menú lateral institucional, escudo del SENA, enlaces de navegación y botón de perfil.
+  - [`header.html`](components/layout/header.html): Barra superior con breadcrumbs dinámicos, botón de ayuda contextual (?) y botón salir.
+  - [`footer.html`](components/layout/footer.html): Pie de página oficial del CADPH Garzón.
+  - [`accessibility.html`](components/layout/accessibility.html): Menú flotante y herramientas accesibles WCAG 2.1 AA (Alt+A).
+- **`components/views/` (Pantallas principales del explorador):**
+  - [`tab-diseno.html`](components/views/tab-diseno.html): Visor de PDF oficial y explorador de las 31 competencias, RAPs y horas.
+  - [`tab-guias.html`](components/views/tab-guias.html): Catálogo interactivo de guías oficiales, sesiones didácticas y descargas.
+  - [`tab-fases.html`](components/views/tab-fases.html): Metodología de las 4 Fases del Proyecto Formativo (*Análisis, Planeación, Ejecución, Evaluación*).
+  - [`tab-ficha.html`](components/views/tab-ficha.html): Datos institucionales del programa ADSO, repositorio oficial y equipo de 8 instructores.
+- **`components/modals/` (Diálogos y ventanas emergentes):**
+  - [`modal-curriculum.html`](components/modals/modal-curriculum.html): Resumen ejecutivo de distribución horaria, porcentajes y fases del proyecto.
+  - [`modal-session.html`](components/modals/modal-session.html): Ficha técnica de sesión formativa con RAPs, evidencias e instrumentos descargables.
+  - [`modal-confirm.html`](components/modals/modal-confirm.html): Diálogo accesible de confirmación y alertas institucionales.
+  - [`modal-assistant.html`](components/modals/modal-assistant.html): Asistente FAQ del CADPH Garzón.
+
+#### ¿Cómo crear o editar un componente?
+1. **Crear o modificar el archivo HTML** en la subcarpeta correspondiente (`components/layout/`, `components/views/` o `components/modals/`).
+2. **Definir el contenedor semántico raíz** con clases Tailwind CSS (ej. `<div id="mi-vista" class="tab-content hidden space-y-6">...</div>`).
+3. **Declarar el marcador de posición en `explorar.html`**:
+   ```html
+   <div data-component="components/views/mi-vista.html"></div>
+   ```
+4. **Ciclo de vida interactivo:** Si el componente requiere vincular eventos JavaScript o cargar datos dinámicos, escucha el evento `adso:componentsLoaded`:
+   ```javascript
+   document.addEventListener('adso:componentsLoaded', () => {
+     // Inicializar controladores, datos o eventos
+     if (window.lucide) lucide.createIcons();
+   });
+   ```
+
+---
+
+### 3. 💻 Entorno de Desarrollo y Ejecución Local
+
+Dado que los componentes modulares se cargan de forma asíncrona mediante peticiones `fetch()`, **es indispensable abrir el portal mediante un servidor web local** (HTTP/HTTPS) para evitar restricciones de seguridad CORS del protocolo nativo `file:///`:
+
+#### ✅ Opción 1: Visual Studio Code con Live Server (Recomendada)
+1. Instala la extensión **Live Server** (Ritwick Dey) en VS Code.
+2. Haz clic derecho sobre `index.html` o `explorar.html` y selecciona **Open with Live Server**.
+3. El explorador cargará todos los componentes sin restricciones en `http://127.0.0.1:5500/explorar.html`.
+
+#### ✅ Opción 2: Servidor HTTP con Python
+```bash
+python -m http.server 8000
+# Abrir en el navegador: http://localhost:8000/explorar.html
+```
+
+#### ✅ Opción 3: Servidor HTTP con Node.js
+```bash
+npx serve .
+```
+
+---
+
+### 4. 📚 Procedimiento para Publicar Material Formativo Oficial (Instructores)
+
+Para asegurar la coherencia pedagógica oficial del SENA, todo material formativo debe respetar la jerarquía institucional:
 
 $$\text{Fase Formativa} \longrightarrow \text{Actividad de Proyecto (AP)} \longrightarrow \text{Guía de Aprendizaje (GA)} \longrightarrow \text{Actividad de Aprendizaje (AA)} \longrightarrow \text{Evidencia (EV)}$$
 
-| Directorio | Tipo de Recurso | Tipo de Evidencias / Temáticas |
-| :--- | :--- | :--- |
-| [`material-formativo/guias-aprendizaje/Fase1_Analisis/`](file:///material-formativo/guias-aprendizaje/Fase1_Analisis/) | **Fase 1: Análisis** | Requisitos de software (SRS), historias de usuario, casos de uso, levantamiento y validación de información. |
-| [`material-formativo/guias-aprendizaje/Fase2_Planeacion/`](file:///material-formativo/guias-aprendizaje/Fase2_Planeacion/) | **Fase 2: Planeación** | Arquitectura de software, diagramas de clases/secuencia UML, modelos relacionales/NoSQL, diseño UI/UX y prototipos. |
-| [`material-formativo/guias-aprendizaje/Fase3_Ejecucion/`](file:///material-formativo/guias-aprendizaje/Fase3_Ejecucion/) | **Fase 3: Ejecución** | Codificación frontend, desarrollo backend, APIs RESTful, persistencia de datos, control de versiones en equipo. |
-| [`material-formativo/guias-aprendizaje/Fase4_Evaluacion/`](file:///material-formativo/guias-aprendizaje/Fase4_Evaluacion/) | **Fase 4: Evaluación** | Pruebas unitarias/integración, aseguramiento de calidad (QA), despliegue a producción, manuales técnicos y de usuario. |
-| [`material-formativo/instrumentos-evaluacion/`](file:///material-formativo/instrumentos-evaluacion/) | **Instrumentos de Evaluación** | Rúbricas y listas de chequeo que especifican los criterios de evaluación de cada evidencia. |
-| [`material-formativo/talleres-ejercicios/`](file:///material-formativo/talleres-ejercicios/) | **Talleres y Laboratorios** | Guías de ejercicios prácticos, retos de código, laboratorios paso a paso y casos de estudio. |
+1. **Identificar la Fase Formativa:**
+   - Fase 1: `material-formativo/guias-aprendizaje/Fase1_Analisis/`
+   - Fase 2: `material-formativo/guias-aprendizaje/Fase2_Planeacion/`
+   - Fase 3: `material-formativo/guias-aprendizaje/Fase3_Ejecucion/`
+   - Fase 4: `material-formativo/guias-aprendizaje/Fase4_Evaluacion/`
+2. **Convenciones Estrictas de Nomenclatura:**
+   - **Guías Oficiales:** `GA[Fase]-[CódigoCompetencia]-[Nombre].pdf`  
+     *Ejemplo:* `GA1-220501092-EspecificacionRequisitos.pdf`
+   - **Instrumentos de Evaluación (Rúbricas / Listas de Chequeo):** `IE-[Guia]-AA[Actividad]-EV[Evidencia]-[Nombre].docx`  
+     *Ejemplo:* `IE-GA1-AA2-EV01-ListaChequeoCasosUso.docx`
+   - **Presentaciones Didácticas:** `Sesion[NN]_[Tema].pptx`
+   - **Talleres y Retos Prácticos:** `Taller-[Tema]-[Tecnologia].docx` *(o `.md`)*
+3. **Sincronización con el Visor Interactivo (`guias-fase1-data.js` / JSON):**
+   Si la guía contiene sesiones que deban aparecer en el explorador web interactivo, regístralas en `assets/js/guias-fase1-data.js` con sus horas, RAPs, evidencias y rutas de descarga.
+4. **Sincronización con el Contexto de IA (`.ai/INDICE_MATERIALES.md`):**
+   Actualiza [`.ai/INDICE_MATERIALES.md`](file:///.ai/INDICE_MATERIALES.md) asociando el documento a su competencia oficial para que los asistentes inteligentes lo localicen de inmediato.
 
 ---
 
-### 2. Estándares y Convenciones de Nomenclatura
+### 5. 🎨 Estándares Técnicos, Identidad Visual y Accesibilidad
 
-Para facilitar la indexación automática de los modelos de IA y la búsqueda por parte de los aprendices, nombra los archivos siguiendo estas pautas:
-
-- **Guías de Aprendizaje Oficiales:**  
-  `GA[Fase]-[CódigoCompetencia]-[Nombre_Descriptivo].pdf`  
-  *Ejemplo:* `GA1-220501092-EspecificacionRequisitos.pdf`
-- **Instrumentos de Evaluación (Rúbricas / Listas de Chequeo):**  
-  `IE-[Guia]-AA[Actividad]-EV[Evidencia]-[Nombre].pdf`  
-  *Ejemplo:* `IE-GA1-AA1-EV01-ListaChequeo.pdf`
-- **Talleres y Prácticas:**  
-  `Taller-[Tema]-[Tecnologia].md` *(o `.pdf`)*  
-  *Ejemplo:* `Taller-Modelado-Datos-MySQL.md`
-- **Formatos Recomendados:**  
-  - **Markdown (`.md`):** Formato ideal para talleres y documentación de lectura directa por IA y humanos.
-  - **PDF (`.pdf`):** Para documentos oficiales institucionales del SENA.
-  - **DOCX / ZIP:** Si incluye plantillas editables o paquetes de código inicial.
-
----
-
-### 3. Procedimiento Paso a Paso para Instructores
-
-Para que un instructor publique nuevo material de formación, notas de sesión, talleres o especificaciones de evidencias en el repositorio:
-
-1. **Identificar la Fase o Categoría:**
-   Determina a qué fase formativa pertenece el recurso (Análisis, Planeación, Ejecución o Evaluación) o si corresponde a un instrumento o taller transversal.
-
-2. **Depositar el Archivo:**
-   Copia el archivo en la subcarpeta correspondiente dentro de `material-formativo/`.
-
-3. **Registrar el Documento en el `README.md` Local:**
-   Cada subcarpeta posee un archivo `README.md` que lista los materiales disponibles. Abre ese archivo y añade una fila o viñeta con el enlace:
-   ```markdown
-   - [📄 GA1-220501092-EspecificacionRequisitos.pdf](./GA1-220501092-EspecificacionRequisitos.pdf) — *Guía de levantamiento y especificación de requisitos*.
+1. **HTML Semántico:** Utilizar elementos semánticos estándar (`<header>`, `<nav>`, `<main>`, `<aside>`, `<footer>`, `<section>`).
+2. **Identidad Visual Oficial SENA:**
+   - Verde institucional: `#39A900` (`sena-green`)
+   - Azul institucional oscuro: `#0c384a` / `#082a38` (`portal-dark`)
+   - Fondos: `#f0f3f6` / `#ffffff`
+   - Tipografía: `Work Sans`
+   - Iconografía: Lucide Icons (`<i data-lucide="..."></i>`)
+3. **Accesibilidad Web (WCAG 2.1 / 2.2 Nivel AA):**
+   - Todos los botones y enlaces deben contar con `title` o `aria-label`.
+   - Soporte fluido para teclado (`Tab`, `Enter`, `Escape` para modales).
+   - Mantener compatibilidad con los controles del panel flotante de accesibilidad (zoom de texto, alto contraste, subrayado de enlaces, lectura clara).
+4. **Verificación de Sintaxis JavaScript:**
+   Antes de confirmar cambios, verificar la ausencia de errores con Node.js:
+   ```bash
+   Get-ChildItem assets/js/*.js | ForEach-Object { node -c $_.FullName }
    ```
 
-4. **Sincronizar el Índice para la IA (Recomendado):**
-   Edita [`.ai/INDICE_MATERIALES.md`](file:///.ai/INDICE_MATERIALES.md) para registrar la nueva guía junto a su código de competencia. De esta forma, cualquier modelo de IA (Gemini, Copilot, ChatGPT, Claude) sabrá exactamente qué guía consultar cuando un aprendiz o instructor haga una pregunta técnica.
+---
 
-5. **Guardar y Publicar los Cambios con Git:**
-   En la terminal del proyecto, ejecuta:
+### 6. 🌿 Convenciones de Git y Control de Versiones
+
+1. **Commits Semánticos (en español):**
+   - `feat: [descripción]` → Nueva funcionalidad, nuevo componente o nuevo material cargado.
+   - `fix: [descripción]` → Corrección de errores en scripts, enlaces o componentes.
+   - `docs: [descripción]` → Actualizaciones en guías formativas, README o `.ai/`.
+   - `style: [descripción]` → Ajustes visuales de maquetación, Tailwind CSS o espaciados.
+   - `refactor: [descripción]` → Modularización o mejora estructural sin cambiar comportamiento.
+2. **Publicación y Despliegue Continuo:**
    ```bash
-   # 1. Verificar los archivos agregados
    git status
-
-   # 2. Agregar los nuevos archivos al control de versiones
-   git add material-formativo/ .ai/
-
-   # 3. Confirmar los cambios con un mensaje descriptivo
-   git commit -m "docs: agregar Guía de Aprendizaje GA1-220501092 de Fase 1"
-
-   # 4. Enviar los cambios al repositorio en GitHub
+   git add .
+   git commit -m "feat: [descripción clara del cambio]"
    git push origin main
    ```
+   *El push a la rama `main` dispara automáticamente el despliegue en GitHub Pages.*
 
 ---
 

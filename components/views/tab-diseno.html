@@ -1,0 +1,326 @@
+        <div id="tab-diseno" class="tab-content space-y-6">
+          
+          <!-- Encabezado y Barra de Acciones del Documento -->
+          <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-start sm:items-center space-x-3.5">
+              <div class="w-12 h-12 rounded-2xl bg-sena-green/15 text-sena-green flex items-center justify-center flex-shrink-0 shadow-sm border border-sena-green/30">
+                <i data-lucide="file-text" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-800">
+                    Diseño Curricular Oficial ADSO
+                  </h2>
+                  <span class="text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-sena-dark uppercase tracking-wider">
+                    Código 228118 • Vigente 2026
+                  </span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">
+                  Tecnólogo en Análisis y Desarrollo de Software • SENA Regional Huila • Centro Agroempresarial y Desarrollo Pecuario (CADPH Garzón).
+                </p>
+              </div>
+            </div>
+
+            <!-- Botones de Acción (Resumen Ejecutivo + Descarga + Nueva Pestaña) -->
+            <div class="flex items-center gap-2.5 flex-wrap sm:flex-nowrap flex-shrink-0">
+              <!-- Botón Ver Resumen General / Modal -->
+              <button type="button" onclick="openCurriculumSummaryModal()" class="bg-gradient-to-r from-[#0c384a] to-[#124d62] hover:from-[#124d62] hover:to-[#1a647e] text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-2 hover:scale-[1.02] flex-1 sm:flex-initial" title="Abrir resumen ejecutivo completo del diseño curricular">
+                <i data-lucide="sparkles" class="w-4 h-4 text-cyan-300"></i>
+                <span>Resumen General</span>
+              </button>
+
+              <!-- Botón Descargar PDF Directo -->
+              <a href="docs/DisenoCurricularADSO.pdf" download="DisenoCurricularADSO.pdf" class="bg-sena-green hover:bg-sena-hover text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-2 hover:scale-[1.02] flex-1 sm:flex-initial" title="Descargar documento PDF del diseño curricular">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                <span>Descargar PDF</span>
+              </a>
+
+              <!-- Botón Abrir en Nueva Ventana / Pantalla Completa -->
+              <a href="docs/DisenoCurricularADSO.pdf" target="_blank" rel="noopener noreferrer" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold px-3.5 sm:px-4 py-2.5 rounded-xl border border-slate-300 transition flex items-center justify-center gap-2 flex-1 sm:flex-initial" title="Abrir documento en una pestaña independiente">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Nueva Pestaña</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Selector de Sub-Vistas (PDF Oficial vs Competencias, RAPs y Horas) -->
+          <div class="flex items-center justify-between flex-wrap gap-3 bg-white p-2.5 rounded-2xl border border-slate-200 shadow-xs">
+            <div class="flex items-center bg-slate-100 p-1 rounded-xl text-xs sm:text-sm font-semibold gap-1 w-full sm:w-auto">
+              <button type="button" onclick="setCurriculumSubTab('pdf')" id="subtab-pdf-btn" class="flex-1 sm:flex-initial px-4 py-2 rounded-lg transition flex items-center justify-center gap-2 bg-sena-green text-white shadow-xs" title="Ver el documento PDF oficial del diseño curricular de 69 páginas">
+                <i data-lucide="file-text" class="w-4 h-4"></i>
+                <span>Documento Oficial PDF (69 Págs)</span>
+              </button>
+              <button type="button" onclick="setCurriculumSubTab('competencias')" id="subtab-comp-btn" class="flex-1 sm:flex-initial px-4 py-2 rounded-lg transition flex items-center justify-center gap-2 text-slate-700 hover:text-slate-900 hover:bg-white/80" title="Explorador dinámico de competencias, resultados de aprendizaje (RAPs) y horas de cada una">
+                <i data-lucide="layout-grid" class="w-4 h-4 text-sena-green"></i>
+                <span>Competencias, RAPs y Horas (Interactivo)</span>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2 text-xs text-slate-500 px-2">
+              <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 font-semibold px-2.5 py-1 rounded-lg border border-emerald-200">
+                <span class="w-2 h-2 rounded-full bg-sena-green animate-pulse"></span>
+                20 Competencias • 75 RAPs • 3.984 Horas
+              </span>
+            </div>
+          </div>
+
+          <!-- ================= SUB-VISTA 1: DOCUMENTO OFICIAL PDF EMBEBIDO ================= -->
+          <div id="curriculumPdfSubView" class="space-y-6">
+
+          <!-- Barra de Ficha Técnica del Programa -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-xs">
+              <span class="text-[10px] uppercase font-bold text-slate-400 block">Duración Total</span>
+              <span class="text-xs sm:text-sm font-bold text-slate-800">3.984 Horas</span>
+            </div>
+            <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-xs">
+              <span class="text-[10px] uppercase font-bold text-slate-400 block">Nivel Formativo</span>
+              <span class="text-xs sm:text-sm font-bold text-sena-dark">Tecnólogo</span>
+            </div>
+            <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-xs">
+              <span class="text-[10px] uppercase font-bold text-slate-400 block">Etapa Lectiva</span>
+              <span class="text-xs sm:text-sm font-bold text-slate-800">3.120 Horas</span>
+            </div>
+            <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-xs">
+              <span class="text-[10px] uppercase font-bold text-slate-400 block">Etapa Productiva</span>
+              <span class="text-xs sm:text-sm font-bold text-emerald-700">864 Horas</span>
+            </div>
+          </div>
+
+          <!-- ================= TARJETA PRINCIPAL DEL VISOR INTERACTIVO Y RESPONSIVO ================= -->
+          <div id="pdfViewerMainCard" class="bg-white rounded-2xl p-2.5 sm:p-5 shadow-sm border border-slate-200 transition-all">
+            
+            <!-- BARRA DE HERRAMIENTAS / TOOLBAR MULTIFUNCIÓN -->
+            <div class="p-2 sm:p-3 bg-slate-50 border border-slate-200 rounded-xl mb-3 flex flex-wrap items-center justify-between gap-2.5">
+              
+              <!-- Selector de Modos de Lectura -->
+              <div class="flex items-center bg-slate-200/80 p-0.5 rounded-lg text-xs font-semibold">
+                <button type="button" onclick="setPdfViewMode('canvas')" id="btnModeCanvas" class="px-2.5 sm:px-3 py-1.5 rounded-md transition flex items-center gap-1.5 bg-sena-green text-white shadow-xs" title="Modo adaptativo optimizado para lectura móvil">
+                  <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+                  <span class="text-[11px] sm:text-xs">Adaptativo</span>
+                </button>
+                <button type="button" onclick="setPdfViewMode('iframe')" id="btnModeIframe" class="px-2.5 sm:px-3 py-1.5 rounded-md transition flex items-center gap-1.5 bg-white text-slate-700 hover:text-slate-900 shadow-xs" title="Modo marco con desplazamiento horizontal y vertical continuo">
+                  <i data-lucide="file" class="w-3.5 h-3.5"></i>
+                  <span class="text-[11px] sm:text-xs">Marco</span>
+                </button>
+              </div>
+
+              <!-- Paginación de Documento -->
+              <div id="pdfPaginationControls" class="flex items-center space-x-1 sm:space-x-1.5">
+                <button type="button" onclick="pdfPrevPage()" id="pdfPrevBtn" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center text-slate-700 transition shadow-xs" title="Página anterior">
+                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                
+                <div class="flex items-center text-xs font-semibold text-slate-700 px-1 sm:px-2 gap-1">
+                  <span class="hidden sm:inline text-slate-500">Pág.</span>
+                  <input type="number" id="pdfPageInput" onchange="pdfJumpToPage(this)" min="1" value="1" class="w-10 sm:w-12 text-center py-0.5 sm:py-1 px-1 rounded-md border border-slate-300 font-bold bg-white text-xs">
+                  <span class="text-slate-400">/</span>
+                  <span id="pdfTotalPages" class="text-slate-600 font-bold">69</span>
+                </div>
+
+                <button type="button" onclick="pdfNextPage()" id="pdfNextBtn" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center text-slate-700 transition shadow-xs" title="Página siguiente">
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <!-- Controles de Zoom y Pantalla Completa -->
+              <div class="flex items-center gap-1 sm:gap-1.5">
+                <!-- Zoom Out -->
+                <button type="button" onclick="pdfZoomOut()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-xs" title="Reducir zoom">
+                  <i data-lucide="zoom-out" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                </button>
+
+                <!-- Nivel de Zoom -->
+                <span id="pdfZoomLevel" class="text-[11px] sm:text-xs font-bold text-slate-600 px-1 min-w-[38px] text-center">100%</span>
+
+                <!-- Zoom In -->
+                <button type="button" onclick="pdfZoomIn()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-xs" title="Aumentar zoom">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                </button>
+
+                <!-- Ajustar al Ancho de Pantalla (Fit Width) -->
+                <button type="button" onclick="pdfToggleFitWidth()" id="pdfFitWidthBtn" class="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border border-slate-300 bg-sena-green text-white text-[11px] sm:text-xs font-semibold flex items-center gap-1 transition shadow-xs" title="Ajustar documento al ancho disponible">
+                  <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                  <span class="hidden md:inline">Ajustar Ancho</span>
+                </button>
+
+                <!-- Pantalla Completa -->
+                <button type="button" onclick="togglePdfFullscreen()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-xs" title="Pantalla completa">
+                  <i data-lucide="expand" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- VISTA 1: MODO ADAPTATIVO (HTML5 CANVAS CON PDF.JS Y SCROLL BIDIRECCIONAL COMPLETO) -->
+            <div id="pdfCanvasView" class="relative">
+              
+              <!-- Indicador de Carga -->
+              <div id="pdfLoadingIndicator" class="hidden absolute inset-0 bg-white/80 backdrop-blur-xs flex flex-col items-center justify-center z-20 rounded-xl">
+                <div class="w-10 h-10 border-4 border-slate-200 border-t-sena-green rounded-full animate-spin mb-3"></div>
+                <p class="text-xs font-bold text-slate-700">Cargando Diseño Curricular ADSO...</p>
+              </div>
+
+              <!-- Contenedor con Desplazamiento Fluido Horizontal y Vertical -->
+              <div id="pdfScrollContainer" class="w-full overflow-x-auto overflow-y-auto custom-scroll max-h-[72vh] md:max-h-[80vh] bg-slate-200/80 p-2 sm:p-5 rounded-xl flex flex-col items-center justify-start touch-pan-x touch-pan-y shadow-inner relative border border-slate-300/80">
+                <canvas id="pdfCanvas" class="shadow-2xl rounded-md bg-white max-w-none transition-all border border-slate-300"></canvas>
+                
+                <!-- Guía de navegación para usuarios móviles -->
+                <div class="mt-3 text-[11px] text-slate-500 bg-white/90 backdrop-blur-xs px-3 py-1 rounded-full shadow-xs flex items-center gap-1.5 select-none">
+                  <i data-lucide="hand" class="w-3.5 h-3.5 text-sena-green"></i>
+                  <span>Desliza a los lados para cambiar de página • Scroll libre horizontal y vertical</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- VISTA 2: MODO MARCO (IFRAME CON SCROLL BIDIRECCIONAL Y ANCHO MÍNIMO SEGURO) -->
+            <div id="pdfIframeView" class="hidden">
+              <div class="w-full overflow-x-auto overflow-y-auto custom-scroll rounded-xl border border-slate-200 bg-slate-100 shadow-inner" style="-webkit-overflow-scrolling: touch;">
+                <div class="min-w-[700px] md:min-w-full h-[75vh] md:h-[82vh]">
+                  <iframe 
+                    src="docs/DisenoCurricularADSO.pdf#toolbar=1&navpanes=0&scrollbar=1" 
+                    type="application/pdf"
+                    class="w-full h-full border-0" 
+                    title="Visor en marco del Diseño Curricular Oficial ADSO SENA">
+                  </iframe>
+                </div>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-2 text-center">
+                En este modo puedes deslizar horizontalmente para ver columnas a la derecha en pantallas estrechas.
+              </p>
+            </div>
+
+          </div>
+          <!-- FIN DE SUB-VISTA 1: DOCUMENTO OFICIAL PDF EMBEBIDO -->
+          </div>
+
+          <!-- ================= SUB-VISTA 2: COMPETENCIAS, RAPS Y HORAS (INTERACTIVO) ================= -->
+          <div id="curriculumInteractiveSubView" class="hidden space-y-6">
+            
+            <!-- Panel Superior de Métricas Curriculares (KPIs) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              <!-- KPI 1: Horas Totales -->
+              <div class="bg-gradient-to-br from-white to-emerald-50/70 rounded-2xl p-4 sm:p-5 border border-emerald-200/90 shadow-xs hover:shadow-md transition">
+                <div class="flex items-center justify-between text-emerald-700 mb-2">
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Horas Totales</span>
+                  <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-sena-dark shadow-xs">
+                    <i data-lucide="clock" class="w-4 h-4"></i>
+                  </div>
+                </div>
+                <div class="text-2xl sm:text-3xl font-extrabold text-slate-800">3.984 <span class="text-xs font-semibold text-slate-500">h</span></div>
+                <div class="text-[11px] text-slate-500 mt-1 flex items-center justify-between">
+                  <span>27 Meses Formación</span>
+                  <span class="font-bold text-sena-dark">100%</span>
+                </div>
+              </div>
+
+              <!-- KPI 2: Técnicas Específicas -->
+              <div class="bg-gradient-to-br from-white to-blue-50/70 rounded-2xl p-4 sm:p-5 border border-blue-200/90 shadow-xs hover:shadow-md transition">
+                <div class="flex items-center justify-between text-blue-700 mb-2">
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Técnicas ADSO</span>
+                  <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-700 shadow-xs">
+                    <i data-lucide="code-2" class="w-4 h-4"></i>
+                  </div>
+                </div>
+                <div class="text-2xl sm:text-3xl font-extrabold text-blue-900">2.208 <span class="text-xs font-semibold text-slate-500">h</span></div>
+                <div class="text-[11px] text-slate-500 mt-1 flex items-center justify-between">
+                  <span>7 Competencias • 28 RAPs</span>
+                  <span class="font-bold text-blue-600">55.4%</span>
+                </div>
+              </div>
+
+              <!-- KPI 3: Clave & Transversales -->
+              <div class="bg-gradient-to-br from-white to-purple-50/70 rounded-2xl p-4 sm:p-5 border border-purple-200/90 shadow-xs hover:shadow-md transition">
+                <div class="flex items-center justify-between text-purple-700 mb-2">
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Clave & Transversal</span>
+                  <div class="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-purple-700 shadow-xs">
+                    <i data-lucide="compass" class="w-4 h-4"></i>
+                  </div>
+                </div>
+                <div class="text-2xl sm:text-3xl font-extrabold text-purple-900">960 <span class="text-xs font-semibold text-slate-500">h</span></div>
+                <div class="text-[11px] text-slate-500 mt-1 flex items-center justify-between">
+                  <span>11 Clave (912h) + Inducción (48h)</span>
+                  <span class="font-bold text-purple-600">24.1%</span>
+                </div>
+              </div>
+
+              <!-- KPI 4: Etapa Productiva -->
+              <div class="bg-gradient-to-br from-white to-teal-50/70 rounded-2xl p-4 sm:p-5 border border-teal-200/90 shadow-xs hover:shadow-md transition">
+                <div class="flex items-center justify-between text-teal-700 mb-2">
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Etapa Productiva</span>
+                  <div class="w-8 h-8 rounded-lg bg-teal-100 flex items-center justify-center text-teal-700 shadow-xs">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                  </div>
+                </div>
+                <div class="text-2xl sm:text-3xl font-extrabold text-teal-900">864 <span class="text-xs font-semibold text-slate-500">h</span></div>
+                <div class="text-[11px] text-slate-500 mt-1 flex items-center justify-between">
+                  <span>Sector Productivo Real</span>
+                  <span class="font-bold text-teal-600">21.7%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Barra de Filtros, Búsqueda en Tiempo Real y Herramientas -->
+            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-xs space-y-3.5">
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <!-- Buscador en tiempo real -->
+                <div class="relative flex-1">
+                  <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                  <input 
+                    type="text" 
+                    id="competenciaSearchInput" 
+                    oninput="filterCompetencias()" 
+                    placeholder="Buscar por código (ej. 220501096), nombre, fase o resultado de aprendizaje..." 
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sena-green/30 focus:border-sena-green bg-slate-50/60 focus:bg-white transition"
+                  >
+                </div>
+
+                <!-- Botones de expandir / colapsar todos los RAPs -->
+                <div class="flex items-center gap-2 flex-shrink-0">
+                  <button type="button" onclick="toggleAllRaps(true)" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-xs" title="Desplegar los RAPs de todas las competencias">
+                    <i data-lucide="chevrons-down" class="w-3.5 h-3.5 text-sena-dark"></i>
+                    <span>Expandir RAPs</span>
+                  </button>
+                  <button type="button" onclick="toggleAllRaps(false)" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-xs" title="Ocultar los RAPs de todas las competencias">
+                    <i data-lucide="chevrons-up" class="w-3.5 h-3.5 text-slate-500"></i>
+                    <span>Colapsar RAPs</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Botones Pill de Categoría -->
+              <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto custom-scroll pb-1 pt-1 text-xs font-medium">
+                <span class="text-[11px] font-bold text-slate-400 uppercase mr-1 whitespace-nowrap">Filtrar:</span>
+                <button type="button" onclick="setCompetenciaFilter('todas', this)" class="comp-filter-btn px-3 py-1.5 rounded-xl bg-sena-green text-white font-bold transition whitespace-nowrap shadow-xs">
+                  Todas (20)
+                </button>
+                <button type="button" onclick="setCompetenciaFilter('Tecnica', this)" class="comp-filter-btn px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition whitespace-nowrap">
+                  Técnicas Específicas (7)
+                </button>
+                <button type="button" onclick="setCompetenciaFilter('Transversal', this)" class="comp-filter-btn px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition whitespace-nowrap">
+                  Clave & Transversales (11)
+                </button>
+                <button type="button" onclick="setCompetenciaFilter('Institucional', this)" class="comp-filter-btn px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition whitespace-nowrap">
+                  Institucional SENA (1)
+                </button>
+                <button type="button" onclick="setCompetenciaFilter('Etapa Productiva', this)" class="comp-filter-btn px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition whitespace-nowrap">
+                  Etapa Productiva (1)
+                </button>
+              </div>
+
+              <!-- Contador dinámico de resultados -->
+              <div id="competenciasCounter" class="text-xs text-slate-500 font-medium pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+                <span>Mostrando 20 de 20 competencias • 75 Resultados de Aprendizaje • 3.984 Horas</span>
+                <span class="text-[11px] text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">Diseño Curricular Código 228118</span>
+              </div>
+            </div>
+
+            <!-- Grid Dinámico de Tarjetas de Competencias -->
+            <div id="competenciasCardsContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+              <!-- Renderizado interactivo dinámico vía JavaScript -->
+            </div>
+
+          </div>
+          <!-- FIN DE SUB-VISTA 2: COMPETENCIAS, RAPS Y HORAS -->
+
+        </div>

@@ -14,5 +14,6 @@ Este archivo orienta al modelo **Claude** y a la CLI de **Claude Code** en este 
 ## 📋 Reglas Fundamentales de Operación
 1. **Consulta de Contexto Institucional:** Lee obligatoriamente [`.ai/CONTEXTO_ADSO.md`](.ai/CONTEXTO_ADSO.md).
 2. **Estándares de Código y Estilos:** Sigue estrictamente [`.ai/REGLAS_CODIGO.md`](.ai/REGLAS_CODIGO.md) (HTML5 semántico, Tailwind CSS, JavaScript Vanilla modular, WCAG 2.1 AA).
-3. **Mapeo de Guías de Aprendizaje:** Cuando se pregunten por actividades o evidencias, consulta [`.ai/INDICE_MATERIALES.md`](.ai/INDICE_MATERIALES.md) y busca en [`material-formativo/guias-aprendizaje/`](material-formativo/guias-aprendizaje/) según la fase (*Fase 1: Análisis, Fase 2: Planeación, Fase 3: Ejecución, Fase 4: Evaluación*).
-4. **Pedagogía SENA:** Explica los conceptos antes de entregar bloques de código complejos. Fomenta el entendimiento de la algoritmia y la arquitectura de software.
+3. **Arquitectura Modular de Componentes:** Todas las vistas del explorador deben gestionarse en `components/` (`layout/`, `views/`, `modals/`). No acumular bloques masivos de código en `explorar.html`.
+4. **Mapeo de Guías de Aprendizaje:** Cuando se pregunten por actividades o evidencias, consulta [`.ai/INDICE_MATERIALES.md`](.ai/INDICE_MATERIALES.md) y busca en [`material-formativo/guias-aprendizaje/`](material-formativo/guias-aprendizaje/) según la fase (*Fase 1: Análisis, Fase 2: Planeación, Fase 3: Ejecución, Fase 4: Evaluación*).
+5. **Pedagogía SENA:** Explica los conceptos antes de entregar bloques de código complejos. Fomenta el entendimiento de la algoritmia y la arquitectura de software.

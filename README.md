@@ -73,7 +73,11 @@ Para optimizar la experiencia en computadores, tabletas y celulares, el visor de
 cadphAdso/
 ├── 404.html                     # Página personalizada de error 404 para GitHub Pages
 ├── index.html                   # Portal principal de bienvenida / acceso institucional
-├── explorar.html                # Dashboard, visor curricular y de guías formativas ADSO
+├── explorar.html                # Shell modular y ligero del explorador formativo (< 100 líneas)
+├── components/                  # 🧩 Componentes HTML desacoplados e independientes
+│   ├── layout/                  # Estructura y navegación (sidebar, header, footer, accessibility)
+│   ├── views/                   # Vistas modulares (tab-diseno, tab-guias, tab-fases, tab-ficha)
+│   └── modals/                  # Modales interactivos (modal-curriculum, modal-session, modal-confirm, modal-assistant)
 ├── AGENTS.md                    # Directivas universales para agentes de Inteligencia Artificial
 ├── GEMINI.md                    # Contexto para Google Gemini / Antigravity IDE
 ├── CLAUDE.md                    # Instrucciones para Anthropic Claude / Claude Code
@@ -103,11 +107,12 @@ cadphAdso/
 │   │   ├── competencias_adso.json # Base de datos JSON con las 20 competencias, 75 RAPs y 3.984h
 │   │   └── guias_fase1.json     # Base de datos JSON de guías, sesiones formativas y anexos de Fase 1
 │   ├── js/
+│   │   ├── component-loader.js  # Cargador asíncrono y gestor de ciclo de vida de componentes modulares
 │   │   ├── accessibility.js     # Módulo integral de accesibilidad (zoom, contraste, teclado)
 │   │   ├── competencias-data.js # Exportación estructurada de datos curriculares para el explorador
 │   │   ├── guias-fase1-data.js  # Exportación de datos de guías y sesiones formativas de Fase 1
 │   │   ├── guias-viewer.js      # Módulo interactivo del visor de guías, sesiones y descargas
-│   │   ├── dashboard.js         # Lógica interactiva del explorador, filtros, acordeones y modales
+│   │   ├── dashboard.js         # Lógica interactiva del explorador, filtros, pestañas y modales
 │   │   └── pdf-viewer.js        # Motor interactivo de renderizado PDF con PDF.js
 │   └── images/
 │       └── sena_logo.svg        # Logotipo vectorial oficial del SENA

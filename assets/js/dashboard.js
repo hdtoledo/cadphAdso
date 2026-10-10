@@ -492,7 +492,7 @@ window.addEventListener('keydown', (e) => {
 /* ==========================================================================
    INICIALIZACIÓN DEL PORTAL
    ========================================================================== */
-document.addEventListener('DOMContentLoaded', () => {
+function initPortal() {
   const sidebar = document.getElementById('mainSidebar');
   if (sidebar && window.innerWidth < 1024) {
     sidebar.classList.add('-translate-x-full');
@@ -513,7 +513,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Pre-cargar datos y renderizar tarjetas de competencias
-  renderCompetenciasCards();
+  if (typeof renderCompetenciasCards === 'function') {
+    renderCompetenciasCards();
+  }
 
   if (window.lucide) lucide.createIcons();
+}
+
+window.initPortal = initPortal;
+
+// Inicializar cuando los componentes modulares terminen de cargarse
+document.addEventListener('adso:componentsLoaded', initPortal);
+
+// Si no hay cargador de componentes o ya están en el DOM, inicializar en DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.querySelectorAll('[data-component]').length === 0) {
+    initPortal();
+  }
 });
+

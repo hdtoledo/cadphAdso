@@ -1,0 +1,30 @@
+<!-- ================= MODAL INTERACTIVO DE CONFIRMACIÓN ================= -->
+<div id="genericModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+  <!-- Backdrop oscuro con desenfoque de fondo -->
+  <div onclick="closeModal()" class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"></div>
+  
+  <!-- Contenido del modal estilo SENA -->
+  <div class="relative bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-slate-100 flex flex-col items-center text-center transform transition-all">
+    
+    <!-- Botón cerrar (X) en la esquina superior derecha -->
+    <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition">
+      <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Ícono verde de verificación checkmark -->
+    <div class="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-sena-green mb-4">
+      <i data-lucide="check" class="w-6 h-6 stroke-[3]"></i>
+    </div>
+
+    <h3 id="modalTitle" class="text-xl font-bold text-slate-800 mb-2">Acción completada</h3>
+    
+    <p id="modalBody" class="text-xs md:text-sm text-slate-500 mb-6 leading-relaxed">
+      El módulo de la formación ADSO ha sido seleccionado correctamente.
+    </p>
+
+    <!-- Botón verde "Aceptar" -->
+    <button onclick="closeModal()" class="w-32 bg-sena-green hover:bg-sena-hover text-white font-semibold py-2.5 px-6 rounded-full shadow transition text-sm">
+      Aceptar
+    </button>
+  </div>
+</div>

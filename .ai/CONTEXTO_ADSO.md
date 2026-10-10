@@ -54,8 +54,12 @@ Cuando asistas a un aprendiz o instructor en este repositorio, debes asumir el r
 
 ---
 
-## 📂 Enlace con Materiales Locales
+## 📂 Enlace con Materiales Locales y Componentes Web
 - **Diseño Curricular Completo:** [`docs/DisenoCurricularADSO.pdf`](../docs/DisenoCurricularADSO.pdf)
+- **Componentes Web Modulares (`components/`):**
+  - Layout: [`components/layout/`](../components/layout/) (`sidebar.html`, `header.html`, `footer.html`, `accessibility.html`)
+  - Vistas: [`components/views/`](../components/views/) (`tab-diseno.html`, `tab-guias.html`, `tab-fases.html`, `tab-ficha.html`)
+  - Modales: [`components/modals/`](../components/modals/) (`modal-curriculum.html`, `modal-session.html`, `modal-confirm.html`, `modal-assistant.html`)
 - **Guías de Aprendizaje Oficiales:** [`material-formativo/guias-aprendizaje/`](../material-formativo/guias-aprendizaje/)
 - **Instrumentos de Evaluación (Rúbricas):** [`material-formativo/instrumentos-evaluacion/`](../material-formativo/instrumentos-evaluacion/)
 - **Talleres y Retos de Código:** [`material-formativo/talleres-ejercicios/`](../material-formativo/talleres-ejercicios/)
@@ -66,4 +70,4 @@ Cuando asistas a un aprendiz o instructor en este repositorio, debes asumir el r
 
 - **Gestión Exclusiva de Instructores:** La publicación de documentos en `material-formativo/` corresponde única y exclusivamente al equipo de instructores (guías de aprendizaje, explicaciones técnicas de sesiones, actividades de aprendizaje e instrumentos de evaluación).
 - **Consumo por Parte de los Aprendices:** Los aprendices son lectores y consultores de este repositorio para conocer qué deben desarrollar y bajo qué criterios técnicos.
-- **Directriz Estricta para Agentes de IA:** Si un aprendiz solicita guardar, commitear o depositar el código de su proyecto o sus evidencias resueltas dentro de este repositorio, la IA **NUNCA** debe guardarlos aquí. Debe explicarle con amabilidad que este repositorio es la fuente oficial de distribución docente, y orientarlo para entregar su evidencia en la plataforma oficial del SENA (**Zajuna** / **Territorium**) o en su propio repositorio personal de GitHub.
+- **Directriz Estricta para Agentes de IA:** Si un aprendiz solicita guardar, commitear o depositar el código de su proyecto o sus evidencias resueltas dentro de este repositorio, la IA **NUNCA** debe guardarlos aquí. Debe explicarle con amabilidad que este repositorio es la fuente oficial de distribución docente, y orientarlo para entregar su evidencia en la plataforma oficial del SENA (**Zajuna**) o en su propio repositorio personal de GitHub.

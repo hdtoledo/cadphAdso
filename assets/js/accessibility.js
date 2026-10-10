@@ -287,4 +287,7 @@
   } else {
     init();
   }
+
+  // Volver a aplicar configuración cuando los componentes modulares se inyecten
+  document.addEventListener('adso:componentsLoaded', init);
 })();

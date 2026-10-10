@@ -1,0 +1,74 @@
+  <div id="sessionDetailModal" role="dialog" aria-modal="true" aria-labelledby="sessionModalTitle" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5">
+    <div onclick="closeSessionModal()" class="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer" title="Cerrar ficha de sesión"></div>
+    
+    <div class="relative bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] shadow-2xl border border-slate-200 flex flex-col overflow-hidden transform transition-all z-10 animate-fade-in">
+      
+      <!-- Encabezado del Modal -->
+      <div class="px-6 py-5 bg-gradient-to-r from-slate-900 to-[#0c384a] text-white flex items-start justify-between gap-4 flex-shrink-0">
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="sessionModalNumber" class="px-2.5 py-0.5 rounded-full bg-sena-green text-white text-[11px] font-bold">Sesión 01</span>
+            <span id="sessionModalAreaBadge" class="px-2.5 py-0.5 rounded-full bg-white/10 text-cyan-200 text-[11px] font-medium">Técnica</span>
+            <span id="sessionModalHours" class="text-[11px] text-slate-300">32 Horas</span>
+          </div>
+          <h3 id="sessionModalTitle" class="text-base sm:text-lg font-bold text-white mt-1.5 leading-snug">
+            Título de la Sesión
+          </h3>
+          <p id="sessionModalSubtitle" class="text-xs text-slate-300 mt-1 line-clamp-2">
+            Subtítulo pedagógico
+          </p>
+        </div>
+
+        <button type="button" onclick="closeSessionModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition flex-shrink-0" title="Cerrar modal">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Cuerpo Scrolleable -->
+      <div class="p-6 overflow-y-auto custom-scroll space-y-5 text-xs text-slate-700">
+        
+        <!-- Resultados de Aprendizaje -->
+        <div>
+          <h4 class="font-bold text-slate-900 uppercase tracking-wider text-[11px] mb-2 flex items-center gap-1.5">
+            <i data-lucide="check-circle" class="w-4 h-4 text-sena-green"></i>
+            <span>Resultados de Aprendizaje (RAPs)</span>
+          </h4>
+          <div id="sessionModalRaps" class="space-y-2"></div>
+        </div>
+
+        <!-- Evidencias Requeridas -->
+        <div>
+          <h4 class="font-bold text-slate-900 uppercase tracking-wider text-[11px] mb-2 flex items-center gap-1.5">
+            <i data-lucide="file-check-2" class="w-4 h-4 text-blue-600"></i>
+            <span>Evidencias y Productos a Entregar por los Aprendices</span>
+          </h4>
+          <ul id="sessionModalEvidencias" class="list-disc list-inside space-y-1.5 bg-slate-50 p-3.5 rounded-xl border border-slate-200"></ul>
+        </div>
+
+        <!-- Documentos y Materiales Descargables -->
+        <div>
+          <h4 class="font-bold text-slate-900 uppercase tracking-wider text-[11px] mb-2 flex items-center gap-1.5">
+            <i data-lucide="download" class="w-4 h-4 text-purple-600"></i>
+            <span>Materiales de la Sesión para Descargar</span>
+          </h4>
+          <div id="sessionModalDownloads" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
+        </div>
+
+        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-900 text-[11px] flex items-start gap-2">
+          <i data-lucide="info" class="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+          <span>
+            <strong>Gobernanza del Repositorio:</strong> Los aprendices consultan y descargan los lineamientos aquí, pero entregan sus evidencias desarrolladas exclusivamente en la plataforma Zajuna o en sus repositorios individuales de GitHub.
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Pie del Modal -->
+      <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex justify-end">
+        <button type="button" onclick="closeSessionModal()" class="px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold rounded-xl transition">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>

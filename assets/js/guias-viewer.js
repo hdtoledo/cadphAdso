@@ -958,7 +958,12 @@
 
   window.initGuiasViewer = initGuiasViewer;
 
-  // Auto-inicializar cuando el DOM esté listo
-  document.addEventListener('DOMContentLoaded', initGuiasViewer);
+  // Auto-inicializar cuando el DOM esté listo o cuando los componentes modulares terminen de cargarse
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelectorAll('[data-component]').length === 0) {
+      initGuiasViewer();
+    }
+  });
+  document.addEventListener('adso:componentsLoaded', initGuiasViewer);
 
 })();

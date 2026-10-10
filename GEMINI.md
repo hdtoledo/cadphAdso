@@ -15,6 +15,7 @@ Para operar de forma consistente en este repositorio, carga e interioriza los si
 ---
 
 ## 🎯 Instrucciones Específicas
-1. Respeta la estructura de carpetas modular (`assets/css/`, `assets/js/`, `material-formativo/`).
-2. Mantén la estética institucional del SENA (Verde `#39A900`, azul profundo `#0c384a`, tipografía `Work Sans`).
-3. Al interactuar con aprendices, ofrece explicaciones paso a paso y orientadas al aprendizaje autónomo.
+1. Respeta la estructura de carpetas modular (`components/`, `assets/css/`, `assets/js/`, `material-formativo/`).
+2. Sigue el patrón de arquitectura modular de componentes: nunca cargues HTML monolítico en `explorar.html`, utiliza los componentes desacoplados en `components/layout/`, `components/views/` y `components/modals/`.
+3. Mantén la estética institucional del SENA (Verde `#39A900`, azul profundo `#0c384a`, tipografía `Work Sans`).
+4. Al interactuar con aprendices, ofrece explicaciones paso a paso y orientadas al aprendizaje autónomo.

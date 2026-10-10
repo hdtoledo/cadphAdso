@@ -17,7 +17,18 @@ Este documento define las directrices que cualquier modelo de IA debe seguir al 
   - Manejo seguro de eventos con `addEventListener` y funciones nombradas claras.
   - No usar librerías externas superfluas si una solución nativa es limpia y eficiente.
 
-### 2. Backend & Persistencia (Fase 3: Ejecución)
+### 2. Arquitectura Modular de Componentes (`components/`)
+- **Desacoplamiento Estricto:** Evitar archivos HTML monolíticos. Las páginas principales (como `explorar.html`) deben actuar como *shells declarativos ligeros* (< 120 líneas).
+- **Estructura de Carpetas de Componentes:**
+  - `components/layout/` → Componentes de navegación y estructura (`sidebar.html`, `header.html`, `footer.html`, `accessibility.html`).
+  - `components/views/` → Vistas de pestañas y módulos (`tab-diseno.html`, `tab-guias.html`, `tab-fases.html`, `tab-ficha.html`).
+  - `components/modals/` → Diálogos modulares y ventanas emergentes (`modal-curriculum.html`, `modal-session.html`, `modal-confirm.html`, `modal-assistant.html`).
+- **Cargador Reactivo (`assets/js/component-loader.js`):**
+  - Los componentes se referencian mediante placeholders: `<div data-component="components/layout/sidebar.html"></div>`.
+  - El cargador inyecta los fragmentos asíncronamente y emite el evento global `adso:componentsLoaded`.
+  - Los scripts de inicialización (`dashboard.js`, `guias-viewer.js`, `accessibility.js`) deben escuchar `adso:componentsLoaded` para enlazar interactividad y ejecutar `lucide.createIcons()`.
+
+### 3. Backend & Persistencia (Fase 3: Ejecución)
 - **Lenguajes Oficiales:** JavaScript / TypeScript (Node.js/Express), Python (FastAPI/Flask/Django) o Java (Spring Boot).
 - **APIs:** Principios RESTful, códigos de estado HTTP semánticos (200, 201, 400, 401, 403, 404, 500), respuestas en JSON con formato estructurado `{ success, data, error }`.
 - **Bases de Datos:**

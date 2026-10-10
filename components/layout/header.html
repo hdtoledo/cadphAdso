@@ -1,0 +1,37 @@
+<!-- ================= BARRA SUPERIOR DE NAVEGACIÓN Y ACCIONES ================= -->
+<header class="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 bg-white border-b border-slate-200 flex items-center justify-between gap-3 sm:gap-4 z-20 flex-shrink-0 shadow-xs">
+  
+  <!-- Izquierda: Menú móvil + Breadcrumbs -->
+  <div class="flex items-center space-x-2 sm:space-x-3 text-xs md:text-sm text-slate-500 min-w-0">
+    <button onclick="toggleMobileSidebar()" class="lg:hidden p-1.5 -ml-1 text-slate-700 hover:text-sena-green hover:bg-slate-100 rounded-lg transition flex-shrink-0" title="Abrir menú" aria-label="Abrir menú">
+      <i data-lucide="menu" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+    </button>
+
+    <!-- Breadcrumbs con Lucide Icons -->
+    <div class="flex items-center space-x-1.5 sm:space-x-2 truncate">
+      <a href="#" onclick="switchTab('tab-diseno')" class="hover:text-sena-green flex items-center gap-1 flex-shrink-0 text-slate-600 font-medium">
+        <i data-lucide="file-text" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+        <span class="hidden sm:inline">Diseño Curricular</span>
+      </a>
+      <span class="text-slate-300">&gt;</span>
+      <span id="currentBreadcrumb" class="font-semibold text-sena-dark truncate text-xs sm:text-sm">Diseño Curricular Oficial ADSO (Documento PDF & Competencias)</span>
+    </div>
+  </div>
+
+  <!-- Derecha: Ayuda + Botón Salir a Bienvenida -->
+  <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+
+    <!-- Botón de ayuda (?) -->
+    <button onclick="showHelpModal()" class="w-7 h-7 rounded-full border border-slate-300 hover:border-sena-dark text-slate-600 hover:text-sena-dark transition flex items-center justify-center text-xs font-bold flex-shrink-0 bg-white hover:bg-slate-50 shadow-xs" title="Información del repositorio">
+      ?
+    </button>
+
+    <div class="h-5 w-px bg-slate-200 hidden sm:block"></div>
+
+    <!-- Botón Salir a Bienvenida -->
+    <a href="index.html" class="bg-[#082a38] hover:bg-[#0c384a] text-white px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap" title="Regresar a la pantalla de bienvenida">
+      <i data-lucide="arrow-left" class="w-3.5 h-3.5 flex-shrink-0"></i>
+      <span class="hidden sm:inline">Salir</span>
+    </a>
+  </div>
+</header>

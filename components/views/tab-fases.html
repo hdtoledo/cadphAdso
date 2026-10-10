@@ -1,0 +1,155 @@
+        <div id="tab-fases" class="tab-content hidden space-y-6">
+          <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+            <div class="border-b border-slate-100 pb-5 mb-6">
+              <h2 class="text-2xl font-bold text-slate-800">Fases del Proyecto Formativo ADSO</h2>
+              <p class="text-xs text-slate-500 mt-1">
+                Estructura metodológica del programa en el Centro Agroempresarial y Desarrollo Pecuario del Huila.
+              </p>
+            </div>
+
+            <!-- Grid de las 4 Fases Metodológicas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Fase 1: Análisis -->
+              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:bg-white flex flex-col justify-between group">
+                <div>
+                  <div class="flex items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-3">
+                      <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">1</span>
+                      <h3 class="text-base font-bold text-slate-800">Fase de Análisis</h3>
+                    </div>
+                    <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                      448h Cargadas
+                    </span>
+                  </div>
+                  <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                    <li>Identificar las necesidades del cliente y del sector productivo de Garzón.</li>
+                    <li>Elaborar el mapa de procesos de la organización.</li>
+                    <li>Definir los requerimientos funcionales y no funcionales (IEEE 830).</li>
+                    <li>Modelar historias de usuario y diagramas de casos de uso UML.</li>
+                  </ul>
+                </div>
+                <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-[11px] text-slate-500">3 Actividades · 14 Sesiones</span>
+                  <button type="button" onclick="window.selectGuiaPhase('fase-1-analisis'); switchTab('tab-guias');"
+                    class="text-xs bg-sena-green hover:bg-sena-hover text-white font-semibold px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 shadow-xs">
+                    <span>Ver Guías & Sesiones</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Fase 2: Planeación -->
+              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:bg-white flex flex-col justify-between group">
+                <div>
+                  <div class="flex items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-3">
+                      <span class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-xs">2</span>
+                      <h3 class="text-base font-bold text-slate-800">Fase de Planeación</h3>
+                    </div>
+                    <span class="text-[10px] font-bold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200">
+                      576h Planificadas
+                    </span>
+                  </div>
+                  <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                    <li>Diseñar la arquitectura tecnológica de la solución de software.</li>
+                    <li>Construir el modelo relacional de base de datos normalizado.</li>
+                    <li>Diseñar las interfaces de usuario (UI) y la experiencia de usuario (UX).</li>
+                    <li>Planificar el cronograma del proyecto bajo metodología ágil (Scrum).</li>
+                  </ul>
+                </div>
+                <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-[11px] text-slate-500">Modelado MER/MR & Figma</span>
+                  <button type="button" onclick="window.selectGuiaPhase('fase-2-planeacion'); switchTab('tab-guias');"
+                    class="text-xs bg-purple-600 hover:bg-purple-700 text-white font-semibold px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 shadow-xs">
+                    <span>Ver Planeación</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Fase 3: Ejecución -->
+              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:bg-white flex flex-col justify-between group">
+                <div>
+                  <div class="flex items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-3">
+                      <span class="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold text-xs">3</span>
+                      <h3 class="text-base font-bold text-slate-800">Fase de Ejecución</h3>
+                    </div>
+                    <span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+                      672h Planificadas
+                    </span>
+                  </div>
+                  <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                    <li>Codificar los módulos del sistema según los estándares de codificación.</li>
+                    <li>Integrar la persistencia de datos mediante ORM o consultas optimizadas.</li>
+                    <li>Implementar seguridad, control de acceso y validación de entradas.</li>
+                    <li>Gestionar el código colaborativo en GitHub mediante ramas y pull requests.</li>
+                  </ul>
+                </div>
+                <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-[11px] text-slate-500">Full-Stack & APIs RESTful</span>
+                  <button type="button" onclick="window.selectGuiaPhase('fase-3-ejecucion'); switchTab('tab-guias');"
+                    class="text-xs bg-amber-600 hover:bg-amber-700 text-white font-semibold px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 shadow-xs">
+                    <span>Ver Ejecución</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Fase 4: Evaluación -->
+              <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/40 hover:border-sena-green/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:bg-white flex flex-col justify-between group">
+                <div>
+                  <div class="flex items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-3">
+                      <span class="w-8 h-8 rounded-full bg-sena-green text-white flex items-center justify-center font-bold text-xs">4</span>
+                      <h3 class="text-base font-bold text-slate-800">Fase de Evaluación</h3>
+                    </div>
+                    <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">
+                      384h Planificadas
+                    </span>
+                  </div>
+                  <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                    <li>Ejecutar pruebas funcionales, de seguridad y de rendimiento.</li>
+                    <li>Elaborar manuales técnicos de instalación y manuales de usuario.</li>
+                    <li>Desplegar la solución en servidores de producción o GitHub Pages.</li>
+                    <li>Capacitar al usuario final y realizar la entrega formal del software.</li>
+                  </ul>
+                </div>
+                <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-[11px] text-slate-500">QA & Despliegue en Producción</span>
+                  <button type="button" onclick="window.selectGuiaPhase('fase-4-evaluacion'); switchTab('tab-guias');"
+                    class="text-xs bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 shadow-xs">
+                    <span>Ver Evaluación</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Banner de Navegación Directa al Módulo de Guías -->
+            <div class="mt-8 pt-6 border-t border-slate-200">
+              <div class="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-[#0c384a] via-[#104b5c] to-[#155a6c] text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-5 shadow-lg border border-white/10">
+                <div class="flex items-start space-x-3.5">
+                  <div class="w-12 h-12 rounded-2xl bg-sena-green text-white flex items-center justify-center flex-shrink-0 shadow-md">
+                    <i data-lucide="folder-git-2" class="w-6 h-6"></i>
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-cyan-200 uppercase tracking-wider">Módulo de Aprendizaje Dedicado</span>
+                    <h3 class="text-base sm:text-lg font-bold text-white mt-0.5">Catálogo Oficial de Guías de Aprendizaje</h3>
+                    <p class="text-xs text-slate-200 mt-1 max-w-xl">
+                      Explora de forma interactiva las actividades, sesiones formativas técnicas y matemáticas, rúbricas e instrumentos de evaluación desde la Guía 1 en adelante.
+                    </p>
+                  </div>
+                </div>
+                <button type="button" onclick="switchTab('tab-guias')"
+                  class="px-5 py-2.5 bg-sena-green hover:bg-sena-hover text-white text-xs sm:text-sm font-bold rounded-xl shadow transition flex items-center gap-2 flex-shrink-0 hover:scale-105">
+                  <i data-lucide="folder-open" class="w-4 h-4"></i>
+                  <span>Explorar Guías de Aprendizaje</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>

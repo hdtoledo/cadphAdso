@@ -1,0 +1,186 @@
+  <div id="curriculumSummaryModal" role="dialog" aria-modal="true" aria-labelledby="curriculumSummaryTitle" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5">
+    <div onclick="closeCurriculumSummaryModal()" class="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer" title="Cerrar resumen curricular"></div>
+    <div class="relative bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden my-auto animate-fadeIn z-10">
+      
+      <!-- Cabecera del Modal con Estética SENA -->
+      <div class="px-5 sm:px-7 py-4 sm:py-5 bg-gradient-to-r from-[#0c394b] via-[#104b5c] to-[#155a6c] text-white flex items-center justify-between border-b border-white/10 flex-shrink-0">
+        <div class="flex items-center space-x-3.5 overflow-hidden">
+          <div class="w-10 h-10 rounded-xl bg-sena-green p-2 flex items-center justify-center shadow-md flex-shrink-0">
+            <i data-lucide="book-marked" class="w-5 h-5 text-white"></i>
+          </div>
+          <div class="truncate">
+            <h3 id="curriculumSummaryTitle" class="text-base sm:text-lg font-bold text-white flex items-center gap-2 truncate">
+              Resumen Ejecutivo del Diseño Curricular ADSO
+            </h3>
+            <p class="text-xs text-cyan-200/90 mt-0.5 truncate">
+              Tecnólogo en Análisis y Desarrollo de Software • Código 228118 • SENA CADPH Garzón
+            </p>
+          </div>
+        </div>
+        <button type="button" onclick="closeCurriculumSummaryModal()" class="text-cyan-200 hover:text-white p-2 rounded-xl hover:bg-white/10 transition flex-shrink-0" title="Cerrar modal de resumen" aria-label="Cerrar modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Cuerpo del Modal con Información Analítica Scrolleable -->
+      <div class="p-5 sm:p-6 md:p-8 space-y-6 overflow-y-auto custom-scroll text-slate-700 text-xs sm:text-sm">
+        
+        <!-- Ficha General Resumida del Programa -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div>
+            <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Denominación</span>
+            <span class="font-bold text-slate-800 text-xs sm:text-sm">Tecnólogo en ADSO</span>
+          </div>
+          <div>
+            <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Código del Programa</span>
+            <span class="font-bold text-sena-dark text-xs sm:text-sm">228118 (Vigente 2026)</span>
+          </div>
+          <div>
+            <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Duración Total</span>
+            <span class="font-bold text-slate-800 text-xs sm:text-sm">3.984 Horas (27 Meses)</span>
+          </div>
+          <div>
+            <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Distribución</span>
+            <span class="font-bold text-emerald-700 text-xs sm:text-sm">18m Lectiva + 9m Práctica</span>
+          </div>
+        </div>
+
+        <!-- Tabla Estructurada de Horas por Componente Curricular -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-slate-800 text-sm sm:text-base flex items-center gap-2">
+              <i data-lucide="pie-chart" class="w-4 h-4 text-sena-green"></i>
+              <span>Estructura Curricular y Distribución de Horas</span>
+            </h4>
+            <span class="text-[11px] font-semibold text-slate-500">Total: 3.984 Horas</span>
+          </div>
+          
+          <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-xs">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200 uppercase text-[10px] tracking-wider">
+                <tr>
+                  <th class="py-3 px-4">Componente Curricular</th>
+                  <th class="py-3 px-4 text-center">Competencias</th>
+                  <th class="py-3 px-4 text-center">Resultados (RAPs)</th>
+                  <th class="py-3 px-4 text-right">Horas Asignadas</th>
+                  <th class="py-3 px-4 text-right">% del Total</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-slate-50 font-medium">
+                  <td class="py-3 px-4 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                    <span>Competencias Técnicas Específicas</span>
+                  </td>
+                  <td class="py-3 px-4 text-center font-bold text-slate-800">7</td>
+                  <td class="py-3 px-4 text-center text-slate-600">28</td>
+                  <td class="py-3 px-4 text-right font-bold text-blue-900">2.208 h</td>
+                  <td class="py-3 px-4 text-right font-bold text-blue-700">55.4%</td>
+                </tr>
+                <tr class="hover:bg-slate-50 font-medium">
+                  <td class="py-3 px-4 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                    <span>Competencias Clave y Transversales</span>
+                  </td>
+                  <td class="py-3 px-4 text-center font-bold text-slate-800">11</td>
+                  <td class="py-3 px-4 text-center text-slate-600">45</td>
+                  <td class="py-3 px-4 text-right font-bold text-purple-900">912 h</td>
+                  <td class="py-3 px-4 text-right font-bold text-purple-700">22.9%</td>
+                </tr>
+                <tr class="hover:bg-slate-50 font-medium">
+                  <td class="py-3 px-4 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                    <span>Inducción Institucional SENA</span>
+                  </td>
+                  <td class="py-3 px-4 text-center font-bold text-slate-800">1</td>
+                  <td class="py-3 px-4 text-center text-slate-600">1</td>
+                  <td class="py-3 px-4 text-right font-bold text-emerald-900">48 h</td>
+                  <td class="py-3 px-4 text-right font-bold text-emerald-700">1.2%</td>
+                </tr>
+                <tr class="hover:bg-slate-50 font-medium">
+                  <td class="py-3 px-4 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+                    <span>Etapa Productiva (Práctica Empresarial)</span>
+                  </td>
+                  <td class="py-3 px-4 text-center font-bold text-slate-800">1</td>
+                  <td class="py-3 px-4 text-center text-slate-600">1</td>
+                  <td class="py-3 px-4 text-right font-bold text-teal-900">864 h</td>
+                  <td class="py-3 px-4 text-right font-bold text-teal-700">21.7%</td>
+                </tr>
+              </tbody>
+              <tfoot class="bg-slate-100 font-extrabold text-slate-900 border-t-2 border-slate-300">
+                <tr>
+                  <td class="py-3.5 px-4 uppercase tracking-wider text-[11px]">Total General del Programa ADSO</td>
+                  <td class="py-3.5 px-4 text-center text-sena-dark">20</td>
+                  <td class="py-3.5 px-4 text-center text-sena-dark">75</td>
+                  <td class="py-3.5 px-4 text-right text-sena-dark">3.984 h</td>
+                  <td class="py-3.5 px-4 text-right text-sena-dark">100.0%</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <!-- Desglose por Fases del Proyecto Formativo -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-slate-800 text-sm sm:text-base flex items-center gap-2">
+            <i data-lucide="git-merge" class="w-4 h-4 text-sena-green"></i>
+            <span>Articulación con las 4 Fases Metodológicas del Proyecto</span>
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/50">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block">Fase 1: Análisis</span>
+              <p class="font-bold text-slate-800 mt-1">432 Horas Técnicas</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Requisitos (144h) + Algoritmia y Análisis (288h)</p>
+            </div>
+            <div class="p-3.5 rounded-xl border border-blue-200 bg-blue-50/50">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-blue-800 block">Fase 2: Planeación</span>
+              <p class="font-bold text-slate-800 mt-1">480 Horas Técnicas</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Propuesta Técnica (144h) + Modelado Artefactos (336h)</p>
+            </div>
+            <div class="p-3.5 rounded-xl border border-indigo-200 bg-indigo-50/50">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-800 block">Fase 3: Ejecución</span>
+              <p class="font-bold text-slate-800 mt-1">1.152 Horas Técnicas</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Codificación Software (1.008h) + Implantación (144h)</p>
+            </div>
+            <div class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/50">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-amber-800 block">Fase 4: Evaluación</span>
+              <p class="font-bold text-slate-800 mt-1">144 Horas Técnicas</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Calidad y Pruebas del Software (144h)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Perfil Ocupacional del Egresado -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+          <h4 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
+            <i data-lucide="briefcase" class="w-4 h-4 text-sena-green"></i>
+            <span>Perfil Ocupacional del Egresado ADSO</span>
+          </h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            El egresado del Tecnólogo en Análisis y Desarrollo de Software del SENA está capacitado para analizar, diseñar, desarrollar, probar e implantar soluciones de software multiplataforma, aplicando estándares de calidad, seguridad y buenas prácticas de ingeniería de software para organizaciones del sector productivo.
+          </p>
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            <span class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[11px] font-semibold text-slate-700">Desarrollador Full-Stack</span>
+            <span class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[11px] font-semibold text-slate-700">Analista de Requisitos</span>
+            <span class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[11px] font-semibold text-slate-700">Diseñador y Modelador de Software</span>
+            <span class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[11px] font-semibold text-slate-700">Tester de Software (QA)</span>
+            <span class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[11px] font-semibold text-slate-700">Administrador de Bases de Datos Junior</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pie del Modal con Acciones -->
+      <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
+        <a href="docs/DisenoCurricularADSO.pdf" download="DisenoCurricularADSO.pdf" class="inline-flex items-center gap-2 text-xs font-semibold text-sena-dark hover:text-sena-hover hover:underline">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>Descargar PDF Oficial Completo (69 Páginas)</span>
+        </a>
+        <button type="button" onclick="closeCurriculumSummaryModal()" class="px-5 py-2.5 bg-sena-green hover:bg-sena-hover text-white text-xs sm:text-sm font-semibold rounded-xl transition shadow-xs">
+          Cerrar Resumen
+        </button>
+      </div>
+
+    </div>
+  </div>

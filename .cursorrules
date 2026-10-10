@@ -11,6 +11,7 @@ Before producing any code or answering learner questions, read:
 
 ## Code & Tone Standards
 - Language: Spanish (formal, clear, pedagogical).
+- Modular architecture: Keep `explorar.html` minimal (< 120 lines) and manage UI views within `components/` (`layout/`, `views/`, `modals/`).
 - Always explain the architectural rationale behind suggestions.
 - Do not introduce bloated libraries; prefer clean, native, and maintainable solutions.
 - Ensure all interactive elements are responsive and accessible (WCAG AA).

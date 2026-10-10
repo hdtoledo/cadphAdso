@@ -1,44 +1,79 @@
-# 📚 Índice de Materiales y Mapeo Curricular — ADSO CADPH
+# 📚 Índice de Materiales y Mapeo Curricular — ADSO CADPH Garzón
 
-Este archivo actúa como el **mapa de enrutamiento** para que cualquier modelo de Inteligencia Artificial localice rápidamente las Guías de Aprendizaje, Instrumentos de Evaluación y Talleres correspondientes a cada fase del programa formativo.
+Este archivo actúa como el **mapa de enrutamiento y gobernanza de contenidos** para que cualquier modelo de Inteligencia Artificial (Claude, Gemini, ChatGPT, Antigravity, Copilot, Cursor, etc.) localice, analice y automatice los montajes pedagógicos de las Guías de Aprendizaje, Sesiones Didácticas, Instrumentos de Evaluación y Talleres correspondientes al programa **Tecnólogo en Análisis y Desarrollo de Software (Código 228118)**.
 
 ---
 
-## 🗺️ Mapa de Competencias vs. Fases Formativas
+## 🗺️ Mapa Curricular Oficial de Fases Formativas
 
-| Fase Formativa | Carpeta de Guías | Competencias Clave del Diseño Curricular |
+| Fase Formativa | Carpeta de Guías | Competencias Clave y Horas Validadas |
 | :--- | :--- | :--- |
-| **Fase 1: Análisis** | [`material-formativo/guias-aprendizaje/Fase1_Analisis/`](../material-formativo/guias-aprendizaje/Fase1_Analisis/) | • Establecer los requisitos de la solución de software de acuerdo con estándares y procedimiento técnico.<br>• Diseñar la estructura de datos según los requisitos del cliente. |
-| **Fase 2: Planeación** | [`material-formativo/guias-aprendizaje/Fase2_Planeacion/`](../material-formativo/guias-aprendizaje/Fase2_Planeacion/) | • Estructurar el plan de actividades de desarrollo de software.<br>• Modelar las funciones del software de acuerdo con el informe de requisitos.<br>• Diseñar artefactos del software usando herramientas de prototipado. |
-| **Fase 3: Ejecución** | [`material-formativo/guias-aprendizaje/Fase3_Ejecucion/`](../material-formativo/guias-aprendizaje/Fase3_Ejecucion/) | • Desarrollar la solución de software de acuerdo con el diseño y metodologías de desarrollo.<br>• Implementar la base de datos de acuerdo con los requerimientos del software.<br>• Integrar componentes de software siguiendo especificaciones técnicas. |
-| **Fase 4: Evaluación** | [`material-formativo/guias-aprendizaje/Fase4_Evaluacion/`](../material-formativo/guias-aprendizaje/Fase4_Evaluacion/) | • Verificar los entregables de desarrollo de software contra criterios de calidad y especificaciones.<br>• Desplegar la solución de software en el entorno de producción.<br>• Elaborar manuales técnicos y de usuario. |
+| **Fase 1: Análisis** | [`material-formativo/guias-aprendizaje/Fase1_Analisis/`](../material-formativo/guias-aprendizaje/Fase1_Analisis/) | • **220501092** (96h): Caracterizar procesos y requisitos.<br>• **220501093** (288h): Evaluar requisitos y algoritmia.<br>• **240201528** (48h): Razonamiento cuantitativo y matemáticas.<br>• **220501094** (56h de 192h): Propuesta técnica de software.<br>• **240202501** (56h de 192h): Interacción en lengua inglesa. |
+| **Fase 2: Planeación** | [`material-formativo/guias-aprendizaje/Fase2_Planeacion/`](../material-formativo/guias-aprendizaje/Fase2_Planeacion/) | • **220501095** (384h): Diseñar artefactos de software.<br>• **220501096** (192h): Modelado de base de datos relacional y NoSQL. |
+| **Fase 3: Ejecución** | [`material-formativo/guias-aprendizaje/Fase3_Ejecucion/`](../material-formativo/guias-aprendizaje/Fase3_Ejecucion/) | • **220501097** (288h): Codificar módulos de software.<br>• **220501098** (192h): Desarrollar aplicaciones web y móviles.<br>• **220501099** (192h): Integrar componentes de software. |
+| **Fase 4: Evaluación** | [`material-formativo/guias-aprendizaje/Fase4_Evaluacion/`](../material-formativo/guias-aprendizaje/Fase4_Evaluacion/) | • **220501100** (192h): Pruebas de software (QA) y verificación.<br>• **220501101** (96h): Despliegue e implantación de software.<br>• **220501102** (96h): Manuales y entrega de software. |
 
 ---
 
-## 📂 Organización de Carpetas en `material-formativo/`
+## 📂 Inventario Detallado de Fase 1: Análisis (Cargado en el Repositorio)
 
-```text
-material-formativo/
-│
-├── guias-aprendizaje/
-│   ├── Fase1_Analisis/         # Guías de levantamiento de requisitos, casos de uso, metodologías ágiles
-│   ├── Fase2_Planeacion/       # Guías de modelado de datos (MER), arquitectura y prototipos UI/UX
-│   ├── Fase3_Ejecucion/        # Guías de frontend, backend, APIs RESTful y persistencia
-│   └── Fase4_Evaluacion/       # Guías de pruebas unitarias, manuales técnicos y despliegue
-│
-├── instrumentos-evaluacion/    # Listas de chequeo, rúbricas y criterios de evaluación de evidencias
-│
-└── talleres-ejercicios/        # Laboratorios prácticos, retos algorítmicos y talleres de codificación
-```
+La carpeta [`material-formativo/guias-aprendizaje/Fase1_Analisis/`](../material-formativo/guias-aprendizaje/Fase1_Analisis/) contiene 3 actividades estructuradas:
+
+### 1. Actividad de Aprendizaje 1 (En preparación)
+- **Ruta:** [`material-formativo/guias-aprendizaje/Fase1_Analisis/ACTIVIDAD 1/`](../material-formativo/guias-aprendizaje/Fase1_Analisis/ACTIVIDAD%201/)
+- **Competencia Objetivo:** `220501092` - Establecer requisitos de la solución de software (96 Horas).
+- **Finalidad:** Espacio reservado para que los instructores depositen las guías de caracterización de procesos y levantamiento inicial.
+
+### 2. Actividad de Aprendizaje 2: Requisitos, Algoritmia y Matemáticas (336 Horas)
+- **Ruta:** [`material-formativo/guias-aprendizaje/Fase1_Analisis/ACTIVIDAD 2/`](../material-formativo/guias-aprendizaje/Fase1_Analisis/ACTIVIDAD%202/)
+- **Documento Guía Oficial:** `GFPI-F-135 Guia Actividad 2 - ADSO 228118.docx` (284h directas + 52h independientes).
+- **Manual Pedagógico:** `Manual e Índice de sesiones y materiales.docx`.
+- **Competencias Validadas:**
+  - `220501093` (288h · 4 RAPs) - Instructor Técnico (Sesiones 01 a 09).
+  - `240201528` (48h · 4 RAPs) - Instructor de Matemáticas (Sesiones 01 a 05).
+- **Desglose de las 14 Sesiones Didácticas:**
+  - **Sesión 01 (Técnica · 32h):** *Del problema del cliente al análisis del software* (RAP 01).
+  - **Sesión 02 (Técnica · 32h):** *Técnicas de recolección de información* (RAP 01).
+  - **Sesión 03 (Técnica · 32h):** *Elicitación y clasificación de requerimientos (IEEE 830)* (RAP 01).
+  - **Sesión 04 (Técnica · 32h):** *Historias de usuario y criterios de aceptación ágiles* (RAP 02).
+  - **Sesión 05 (Técnica · 32h):** *Modelado de Casos de Uso en UML* (RAP 02).
+  - **Sesión 06 (Técnica · 32h):** *Diagramas de Actividades y Procesos de Negocio* (RAP 02).
+  - **Sesión 07 (Técnica · 32h):** *Lógica proposicional, tablas de verdad y condicionales* (RAP 03).
+  - **Sesión 08 (Técnica · 32h):** *Algoritmia: pseudocódigo, bucles y estructuras de datos* (RAP 03).
+  - **Sesión 09 (Técnica · 32h):** *Trazabilidad de requisitos y matriz RTM* (RAP 04).
+  - **Sesión 01 (Matemáticas · 9.6h):** *Conjuntos numéricos y proporcionalidad en software* (RAP 01).
+  - **Sesión 02 (Matemáticas · 9.6h):** *Ecuaciones lineales y cálculo de costos/recursos* (RAP 02).
+  - **Sesión 03 (Matemáticas · 9.6h):** *Geometría plana y analítica para layout/UI* (RAP 02).
+  - **Sesión 04 (Matemáticas · 9.6h):** *Estadística descriptiva y análisis de ventas Agrosur* (RAP 03 - incluye `Datos de ventas Agrosur.xlsx`).
+  - **Sesión 05 (Matemáticas · 9.6h):** *Probabilidad básica y toma de decisiones en QA* (RAP 04).
+
+Cada una de las 14 sesiones cuenta con:
+1. `Guía de Actividad` (`.docx`).
+2. `Instrumento de Evaluación / Rúbrica` (`.docx`).
+3. `Presentación de Diapositivas` (`.pptx`) o `Hoja de cálculo` (`.xlsx`).
+
+### 3. Actividad de Aprendizaje 3: Propuesta Técnica y Comunicación en Inglés (112 Horas)
+- **Ruta:** [`material-formativo/guias-aprendizaje/Fase1_Analisis/ACTIVIDAD 3/`](../material-formativo/guias-aprendizaje/Fase1_Analisis/ACTIVIDAD%203/)
+- **Documento Guía Oficial:** `Guia de Aprendizaje 3.0.docx` (94h directas + 18h independientes).
+- **Competencias Validadas:**
+  - `220501094` (56h de 192h · RAP 01) - Propuesta técnica y términos de referencia.
+  - `240202501` (56h de 192h · RAP 01) - Interacción técnica en inglés.
+- **Caso de Estudio Aplicado:** *Empresa Productora y Comercializadora de Café Especial del Huila*.
+- **Talleres y Anexos Disponibles:**
+  - `Anexo 1: Especificaciones de Requerimientos de Software (IEEE 830)`.
+  - `Anexo 2: Plantilla de Términos de Referencia para Adquisición de Software`.
+  - `Anexo 3: Modelo de Contrato y Licenciamiento de Software`.
+  - `Anexo 4: Caso de Estudio - Sector Cafetero del Huila`.
+  - `Anexo 5: Taller Práctico de Comunicación Técnica en Inglés`.
+  - `Anexo 6: Taller de Comprensión Lectora y Glosario en Inglés Técnico`.
 
 ---
 
-## 🔍 Instrucciones para el Modelo de IA al Consultar Materiales
+## 🤖 Protocolo para Automatización y Soporte con Agentes de IA
 
-1. **Cuando el aprendiz o instructor consulte sobre una actividad específica:**
-   - Identifica a qué fase pertenece (Análisis, Planeación, Ejecución o Evaluación).
-   - Revisa la subcarpeta correspondiente en `material-formativo/guias-aprendizaje/`.
-   - Si existen rúbricas o criterios de evaluación, consulta `material-formativo/instrumentos-evaluacion/`.
-2. **Formato de Archivos Admitidos:**
-   - Los materiales pueden estar en formato Markdown (`.md`), texto (`.txt`), Word (`.docx`) o PDF (`.pdf`).
-   - El documento curricular base oficial de todo el programa se ubica en: [`docs/DisenoCurricularADSO.pdf`](../docs/DisenoCurricularADSO.pdf).
+Cuando un usuario solicite asistencia o automatización sobre las guías formativas:
+
+1. **Lectura Directa:** Localiza la sesión o taller específico en las rutas indicadas arriba.
+2. **Consultar RAPs Oficiales:** Coteja los resultados de aprendizaje con `assets/data/competencias_adso.json` o `assets/js/competencias-data.js`.
+3. **Generación de Código de Ejemplo:** Al explicar una sesión (ej. Diagramas UML, pseudocódigo, tablas de verdad, consultas SQL), utiliza ejemplos contextualizados con el entorno productivo del Huila (café, piscicultura, turismo, comercio agropecuario).
+4. **Respeto a la Gobernanza:** Recuerda a los aprendices que el código desarrollado debe entregarse en su repositorio personal o en la plataforma Zajuna.

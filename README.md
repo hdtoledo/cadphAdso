@@ -26,6 +26,8 @@ El portal ha sido diseñado bajo las mejores prácticas de **UI/UX**, rendimient
 - **Barra Superior Limpia:** Barra blanca superior independiente para el área de contenido con indicador de ruta (*breadcrumbs*), píldora de avance formativo al 100%, botón de ayuda contextual y botón de salida a la pantalla de bienvenida.
 - **Diseño Curricular Oficial como Vista Principal (#1):** El menú sitúa como primer ítem activo por defecto el Diseño Curricular, ofreciendo un conmutador fluido entre el visor de PDF oficial y el nuevo explorador interactivo.
 - **Explorador Interactivo de Competencias, RAPs y Horas:** Extracción analítica completa del documento oficial (69 páginas), estructurando 20 competencias, 75 Resultados de Aprendizaje (RAPs) y 3.984 horas totales. Cuenta con búsqueda en vivo, filtros por categoría (*Todas, Técnicas Específicas, Clave & Transversales, Institucional, Etapa Productiva*), métricas superiores (KPIs), barras visuales de intensidad horaria y acordeones independientes para consultar la descripción detallada de cada RAP.
+- **Visor Interactivo de Guías de Aprendizaje y Materiales (Fase 1: Análisis):** Nuevo módulo interactivo en la pestaña de Fases del Proyecto (`tab-fases`) con switch dinámico entre actividades, desglose de 14 sesiones didácticas (9 técnicas · 288h y 5 matemáticas · 48h de la Actividad 2) con descarga directa de archivos Word (.docx), presentaciones (.pptx) y datos Excel (.xlsx), además de 6 anexos y talleres de la Actividad 3 (112h) aplicados a empresas cafeteras del Huila.
+- **Modal de Ficha Técnica de Sesión Formativa:** Ventana accesible con descripción de objetivos, RAPs oficiales asociados, evidencias evaluables y descarga directa de actividades, rúbricas e instrumentos de evaluación.
 - **Modal de Resumen Ejecutivo Curricular:** Ventana modal accesible de alto nivel con ficha técnica, tabla comparativa de horas y porcentajes (Técnicas 55.4%, Clave 22.9%, Inducción 1.2%, Productiva 21.7%), distribución por las 4 fases del proyecto y perfiles ocupacionales de egreso.
 - **Visor PDF Oficial de 69 Páginas:** Lector embebido directamente en HTML con soporte para desplazamiento bidireccional (scroll horizontal y vertical libre), ajuste automático al ancho (*Fit Width*), controles de zoom, paginación, gestos táctiles (*swipe*) en móviles y descarga directa.
 - **Estructura Curricular por Fases:** Módulos de las 4 fases del proyecto formativo (*Análisis, Planeación, Ejecución, Evaluación*) con modales interactivos de consulta técnica.
@@ -38,12 +40,12 @@ El portal ha sido diseñado bajo las mejores prácticas de **UI/UX**, rendimient
 
 El proyecto formativo está alineado con el [Diseño Curricular Oficial de ADSO (Código 228118)](docs/DisenoCurricularADSO.pdf):
 
-| Fase | Enfoque Principal | Tecnologías y Competencias Clave |
-| :--- | :--- | :--- |
-| **1. Análisis** | Requisitos de software, SRS (IEEE 830) y metodologías ágiles | Casos de uso UML, historias de usuario, entrevistas y levantamiento de requerimientos. |
-| **2. Planeación** | Arquitectura de software, UI/UX y modelado de datos | Diagramas Entidad-Relación (MER), Normalización SQL (1FN-3FN), Wireframes en Figma. |
-| **3. Ejecución** | Codificación Full Stack y servicios web | HTML5, Tailwind CSS, JavaScript, APIs RESTful, Python, Java, Git & GitHub. |
-| **4. Evaluación** | Aseguramiento de calidad, testing y despliegue | Pruebas unitarias e integración, manuales técnicos y despliegue en GitHub Pages / Cloud. |
+| Fase | Enfoque Principal | Tecnologías y Competencias Clave | Horas en Repositorio |
+| :--- | :--- | :--- | :--- |
+| **1. Análisis** | Requisitos de software, SRS (IEEE 830), algoritmia y matemáticas | • **Actividad 1:** Caracterización de procesos (220501092).<br>• **Actividad 2 (336h):** 14 sesiones didácticas técnicas (220501093) y matemáticas (240201528).<br>• **Actividad 3 (112h):** Propuesta técnica (220501094) e inglés (240202501) con 6 talleres. | **448 Horas Cargadas** |
+| **2. Planeación** | Arquitectura de software, UI/UX y modelado de datos | Diagramas Entidad-Relación (MER), Normalización SQL (1FN-3FN), Wireframes en Figma (220501095, 220501096). | Próximamente |
+| **3. Ejecución** | Codificación Full Stack y servicios web | HTML5, Tailwind CSS, JavaScript, APIs RESTful, Python, Java, Git & GitHub (220501097, 220501098, 220501099). | Próximamente |
+| **4. Evaluación** | Aseguramiento de calidad, testing y despliegue | Pruebas unitarias e integración, manuales técnicos y despliegue en GitHub Pages / Cloud (220501100, 220501101, 220501102). | Próximamente |
 
 ---
 
@@ -70,7 +72,7 @@ Para optimizar la experiencia en computadores, tabletas y celulares, el visor de
 cadphAdso/
 ├── 404.html                     # Página personalizada de error 404 para GitHub Pages
 ├── index.html                   # Portal principal de bienvenida / acceso institucional
-├── explorar.html                # Dashboard y explorador curricular completo de ADSO
+├── explorar.html                # Dashboard, visor curricular y de guías formativas ADSO
 ├── AGENTS.md                    # Directivas universales para agentes de Inteligencia Artificial
 ├── GEMINI.md                    # Contexto para Google Gemini / Antigravity IDE
 ├── CLAUDE.md                    # Instrucciones para Anthropic Claude / Claude Code
@@ -80,11 +82,14 @@ cadphAdso/
 ├── .ai/                         # 🧠 Base de conocimiento y contexto pedagógico para IAs
 │   ├── CONTEXTO_ADSO.md         # Contexto institucional SENA CADPH, ficha y fases
 │   ├── REGLAS_CODIGO.md         # Estándares técnicos y lineamientos de programación
-│   ├── INDICE_MATERIALES.md     # Mapeo curricular de competencias y materiales
+│   ├── INDICE_MATERIALES.md     # Mapeo curricular exhaustivo de competencias y materiales
 │   └── PROMPTS_ASISTENCIA.md    # Plantillas de prompts para aprendices e instructores
 ├── material-formativo/          # 📚 Depósito curricular de guías, talleres e instrumentos
 │   ├── guias-aprendizaje/       # Guías organizadas por las 4 fases del proyecto
-│   │   ├── Fase1_Analisis/      # Requisitos, especificación, levantamiento de información
+│   │   ├── Fase1_Analisis/      # Requisitos, modelado UML, algoritmia y matemáticas (448h)
+│   │   │   ├── ACTIVIDAD 1/     # Reservado: Caracterización y requisitos iniciales (220501092)
+│   │   │   ├── ACTIVIDAD 2/     # Guía oficial (336h), 14 sesiones (técnicas/matemáticas), PPTX y XLSX
+│   │   │   └── ACTIVIDAD 3/     # Guía oficial (112h), 6 talleres prácticos IEEE 830 e inglés técnico
 │   │   ├── Fase2_Planeacion/    # Arquitectura, diseño de bases de datos, diagramas UML
 │   │   ├── Fase3_Ejecucion/     # Desarrollo frontend/backend, codificación, APIs
 │   │   └── Fase4_Evaluacion/    # Pruebas de software, despliegue, manuales técnicos
@@ -94,10 +99,13 @@ cadphAdso/
 │   ├── css/
 │   │   └── styles.css           # Estilos institucionales, layout fluido, visor PDF y temas WCAG
 │   ├── data/
-│   │   └── competencias_adso.json # Base de datos JSON con las 20 competencias, 75 RAPs y 3.984h
+│   │   ├── competencias_adso.json # Base de datos JSON con las 20 competencias, 75 RAPs y 3.984h
+│   │   └── guias_fase1.json     # Base de datos JSON de guías, sesiones formativas y anexos de Fase 1
 │   ├── js/
 │   │   ├── accessibility.js     # Módulo integral de accesibilidad (zoom, contraste, teclado)
 │   │   ├── competencias-data.js # Exportación estructurada de datos curriculares para el explorador
+│   │   ├── guias-fase1-data.js  # Exportación de datos de guías y sesiones formativas de Fase 1
+│   │   ├── guias-viewer.js      # Módulo interactivo del visor de guías, sesiones y descargas
 │   │   ├── dashboard.js         # Lógica interactiva del explorador, filtros, acordeones y modales
 │   │   └── pdf-viewer.js        # Motor interactivo de renderizado PDF con PDF.js
 │   └── images/

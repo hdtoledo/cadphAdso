@@ -60,6 +60,10 @@ function switchTab(tabId) {
     } else if (currentCurriculumSubTab === 'competencias') {
       renderCompetenciasCards();
     }
+  } else if (tabId === 'tab-fases') {
+    if (typeof window.initGuiasViewer === 'function') {
+      window.initGuiasViewer();
+    }
   }
 
   if (window.lucide) lucide.createIcons();
@@ -488,6 +492,7 @@ window.addEventListener('keydown', (e) => {
     closeCurriculumSummaryModal();
     closeModal();
     closeAssistantModal();
+    if (typeof closeSessionModal === 'function') closeSessionModal();
   }
 });
 
